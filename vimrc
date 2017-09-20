@@ -1,37 +1,15 @@
 set nocompatible
 
-" Trailing Whitespaces {{{
-function ShowSpaces(...)
-    let @/='\v(\s+$)|( +\ze\t)'
-    let oldhlsearch=&hlsearch
-    if !a:0
-        let &hlsearch=!&hlsearch
-    else
-        let &hlsearch=a:1
-    end
-    return oldhlsearch
-endfunction
-
-function TrimSpaces() range
-    let oldhlsearch=ShowSpaces(1)
-    execute a:firstline.",".a:lastline."substitute ///gec"
-    let &hlsearch=oldhlsearch
-endfunction
-
-command -bar -nargs=? ShowSpaces call ShowSpaces(<args>)
-command -bar -nargs=0 -range=% TrimSpaces <line1>,<line2>call TrimSpaces()
-nnoremap <F12>     :ShowSpaces 1<CR>
-nnoremap <S-F12>   m`:TrimSpaces<CR>``
-vnoremap <S-F12>   :TrimSpaces<CR>
-" }}}
 " clang-format {{{
-function FormatFile()
+function! FormatFile()
     let l:lines="all"
-    py3f /home/nikita/ADASPlatformRoot/BuildTools/host_env_setup/linux/build/llvm/tools/clang/tools/clang-format/clang-format.py
+    py3f ~/ADASPlatformRoot/BuildTools/host_env_setup/linux/build/llvm/tools/clang/tools/clang-format/clang-format.py
 endfunction
 
 map <C-K> :call FormatFile()<CR>
 imap <C-K> <c-o>:call FormatFile()<CR>
+
+nnoremap <leader>s :call FormatFile()<CR> :update<CR>
 " }}}
 " Tabs & Spaces {{{
 set tabstop=4
@@ -65,6 +43,9 @@ set incsearch
 set ignorecase
 set hlsearch
 set wildignorecase
+
+" Breaks input right after launch
+" nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
 " }}}
 " Folding {{{
 set foldmethod=manual
@@ -77,16 +58,27 @@ nnoremap gv ggVG
 " }}}
 " Leader Shortcuts {{{
 let mapleader = ","
+
+" Toggle line numbers
 nnoremap <leader>1 :set number!<CR> :set relativenumber!<CR>
+
 nnoremap <leader>ev :vsp ~/.dotfiles/vimrc<CR>
-nnoremap <leader>eb :vsp ~/.bashrc<CR>
+
+" silversearcher-ag
 nnoremap <leader>a :Ag 
+
+" Clipboard
+nnoremap <leader>y "+y
+vnoremap <leader>y "+y
+nnoremap <leader>p "+p
+nnoremap <leader>P "+P
+vnoremap <leader>p "+p
+
+" Clear search highlight
 nnoremap <leader><space> :noh<CR>
-nnoremap <leader>n :NERDTree<CR>
-nnoremap <leader>s :call FormatFile() \| update<CR>
-nnoremap <leader>w :w<CR>
-nnoremap <leader>q :q<CR>
-"vnoremap <leader>y "+y
+
+" Reopen last file
+nnoremap <leader><leader> :e#<CR>
 " }}}
 " UltiSnips {{{
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -100,8 +92,10 @@ let g:UltiSnipsEditSplit="vertical"
 " Autocmds {{{
 augroup configgroup
     autocmd!
+
     " Header snippet
     autocmd BufNewFile *.hpp :exe "normal iheader\<C-b>"
+
     " Changing cursor shape
     autocmd VimEnter,InsertLeave * silent execute '!echo -ne "\e[1 q"' | redraw!
     autocmd InsertEnter,InsertChange *
@@ -126,46 +120,52 @@ call vundle#begin()
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
 
-" Git wrapper
+" a Git wrapper so awesome, it should be illegal
 Plugin 'tpope/vim-fugitive'
 
 " A Vim plugin which shows a git diff in the gutter (sign column) and
 " stages/undoes hunks.
 Plugin 'airblade/vim-gitgutter'
 
-" A tree explorer plugin
+" A tree explorer plugin for vim.
 Plugin 'scrooloose/nerdtree'
 
-" quoting/parenthesiizng made simple
+" quoting/parenthesizing made simple
 Plugin 'tpope/vim-surround'
 
-" semantic code completion and more
-Plugin 'https://github.com/Valloric/YouCompleteMe'
+" A code-completion engine for Vim
+Plugin 'Valloric/YouCompleteMe'
 
-" config generator from CMakeLists for YCM code completion plugin
-Plugin 'https://github.com/rdnetto/YCM-Generator'
+" Generates config files for YouCompleteMe
+Plugin 'rdnetto/YCM-Generator'
 
-" fuzzy file search/goto
-Plugin 'https://github.com/kien/ctrlp.vim'
+" Fuzzy file, buffer, mru, tag, etc finder.
+Plugin 'kien/ctrlp.vim'
 
-" useful shortcuts
-Plugin 'https://github.com/tpope/vim-unimpaired'
+" pairs of handy bracket mappings
+Plugin 'tpope/vim-unimpaired'
 
-" snippets engine plugin
+" The ultimate snippet solution for Vim.
 Plugin 'SirVer/ultisnips'
 
-" popular snippets for the snippets engine
+" vim-snipmate default snippets
 Plugin 'honza/vim-snippets'
 
-" A light and configurable statusline/tabline plugin
+" A light and configurable statusline/tabline plugin for Vim
 Plugin 'itchyny/lightline.vim'
 
-" Wombat color scheme
+" Awesome wombat-like scheme for Vim
 Plugin 'sheerun/vim-wombat-scheme'
 
-" Vim plugin for the_silver_searcher, 'ag', a replacement for the Perl module /
-" CLI script 'ack'
+" Vim plugin for the_silver_searcher, 'ag', a replacement for the Perl module / CLI script 'ack'
 Plugin 'rking/ag.vim'
+
+" Extended Visual Mode Commands, Substitutes, and Searches
+Plugin 'vim-scripts/vis'
+
+" lean & mean status/tabline for vim that's light as air
+" Plugin 'vim-airline/vim-airline'
+" Plugin 'vim-airline/vim-airline-themes'
 
 " All of your Plugins must be added before the following line
 
@@ -181,9 +181,11 @@ hi NonText ctermfg=241 ctermbg=234
 set colorcolumn=101
 " }}}
 " YouCompleteMe {{{
-highlight YcmErrorSection guibg=#3f0000
+hi YcmErrorSection guibg=#3f0000
+
 nnoremap gf :YcmCompleter GoToInclude<CR>
 set completeopt-=preview 
+
 let g:ycm_enable_diagnostic_signs = 0
 let g:ycm_confirm_extra_conf = 0
 " }}}
@@ -191,6 +193,10 @@ let g:ycm_confirm_extra_conf = 0
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
+let g:ctrlp_by_filename = 1
+let g:ctrlp_show_hidden = 1
+
+set wildignore=*.o,*.so,*.swp,*.cmake,*.log,*.bin
 " }}}
 " Lightline {{{
 set laststatus=2
@@ -218,6 +224,30 @@ endfunction
 "inoremap {<CR> {<CR>}<c-o>O
 "inoremap [<CR> [<CR>]<c-o>O
 "inoremap (<CR> (<CR>)<c-o>O
+" }}}
+" NERDTree {{{
+let NERDTreeMapActivateNode = '<space>'
+let NERDTreeShowHidden = 1
+let NERDTreeIgnore=['\.swp']
+
+nmap <leader>n :NERDTreeToggle<CR>
+nmap <leader>j :NERDTreeFind<CR>
+" }}}
+" Git Gutter {{{
+set signcolumn=yes
+" }}}
+" vim-fugitive {{{
+nnoremap <leader>gs :Gstatus<CR>
+nnoremap <leader>gd :Gdiff<CR>
+
+" git diff color scheme
+hi DiffAdd ctermfg=15 ctermbg=22
+hi DiffChange ctermfg=15 ctermbg=22
+hi DiffText ctermfg=15 ctermbg=34
+hi DiffDelete ctermfg=1 ctermbg=1
+" }}}
+" vim-airline {{{
+let g:airline_theme = 'powerlineish'
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0
