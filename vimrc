@@ -6,10 +6,11 @@ function! FormatFile()
     py3f ~/ADASPlatformRoot/BuildTools/host_env_setup/linux/build/llvm/tools/clang/tools/clang-format/clang-format.py
 endfunction
 
-map <C-K> :call FormatFile()<CR>
-imap <C-K> <c-o>:call FormatFile()<CR>
+" !Interferes with split navigation
+" map <C-K> :call FormatFile()<CR>
+" imap <C-K> <c-o>:call FormatFile()<CR>
 
-nnoremap <leader>s :call FormatFile()<CR> :update<CR>
+nnoremap <leader>s :call FormatFile() \| update<CR>
 " }}}
 " Tabs & Spaces {{{
 set tabstop=4
@@ -44,12 +45,19 @@ set ignorecase
 set hlsearch
 set wildignorecase
 
-" Breaks input right after launch
+" !Breaks input right after launch
 " nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
 " }}}
 " Folding {{{
 set foldmethod=manual
 nnoremap <space> za
+" }}}
+" Splits {{{
+" Navigation
+nnoremap <C-h> <C-w>h
+nnoremap <C-j> <C-w>j
+nnoremap <C-k> <C-w>k
+nnoremap <C-l> <C-w>l
 " }}}
 " Line Shortcuts {{{
 nnoremap j gj
@@ -79,6 +87,9 @@ nnoremap <leader><space> :noh<CR>
 
 " Reopen last file
 nnoremap <leader><leader> :e#<CR>
+
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
 " }}}
 " UltiSnips {{{
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -160,8 +171,9 @@ Plugin 'sheerun/vim-wombat-scheme'
 " Vim plugin for the_silver_searcher, 'ag', a replacement for the Perl module / CLI script 'ack'
 Plugin 'rking/ag.vim'
 
+" !Breaks <leader>s
 " Extended Visual Mode Commands, Substitutes, and Searches
-Plugin 'vim-scripts/vis'
+" Plugin 'vim-scripts/vis'
 
 " lean & mean status/tabline for vim that's light as air
 " Plugin 'vim-airline/vim-airline'
