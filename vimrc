@@ -248,7 +248,7 @@ nmap <leader>j :NERDTreeFind<CR>
 " }}}
 " Git Gutter {{{
 if exists('&signcolumn')
-    set signcolumn = yes
+    set signcolumn=yes
 else
     let g:gitgutter_sign_column_always = 1
 endif
