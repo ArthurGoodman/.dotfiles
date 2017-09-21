@@ -165,9 +165,6 @@ Plugin 'honza/vim-snippets'
 " A light and configurable statusline/tabline plugin for Vim
 Plugin 'itchyny/lightline.vim'
 
-" Awesome wombat-like scheme for Vim
-Plugin 'sheerun/vim-wombat-scheme'
-
 " Vim plugin for the_silver_searcher, 'ag', a replacement for the Perl module / CLI script 'ack'
 Plugin 'rking/ag.vim'
 
@@ -179,6 +176,12 @@ Plugin 'rking/ag.vim'
 " Plugin 'vim-airline/vim-airline'
 " Plugin 'vim-airline/vim-airline-themes'
 
+" Awesome wombat-like scheme for Vim
+Plugin 'sheerun/vim-wombat-scheme'
+
+" A Vim color scheme. 
+Plugin 'sjl/badwolf'
+
 " All of your Plugins must be added before the following line
 
 call vundle#end()
@@ -188,7 +191,7 @@ filetype plugin indent on
 syntax enable
 colorscheme wombat
 " }}}
-" Custom Color Cheme Settings {{{
+" Custom Color Scheme Settings {{{
 hi NonText ctermfg=241 ctermbg=234
 set colorcolumn=101
 " }}}
