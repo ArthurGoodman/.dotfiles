@@ -12,7 +12,7 @@ COLOREND="\[\e[00m\]"
 
 parse_git_branch() {
     branch=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'`
-    if [[ $(git status 2> /dev/null | tail -n1) == "nothing to commit, working tree clean" ]]
+    if [[ $(git status 2> /dev/null | tail -n1) == "nothing to commit, working ${GIT_WORD_FOR_TREE-tree} clean" ]]
     then
         echo -e "${WHITE}$branch${COLOREND}"
     else

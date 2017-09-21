@@ -6,11 +6,8 @@ function! FormatFile()
     py3f ~/ADASPlatformRoot/BuildTools/host_env_setup/linux/build/llvm/tools/clang/tools/clang-format/clang-format.py
 endfunction
 
-" !Interferes with split navigation
-" map <C-K> :call FormatFile()<CR>
-" imap <C-K> <c-o>:call FormatFile()<CR>
-
-nnoremap <leader>s :call FormatFile() \| update<CR>
+map <C-I> :call FormatFile()<CR>
+imap <C-I> <c-o>:call FormatFile()<CR>
 " }}}
 " Tabs & Spaces {{{
 set tabstop=4
@@ -44,9 +41,6 @@ set incsearch
 set ignorecase
 set hlsearch
 set wildignorecase
-
-" !Breaks input right after launch
-" nnoremap <silent> <Esc> :nohlsearch<Bar>:echo<CR>
 " }}}
 " Folding {{{
 set foldmethod=manual
@@ -90,6 +84,9 @@ nnoremap <leader><leader> :e#<CR>
 
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
+
+" clang-format
+nnoremap <leader>s :call FormatFile() \| update<CR>
 " }}}
 " UltiSnips {{{
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -116,6 +113,9 @@ augroup configgroup
         \   silent execute '!echo -ne "\e[3 q"' | redraw! |
         \ endif
     autocmd VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
+
+    " :nohlsearch on <esc>
+    autocmd TermResponse * nnoremap <esc> :noh<return><esc>
 augroup END
 " }}}
 " Vundle {{{
