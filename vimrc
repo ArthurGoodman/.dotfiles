@@ -1,5 +1,22 @@
 set nocompatible
 
+" UI/Behaviour {{{
+set number
+set relativenumber
+set showcmd
+set cursorline
+set wildmenu
+set wildmode=longest,list,full
+set ttimeoutlen=100
+set lazyredraw
+set showmatch
+set nowrap
+set title
+set history=1000
+set splitbelow
+set splitright
+set autoread
+" }}}
 " clang-format {{{
 function! FormatFile()
     let l:lines="all"
@@ -18,23 +35,6 @@ set modelines=1
 " }}}
 " Syntax {{{
 let g:load_doxygen_syntax = 1
-" }}}
-" UI/Behaviour {{{
-set number
-set relativenumber
-set showcmd
-set cursorline
-set wildmenu
-set wildmode=longest,list,full
-set ttimeoutlen=100
-set lazyredraw
-set showmatch
-set nowrap
-set title
-set history=1000
-set splitbelow
-set splitright
-set autoread
 " }}}
 " Search {{{
 set incsearch
@@ -56,7 +56,6 @@ nnoremap <C-l> <C-w>l
 " Line Shortcuts {{{
 nnoremap j gj
 nnoremap k gk
-nnoremap gv ggVG
 " }}}
 " Leader Shortcuts {{{
 let mapleader = ","
@@ -76,14 +75,14 @@ nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 vnoremap <leader>p "+p
 
-" Clear search highlight
-nnoremap <leader><space> :noh<CR>
-
 " Reopen last file
 nnoremap <leader><leader> :e#<CR>
 
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
+
+" Remove search highlighting
+nnoremap <leader><space> :noh<CR>
 
 " clang-format
 nnoremap <leader>s :call FormatFile() \| update<CR>
@@ -115,7 +114,8 @@ augroup configgroup
     autocmd VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
 
     " :nohlsearch on <esc>
-    autocmd TermResponse * nnoremap <esc> :noh<return><esc>
+    " !Breaks arrows in normal mode
+    " autocmd TermResponse * nnoremap <esc> :noh<return><esc>
 augroup END
 " }}}
 " Vundle {{{
@@ -195,7 +195,8 @@ set colorcolumn=101
 " YouCompleteMe {{{
 hi YcmErrorSection guibg=#3f0000
 
-nnoremap gf :YcmCompleter GoToInclude<CR>
+nnoremap <leader>i :YcmCompleter GoToInclude<CR>
+nnoremap <leader>d :YcmCompleter GoToDeclaration<CR>
 set completeopt-=preview 
 
 let g:ycm_enable_diagnostic_signs = 0
