@@ -246,7 +246,11 @@ nmap <leader>n :NERDTreeToggle<CR>
 nmap <leader>j :NERDTreeFind<CR>
 " }}}
 " Git Gutter {{{
-set signcolumn=yes
+if exists('&signcolumn')
+    set signcolumn = yes
+else
+    let g:gitgutter_sign_column_always = 1
+endif
 " }}}
 " vim-fugitive {{{
 nnoremap <leader>gs :Gstatus<CR>
