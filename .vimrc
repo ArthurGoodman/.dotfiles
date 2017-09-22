@@ -64,8 +64,7 @@ let mapleader = ","
 " Toggle line numbers
 nnoremap <leader>1 :set number!<CR> :set relativenumber!<CR>
 
-nnoremap <leader>ve :vsp ~/.dotfiles/vimrc<CR>
-nnoremap <leader>vs :so $MYVIMRC<CR>
+nnoremap <leader>ev :vsp ~/.dotfiles/.vimrc<CR>
 
 " silversearcher-ag
 nnoremap <leader>a :Ag 
@@ -87,7 +86,7 @@ nnoremap <leader>q :q<CR>
 nnoremap <leader><space> :noh<CR>
 
 " clang-format
-nnoremap <leader>s :call FormatFile() \| update<CR>
+nnoremap <leader>s :call FormatFile() <bar> update<CR>
 " }}}
 " UltiSnips {{{
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -149,6 +148,7 @@ Plugin 'airblade/vim-gitgutter'
 
 " A tree explorer plugin for vim.
 Plugin 'scrooloose/nerdtree'
+Plugin 'jistr/vim-nerdtree-tabs'
 
 " quoting/parenthesizing made simple
 Plugin 'tpope/vim-surround'
@@ -172,7 +172,7 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 
 " A light and configurable statusline/tabline plugin for Vim
-Plugin 'itchyny/lightline.vim'
+"Plugin 'itchyny/lightline.vim'
 
 " Vim plugin for the_silver_searcher, 'ag', a replacement for the Perl module / CLI script 'ack'
 Plugin 'rking/ag.vim'
@@ -181,9 +181,17 @@ Plugin 'rking/ag.vim'
 " Extended Visual Mode Commands, Substitutes, and Searches
 " Plugin 'vim-scripts/vis'
 
+" Vim plugin, provides insert mode auto-completion for quotes, parens, brackets, etc.
+Plugin 'Raimondi/delimitMate'
+
 " lean & mean status/tabline for vim that's light as air
-" Plugin 'vim-airline/vim-airline'
-" Plugin 'vim-airline/vim-airline-themes'
+Plugin 'vim-airline/vim-airline'
+
+" A collection of themes for vim-airline
+Plugin 'vim-airline/vim-airline-themes'
+
+" Alternate Files quickly (.c --> .h etc)
+Plugin 'vim-scripts/a.vim'
 
 " Color Schemes
 Plugin 'sheerun/vim-wombat-scheme'
@@ -191,6 +199,7 @@ Plugin 'sjl/badwolf'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'joshdick/onedark.vim'
 Plugin 'crusoexia/vim-monokai'
+Plugin 'dracula/vim'
 
 " All of your Plugins must be added before the following line
 
@@ -199,12 +208,13 @@ filetype plugin indent on
 " }}}
 " Color Scheme {{{
 syntax enable
-set background=light
+set background=dark
 colorscheme wombat
 " }}}
 " Custom Color Scheme Settings {{{
-hi NonText ctermfg=241 ctermbg=234 guifg=#626262 guibg=#1c1c1c
-set colorcolumn=101
+hi NonText ctermfg=241 ctermbg=234 guifg=#626262 guibg=#242424 
+" set colorcolumn=101
+execute "set colorcolumn=" . join(range(101,335), ',')
 " }}}
 " YouCompleteMe {{{
 hi YcmErrorSection guibg=#3f0000
@@ -226,18 +236,18 @@ let g:ctrlp_show_hidden = 1
 set wildignore=*.o,*.so,*.swp,*.cmake,*.log,*.bin
 " }}}
 " Lightline {{{
-set laststatus=2
-
-let g:lightline = {
-    \ 'colorscheme' : 'powerline',
-    \ 'active' : {
-    \ 'left' : [ [ 'mode', 'paste' ],
-    \ ['gitbranch', 'readonly', 'filename', 'modified'] ]
-    \ },
-    \ 'component_function' : {
-    \ 'gitbranch' : 'fugitive#head'
-    \ },
-    \ }
+" set laststatus=2
+" 
+" let g:lightline = {
+"     \ 'colorscheme' : 'powerline',
+"     \ 'active' : {
+"     \ 'left' : [ [ 'mode', 'paste' ],
+"     \ ['gitbranch', 'readonly', 'filename', 'modified'] ]
+"     \ },
+"     \ 'component_function' : {
+"     \ 'gitbranch' : 'fugitive#head'
+"     \ },
+"     \ }
 " }}}
 " Visual @ {{{
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
@@ -259,6 +269,10 @@ let NERDTreeIgnore=['\.swp']
 
 nmap <leader>n :NERDTreeToggle<CR>
 nmap <leader>j :NERDTreeFind<CR>
+
+nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
+
+let g:nerdtree_tabs_open_on_gui_startup = 0
 " }}}
 " Git Gutter {{{
 " !TODO Change colors of marks for GVim
@@ -279,15 +293,21 @@ hi DiffChange ctermfg=15 ctermbg=22 guifg=#ffffff guibg=#005f00
 hi DiffText ctermfg=15 ctermbg=34 guifg=#ffffff guibg=#00af00
 hi DiffDelete ctermfg=1 ctermbg=1 guifg=#800000 guibg=#800000
 " }}}
-" vim-airline {{{
-" let g:airline_theme = 'powerlineish'
-" let g:airline_powerline_fonts = 1
-" }}}
 " GVim {{{
 set guioptions-=m
 set guioptions-=T
 set guioptions-=r
 set guioptions-=L
+set guifont=Menlo\ for\ Powerline\ 10
+" }}}
+" delimitMate {{{
+let delimitMate_expand_cr = 1
+" }}}
+" vim-airline {{{
+let g:airline_theme = 'powerlineish'
+if has("gui_running")
+    let g:airline_powerline_fonts = 1
+endif
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0
