@@ -185,11 +185,12 @@ Plugin 'rking/ag.vim'
 " Plugin 'vim-airline/vim-airline'
 " Plugin 'vim-airline/vim-airline-themes'
 
-" Awesome wombat-like scheme for Vim
+" Color Schemes
 Plugin 'sheerun/vim-wombat-scheme'
-
-" A Vim color scheme. 
 Plugin 'sjl/badwolf'
+Plugin 'altercation/vim-colors-solarized'
+Plugin 'joshdick/onedark.vim'
+Plugin 'crusoexia/vim-monokai'
 
 " All of your Plugins must be added before the following line
 
@@ -198,6 +199,7 @@ filetype plugin indent on
 " }}}
 " Color Scheme {{{
 syntax enable
+set background=light
 colorscheme wombat
 " }}}
 " Custom Color Scheme Settings {{{
