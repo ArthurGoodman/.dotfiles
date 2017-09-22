@@ -23,8 +23,9 @@ function! FormatFile()
     py3f ~/ADASPlatformRoot/BuildTools/host_env_setup/linux/build/llvm/tools/clang/tools/clang-format/clang-format.py
 endfunction
 
-map <C-I> :call FormatFile()<CR>
-imap <C-I> <c-o>:call FormatFile()<CR>
+" !Breaks tab in GVim
+" map <C-I> :call FormatFile()<CR>
+" imap <C-I> <c-o>:call FormatFile()<CR>
 " }}}
 " Tabs & Spaces {{{
 set tabstop=4
@@ -63,7 +64,8 @@ let mapleader = ","
 " Toggle line numbers
 nnoremap <leader>1 :set number!<CR> :set relativenumber!<CR>
 
-nnoremap <leader>ev :vsp ~/.dotfiles/vimrc<CR>
+nnoremap <leader>ve :vsp ~/.dotfiles/vimrc<CR>
+nnoremap <leader>vs :so $MYVIMRC<CR>
 
 " silversearcher-ag
 nnoremap <leader>a :Ag 
@@ -103,19 +105,26 @@ augroup configgroup
     " Header snippet
     autocmd BufNewFile *.hpp :exe "normal iheader\<C-b>"
 
-    " Changing cursor shape
-    autocmd VimEnter,InsertLeave * silent execute '!echo -ne "\e[1 q"' | redraw!
-    autocmd InsertEnter,InsertChange *
-        \ if v:insertmode == 'i' | 
-        \   silent execute '!echo -ne "\e[5 q"' | redraw! |
-        \ elseif v:insertmode == 'r' |
-        \   silent execute '!echo -ne "\e[3 q"' | redraw! |
-        \ endif
-    autocmd VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
+    " Change Cursor shape in terminal
+    if !has("gui_running")
+        " Changing cursor shape
+        autocmd VimEnter,InsertLeave * silent execute '!echo -ne "\e[1 q"' | redraw!
+        autocmd InsertEnter,InsertChange *
+            \ if v:insertmode == 'i' |
+            \   silent execute '!echo -ne "\e[5 q"' | redraw! |
+            \ elseif v:insertmode == 'r' |
+            \   silent execute '!echo -ne "\e[3 q"' | redraw! |
+            \ endif
+        autocmd VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
+    endif
 
     " :nohlsearch on <esc>
-    " !Breaks arrows in normal mode
+    " !Breaks arrows in normal mode, doesn't work in GVim
     " autocmd TermResponse * nnoremap <esc> :noh<return><esc>
+
+    " Disable bells
+    set noerrorbells visualbell t_vb=
+    autocmd GUIEnter * set visualbell t_vb=
 augroup END
 " }}}
 " Vundle {{{
@@ -192,7 +201,7 @@ syntax enable
 colorscheme wombat
 " }}}
 " Custom Color Scheme Settings {{{
-hi NonText ctermfg=241 ctermbg=234
+hi NonText ctermfg=241 ctermbg=234 guifg=#626262 guibg=#1c1c1c
 set colorcolumn=101
 " }}}
 " YouCompleteMe {{{
@@ -218,13 +227,13 @@ set wildignore=*.o,*.so,*.swp,*.cmake,*.log,*.bin
 set laststatus=2
 
 let g:lightline = {
-    \ 'colorscheme': 'powerline',
-    \ 'active': {
-    \   'left': [ [ 'mode', 'paste' ],
-    \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+    \ 'colorscheme' : 'powerline',
+    \ 'active' : {
+    \ 'left' : [ [ 'mode', 'paste' ],
+    \ ['gitbranch', 'readonly', 'filename', 'modified'] ]
     \ },
-    \ 'component_function': {
-    \   'gitbranch': 'fugitive#head'
+    \ 'component_function' : {
+    \ 'gitbranch' : 'fugitive#head'
     \ },
     \ }
 " }}}
@@ -250,6 +259,7 @@ nmap <leader>n :NERDTreeToggle<CR>
 nmap <leader>j :NERDTreeFind<CR>
 " }}}
 " Git Gutter {{{
+" !TODO Change colors of marks for GVim
 if exists('&signcolumn')
     set signcolumn=yes
 else
@@ -261,13 +271,21 @@ nnoremap <leader>gs :Gstatus<CR>
 nnoremap <leader>gd :Gdiff<CR>
 
 " git diff color scheme
-hi DiffAdd ctermfg=15 ctermbg=22
-hi DiffChange ctermfg=15 ctermbg=22
-hi DiffText ctermfg=15 ctermbg=34
-hi DiffDelete ctermfg=1 ctermbg=1
+" !Change colors for GVim
+hi DiffAdd ctermfg=15 ctermbg=22 guifg=#ffffff guibg=#005f00
+hi DiffChange ctermfg=15 ctermbg=22 guifg=#ffffff guibg=#005f00
+hi DiffText ctermfg=15 ctermbg=34 guifg=#ffffff guibg=#00af00
+hi DiffDelete ctermfg=1 ctermbg=1 guifg=#800000 guibg=#800000
 " }}}
 " vim-airline {{{
-let g:airline_theme = 'powerlineish'
+" let g:airline_theme = 'powerlineish'
+" let g:airline_powerline_fonts = 1
+" }}}
+" GVim {{{
+set guioptions-=m
+set guioptions-=T
+set guioptions-=r
+set guioptions-=L
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0
