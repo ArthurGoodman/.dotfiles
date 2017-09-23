@@ -47,16 +47,15 @@ set wildignorecase
 set foldmethod=manual
 nnoremap <space> za
 " }}}
-" Splits {{{
-" Navigation
+" Splits Navigation {{{
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 " }}}
-" Line Shortcuts {{{
-nnoremap j gj
-nnoremap k gk
+" Movement/Editing {{{
+nnoremap <CR> o<esc>
+nnoremap <S-CR> O<esc>
 " }}}
 " Leader Shortcuts {{{
 let mapleader = ","
@@ -268,9 +267,7 @@ let NERDTreeMapActivateNode = '<space>'
 let NERDTreeShowHidden = 1
 let NERDTreeIgnore=['\.swp']
 
-nmap <leader>n :NERDTreeToggle<CR>
-nmap <leader>j :NERDTreeFind<CR>
-
+nmap <silent> <leader>j :NERDTreeTabsFind<CR>
 nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
 
 let g:nerdtree_tabs_open_on_gui_startup = 0
