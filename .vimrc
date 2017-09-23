@@ -210,10 +210,11 @@ filetype plugin indent on
 syntax enable
 set background=dark
 colorscheme wombat
-" }}}
-" Custom Color Scheme Settings {{{
-hi NonText ctermfg=241 ctermbg=234 guifg=#626262 guibg=#242424 
-" set colorcolumn=101
+
+if g:colors_name == "wombat"
+    hi NonText ctermfg=241 ctermbg=234 guifg=#626262 guibg=#242424
+endif
+
 execute "set colorcolumn=" . join(range(101,335), ',')
 " }}}
 " YouCompleteMe {{{
@@ -308,6 +309,9 @@ let g:airline_theme = 'powerlineish'
 if has("gui_running")
     let g:airline_powerline_fonts = 1
 endif
+" }}}
+" a.vim {{{
+nnoremap <F4> :A<CR>
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0
