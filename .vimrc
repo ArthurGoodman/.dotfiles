@@ -88,6 +88,8 @@ nnoremap <leader><space> :noh<CR>
 nnoremap <leader>s :call FormatFile() <bar> update<CR>
 
 nnoremap <leader>b :wa <bar> !cmake --build build<CR>
+nnoremap <leader>r :wa <bar> !cmake --build build --target run<CR>
+nnoremap <leader>c :wa <bar> !cmake build<CR>
 " }}}
 " UltiSnips {{{
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
@@ -103,7 +105,7 @@ augroup configgroup
     autocmd!
 
     " Header snippet
-    autocmd BufNewFile *.hpp :exe "normal iheader\<C-b>"
+    " autocmd BufNewFile *.hpp :exe "normal iheader\<C-b>"
 
     " Change Cursor shape in terminal
     if !has("gui_running")
@@ -173,7 +175,7 @@ Plugin 'SirVer/ultisnips'
 Plugin 'honza/vim-snippets'
 
 " A light and configurable statusline/tabline plugin for Vim
-Plugin 'itchyny/lightline.vim'
+" Plugin 'itchyny/lightline.vim'
 
 " Vim plugin for the_silver_searcher, 'ag', a replacement for the Perl module / CLI script 'ack'
 Plugin 'rking/ag.vim'
@@ -186,10 +188,10 @@ Plugin 'rking/ag.vim'
 Plugin 'Raimondi/delimitMate'
 
 " lean & mean status/tabline for vim that's light as air
-" Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline'
 
 " A collection of themes for vim-airline
-" Plugin 'vim-airline/vim-airline-themes'
+Plugin 'vim-airline/vim-airline-themes'
 
 " Alternate Files quickly (.c --> .h etc)
 Plugin 'vim-scripts/a.vim'
@@ -214,6 +216,7 @@ colorscheme wombat
 
 if g:colors_name == "wombat"
     hi NonText ctermfg=241 ctermbg=234 guifg=#626262 guibg=#242424
+hi LineNr ctermfg=241 ctermbg=234 cterm=none guifg=#857b6f guibg=#242424 gui=none
 endif
 
 execute "set colorcolumn=" . join(range(101,335), ',')
@@ -238,18 +241,18 @@ let g:ctrlp_show_hidden = 1
 set wildignore=*.o,*.so,*.swp,*.cmake,*.log,*.bin
 " }}}
 " Lightline {{{
-set laststatus=2
-
-let g:lightline = {
-    \ 'colorscheme' : 'powerline',
-    \ 'active' : {
-    \ 'left' : [ [ 'mode', 'paste' ],
-    \ ['gitbranch', 'readonly', 'filename', 'modified'] ]
-    \ },
-    \ 'component_function' : {
-    \ 'gitbranch' : 'fugitive#head'
-    \ },
-    \ }
+" set laststatus=2
+"
+" let g:lightline = {
+"     \ 'colorscheme' : 'powerline',
+"     \ 'active' : {
+"     \ 'left' : [ [ 'mode', 'paste' ],
+"     \ ['gitbranch', 'readonly', 'filename', 'modified'] ]
+"     \ },
+"     \ 'component_function' : {
+"     \ 'gitbranch' : 'fugitive#head'
+"     \ },
+"     \ }
 " }}}
 " Visual @ {{{
 xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
@@ -293,16 +296,16 @@ set guioptions-=m
 set guioptions-=T
 set guioptions-=r
 set guioptions-=L
-" set guifont=Menlo\ for\ Powerline\ 10
+set guifont=Menlo\ for\ Powerline\ 10
 " }}}
 " delimitMate {{{
 let delimitMate_expand_cr = 1
 " }}}
 " vim-airline {{{
-" let g:airline_theme = 'powerlineish'
-" if has("gui_running")
-"     let g:airline_powerline_fonts = 1
-" endif
+let g:airline_theme = 'powerlineish'
+if has("gui_running")
+    let g:airline_powerline_fonts = 1
+endif
 " }}}
 " a.vim {{{
 nnoremap <F4> :A<CR>
