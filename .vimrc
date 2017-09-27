@@ -224,7 +224,7 @@ execute "set colorcolumn=" . join(range(101,335), ',')
 " YouCompleteMe {{{
 hi YcmErrorSection guibg=#3f0000
 
-nnoremap <leader>i :YcmCompleter GoToInclude<CR>
+nnoremap <F2> :YcmCompleter GoToInclude<CR>
 nnoremap <leader>d :YcmCompleter GoToDeclaration<CR>
 set completeopt-=preview 
 
@@ -242,7 +242,7 @@ set wildignore=*.o,*.so,*.swp,*.cmake,*.log,*.bin
 " }}}
 " Lightline {{{
 " set laststatus=2
-"
+" 
 " let g:lightline = {
 "     \ 'colorscheme' : 'powerline',
 "     \ 'active' : {
