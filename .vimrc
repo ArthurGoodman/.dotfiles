@@ -310,5 +310,9 @@ endif
 " a.vim {{{
 nnoremap <F4> :A<CR>
 " }}}
+" Fullscreen {{{
+map <silent> <F11>
+            \ :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
+" }}}
 
 " vim:foldmethod=marker:foldlevel=0
