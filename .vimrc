@@ -43,10 +43,6 @@ set ignorecase
 set hlsearch
 set wildignorecase
 " }}}
-" Folding {{{
-set foldmethod=manual
-nnoremap <space> za
-" }}}
 " Splits Navigation {{{
 nnoremap <C-h> <C-w>h
 nnoremap <C-j> <C-w>j
@@ -61,7 +57,7 @@ nnoremap <S-CR> O<esc>
 let mapleader = ","
 
 " Toggle line numbers
-nnoremap <leader>1 :set number!<CR> :set relativenumber!<CR>
+nnoremap <leader>1 :set relativenumber!<CR>
 
 nnoremap <leader>ev :vsp ~/.dotfiles/.vimrc<CR>
 
