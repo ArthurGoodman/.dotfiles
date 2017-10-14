@@ -16,6 +16,8 @@ set history=1000
 set splitbelow
 set splitright
 set autoread
+nnoremap Q <nop>
+nnoremap q: <nop>
 " }}}
 " clang-format {{{
 function! FormatFile()
