@@ -16,8 +16,6 @@ set history=1000
 set splitbelow
 set splitright
 set autoread
-nnoremap Q <nop>
-nnoremap q: <nop>
 " }}}
 " clang-format {{{
 function! FormatFile()
@@ -311,6 +309,9 @@ nnoremap <F4> :A<CR>
 " Fullscreen {{{
 map <silent> <F11>
             \ :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
+" }}}
+" Folding {{{
+nnoremap <space> za
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0
