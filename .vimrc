@@ -214,7 +214,7 @@ colorscheme wombat
 
 if g:colors_name == "wombat"
     hi NonText ctermfg=241 ctermbg=234 guifg=#626262 guibg=#242424
-hi LineNr ctermfg=241 ctermbg=234 cterm=none guifg=#857b6f guibg=#242424 gui=none
+    hi LineNr ctermfg=241 ctermbg=234 cterm=none guifg=#857b6f guibg=#242424 gui=none
 endif
 
 execute "set colorcolumn=" . join(range(101,335), ',')
