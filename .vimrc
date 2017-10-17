@@ -20,7 +20,7 @@ set autoread
 " clang-format {{{
 function! FormatFile()
     let l:lines="all"
-    py3f ~/ADASPlatformRoot/BuildTools/host_env_setup/linux/build/llvm/tools/clang/tools/clang-format/clang-format.py
+    py3f ~/.clang-format-py
 endfunction
 
 " !Breaks tab in GVim
@@ -62,7 +62,7 @@ nnoremap <leader>1 :set relativenumber!<CR>
 nnoremap <leader>ev :vsp ~/.dotfiles/.vimrc<CR>
 
 " silversearcher-ag
-nnoremap <leader>a :Ag 
+nnoremap <leader>a :Ag
 
 " Clipboard
 nnoremap <leader>y "+y
@@ -222,7 +222,7 @@ hi YcmErrorSection guibg=#3f0000
 
 nnoremap <F2> :YcmCompleter GoToInclude<CR>
 nnoremap <leader>d :YcmCompleter GoToDeclaration<CR>
-set completeopt-=preview 
+set completeopt-=preview
 
 let g:ycm_enable_diagnostic_signs = 0
 let g:ycm_confirm_extra_conf = 0
@@ -238,7 +238,7 @@ set wildignore=*.o,*.so,*.swp,*.cmake,*.log,*.bin
 " }}}
 " Lightline {{{
 " set laststatus=2
-" 
+"
 " let g:lightline = {
 "     \ 'colorscheme' : 'powerline',
 "     \ 'active' : {
