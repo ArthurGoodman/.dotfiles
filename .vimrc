@@ -53,6 +53,9 @@ nnoremap <C-l> <C-w>l
 nnoremap <CR> o<esc>
 nnoremap <S-CR> O<esc>
 " }}}
+" Folding {{{
+nnoremap <space> za
+" }}}
 " Leader Shortcuts {{{
 let mapleader = ","
 
@@ -99,9 +102,6 @@ let g:UltiSnipsEditSplit="vertical"
 " Autocmds {{{
 augroup configgroup
     autocmd!
-
-    " Header snippet
-    " autocmd BufNewFile *.hpp :exe "normal iheader\<C-b>"
 
     " Change Cursor shape in terminal
     if !has("gui_running")
@@ -199,6 +199,9 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'joshdick/onedark.vim'
 Plugin 'crusoexia/vim-monokai'
 Plugin 'dracula/vim'
+
+" BufExplorer Plugin for Vim
+Plugin 'jlanzarotta/bufexplorer'
 
 " All of your Plugins must be added before the following line
 
@@ -310,8 +313,9 @@ nnoremap <F4> :A<CR>
 map <silent> <F11>
             \ :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
 " }}}
-" Folding {{{
-nnoremap <space> za
+" Switching Buffers {{{
+nnoremap <silent> <c-tab> :bn<CR>
+nnoremap <silent> <s-c-tab> :bp<CR>
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0
