@@ -65,7 +65,7 @@ nnoremap <leader>1 :set relativenumber!<CR>
 nnoremap <leader>ev :vsp ~/.dotfiles/.vimrc<CR>
 
 " silversearcher-ag
-nnoremap <leader>a :Ag
+nnoremap <leader>a :Ag 
 
 " Clipboard
 nnoremap <leader>y "+y
