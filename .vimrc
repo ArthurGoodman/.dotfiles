@@ -84,7 +84,7 @@ nnoremap <leader>q :q<CR>
 nnoremap <leader><space> :noh<CR>
 
 " clang-format
-nnoremap <leader>s :call FormatFile() <bar> update<CR>
+nnoremap <silent> <leader>s :call FormatFile() <bar> update<CR>
 
 nnoremap <leader>b :wa <bar> !cmake --build build<CR>
 nnoremap <leader>r :wa <bar> !cmake --build build --target run<CR>
