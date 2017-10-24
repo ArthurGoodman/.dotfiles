@@ -39,7 +39,7 @@ let g:load_doxygen_syntax = 1
 " }}}
 " Search {{{
 set incsearch
-set ignorecase
+" set ignorecase
 set hlsearch
 set wildignorecase
 " }}}
