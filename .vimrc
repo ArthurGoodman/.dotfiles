@@ -201,7 +201,7 @@ Plugin 'crusoexia/vim-monokai'
 Plugin 'dracula/vim'
 
 " BufExplorer Plugin for Vim
-Plugin 'jlanzarotta/bufexplorer'
+" Plugin 'jlanzarotta/bufexplorer'
 
 " All of your Plugins must be added before the following line
 
@@ -313,9 +313,9 @@ nnoremap <F4> :A<CR>
 map <silent> <F11>
             \ :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
 " }}}
-" Switching Buffers {{{
-nnoremap <silent> <c-tab> :bn<CR>
-nnoremap <silent> <s-c-tab> :bp<CR>
+" bufexplorer {{{
+" nnoremap <silent> <c-tab> :bn<CR>
+" nnoremap <silent> <s-c-tab> :bp<CR>
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0
