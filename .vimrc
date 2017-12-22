@@ -16,6 +16,7 @@ set history=1000
 set splitbelow
 set splitright
 set autoread
+set tildeop
 " }}}
 " clang-format {{{
 function! FormatFile()
@@ -39,9 +40,11 @@ let g:load_doxygen_syntax = 1
 " }}}
 " Search {{{
 set incsearch
-" set ignorecase
+set ignorecase
+set smartcase
 set hlsearch
 set wildignorecase
+set wrapscan
 " }}}
 " Splits Navigation {{{
 nnoremap <C-h> <C-w>h
@@ -50,8 +53,20 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 " }}}
 " Movement/Editing {{{
+nnoremap ; :
+
 nnoremap <CR> o<esc>
 nnoremap <S-CR> O<esc>
+
+vnoremap < <gv
+vnoremap > >gv
+
+nnoremap <C-S-J> :m+<CR>==
+nnoremap <C-S-K> :m-2<CR>==
+inoremap <C-S-J> <Esc>:m+<CR>==gi
+inoremap <C-S-K> <Esc>:m-2<CR>==gi
+vnoremap <C-S-J> :m'>+<CR>gv=gv
+vnoremap <C-S-K> :m-2<CR>gv=gv
 " }}}
 " Folding {{{
 nnoremap <space> za
@@ -75,13 +90,13 @@ nnoremap <leader>P "+P
 vnoremap <leader>p "+p
 
 " Reopen last file
-nnoremap <leader><leader> :e#<CR>
+nnoremap <silent> <leader><leader> :e#<CR>
 
 nnoremap <leader>w :w<CR>
 nnoremap <leader>q :q<CR>
 
 " Remove search highlighting
-nnoremap <leader><space> :noh<CR>
+nnoremap <silent> <leader><space> :noh<CR>
 
 " clang-format
 nnoremap <silent> <leader>s :call FormatFile() <bar> update<CR>
@@ -218,7 +233,7 @@ if g:colors_name == "wombat"
     hi LineNr ctermfg=241 ctermbg=234 cterm=none guifg=#857b6f guibg=#242424 gui=none
 endif
 
-execute "set colorcolumn=" . join(range(101,335), ',')
+execute "set colorcolumn=" . join(range(81,335), ',')
 " }}}
 " YouCompleteMe {{{
 hi YcmErrorSection guibg=#3f0000
