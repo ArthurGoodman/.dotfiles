@@ -17,11 +17,13 @@ LIGHT_GREEN="\[\e[1;32m\]"
 
 parse_git_branch() {
     branch=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'`
-    if [[ $(git status 2> /dev/null | tail -n1) == "nothing to commit, working ${GIT_WORD_FOR_TREE-tree} clean" ]]
-    then
-        echo -e " ${WHITE}${branch}${COLOR_NONE}"
+    status=`git status 2> /dev/null`
+    if [[ $(echo ${status} | grep "nothing to commit") ]] ; then
+        echo " ${WHITE}${branch}${COLOR_NONE}"
+    elif [[ $(echo ${status} | grep "nothing added to commit but untracked files present") ]] ; then
+        echo " ${YELLOW}${branch}${COLOR_NONE}"
     else
-        echo -e " ${LIGHT_RED}${branch}${COLOR_NONE}"
+        echo " ${LIGHT_RED}${branch}${COLOR_NONE}"
     fi
 }
 
@@ -29,7 +31,7 @@ function set_git_branch() {
     BRANCH=$(parse_git_branch)
 }
 
-function set_prompt_symbol () {
+function set_prompt_symbol() {
     if test $1 -eq 0 ; then
         PROMPT_SYMBOL="\$"
     else
@@ -37,7 +39,7 @@ function set_prompt_symbol () {
     fi
 }
 
-function set_virtualenv () {
+function set_virtualenv() {
     if test -z "$VIRTUAL_ENV" ; then
         PYTHON_VIRTUALENV=""
     else
@@ -46,7 +48,7 @@ function set_virtualenv () {
 }
 
 # Set the full bash prompt.
-function set_bash_prompt () {
+function set_bash_prompt() {
     set_prompt_symbol $?
     set_virtualenv
     set_git_branch
