@@ -4,25 +4,55 @@ alias gd="git diff"
 alias glu="git ls-files --others --exclude-standard"
 alias cls=clear
 
-GREEN="\[\e[1;32m\]"
-BLUE="\[\e[1;34m\]"
-RED="\[\e[1;31m\]"
-YELLOW="\[\e[1;33m\]"
-WHITE="\[\e[1;97m\]"
-COLOREND="\[\e[00m\]"
+        RED="\[\e[0;31m\]"
+     YELLOW="\[\e[1;33m\]"
+      GREEN="\[\e[0;32m\]"
+       BLUE="\[\e[1;34m\]"
+     PURPLE="\[\e[0;35m\]"
+  LIGHT_RED="\[\e[1;31m\]"
+LIGHT_GREEN="\[\e[1;32m\]"
+      WHITE="\[\e[1;37m\]"
+ LIGHT_GRAY="\[\e[0;37m\]"
+ COLOR_NONE="\[\e[0m\]"
 
 parse_git_branch() {
     branch=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'`
     if [[ $(git status 2> /dev/null | tail -n1) == "nothing to commit, working ${GIT_WORD_FOR_TREE-tree} clean" ]]
     then
-        echo -e "${WHITE}$branch${COLOREND}"
+        echo -e " ${WHITE}${branch}${COLOR_NONE}"
     else
-        echo -e "${RED}$branch${COLROEND}"
+        echo -e " ${LIGHT_RED}${branch}${COLOR_NONE}"
     fi
 }
 
-prompt() {
-    PS1="${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w$(parse_git_branch)\[\033[00;37m\]\$ "
+function set_git_branch() {
+    BRANCH=$(parse_git_branch)
 }
 
-PROMPT_COMMAND=prompt
+function set_prompt_symbol () {
+    if test $1 -eq 0 ; then
+        PROMPT_SYMBOL="\$"
+    else
+        PROMPT_SYMBOL="${RED}\$${COLOR_NONE}"
+    fi
+}
+
+function set_virtualenv () {
+    if test -z "$VIRTUAL_ENV" ; then
+        PYTHON_VIRTUALENV=""
+    else
+        PYTHON_VIRTUALENV="${PURPLE}[`basename \"$VIRTUAL_ENV\"`]${COLOR_NONE} "
+    fi
+}
+
+# Set the full bash prompt.
+function set_bash_prompt () {
+    set_prompt_symbol $?
+    set_virtualenv
+    set_git_branch
+    PS1="
+${PYTHON_VIRTUALENV}${LIGHT_GREEN}\u@\h${COLOR_NONE}:${BLUE}\w${COLOR_NONE}${BRANCH}
+${PROMPT_SYMBOL} "
+}
+
+PROMPT_COMMAND=set_bash_prompt
