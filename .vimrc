@@ -61,12 +61,12 @@ nnoremap <S-CR> O<esc>
 vnoremap < <gv
 vnoremap > >gv
 
-nnoremap <C-S-J> :m+<CR>==
-nnoremap <C-S-K> :m-2<CR>==
-inoremap <C-S-J> <Esc>:m+<CR>==gi
-inoremap <C-S-K> <Esc>:m-2<CR>==gi
-vnoremap <C-S-J> :m'>+<CR>gv=gv
-vnoremap <C-S-K> :m-2<CR>gv=gv
+nnoremap <M-j> :m+<CR>==
+nnoremap <M-k> :m-2<CR>==
+inoremap <M-j> <Esc>:m+<CR>==gi
+inoremap <M-k> <Esc>:m-2<CR>==gi
+vnoremap <M-j> :m'>+<CR>gv=gv
+vnoremap <M-k> :m-2<CR>gv=gv
 " }}}
 " Folding {{{
 nnoremap <space> za
