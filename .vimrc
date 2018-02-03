@@ -21,7 +21,7 @@ set tildeop
 " clang-format {{{
 function! FormatFile()
     let l:lines="all"
-    py3f ~/.clang-format-py
+    py3f ~/.clang-format.py
 endfunction
 
 " !Breaks tab in GVim
