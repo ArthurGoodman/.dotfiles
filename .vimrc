@@ -281,8 +281,8 @@ let NERDTreeMapActivateNode = '<space>'
 let NERDTreeShowHidden = 1
 let NERDTreeIgnore=['\.swp']
 
-nmap <silent> <leader>j :NERDTreeFind<CR>
-nmap <silent> <leader>t :NERDTreeTabsToggle<CR>
+nnoremap <silent> <leader>j :NERDTreeFind<CR>
+nnoremap <silent> <leader>t :NERDTreeTabsToggle<CR>
 
 let g:nerdtree_tabs_open_on_gui_startup = 0
 " }}}
@@ -322,7 +322,7 @@ if has("gui_running")
 endif
 " }}}
 " a.vim {{{
-nnoremap <F4> :A<CR>
+nnoremap <silent> <F4> :A<CR>
 " }}}
 " Fullscreen {{{
 map <silent> <F11>
