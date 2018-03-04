@@ -52,6 +52,10 @@ nnoremap <C-j> <C-w>j
 nnoremap <C-k> <C-w>k
 nnoremap <C-l> <C-w>l
 " }}}
+" Buffers Navigation {{{
+nnoremap <silent> <c-tab> :bn<CR>
+nnoremap <silent> <s-c-tab> :bp<CR>
+" }}}
 " Movement/Editing {{{
 nnoremap ; :
 
@@ -215,9 +219,6 @@ Plugin 'joshdick/onedark.vim'
 Plugin 'crusoexia/vim-monokai'
 Plugin 'dracula/vim'
 
-" BufExplorer Plugin for Vim
-" Plugin 'jlanzarotta/bufexplorer'
-
 " All of your Plugins must be added before the following line
 
 call vundle#end()
@@ -327,10 +328,6 @@ nnoremap <silent> <F4> :A<CR>
 " Fullscreen {{{
 map <silent> <F11>
             \ :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
-" }}}
-" bufexplorer {{{
-" nnoremap <silent> <c-tab> :bn<CR>
-" nnoremap <silent> <s-c-tab> :bp<CR>
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0
