@@ -219,7 +219,7 @@ Plugin 'sjl/badwolf'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'joshdick/onedark.vim'
 Plugin 'crusoexia/vim-monokai'
-Plugin 'dracula/vim'
+Plugin 'crusoexia/vim-dracula'
 
 " All of your Plugins must be added before the following line
 
@@ -229,7 +229,7 @@ filetype plugin indent on
 " Color Scheme {{{
 syntax enable
 set background=dark
-colorscheme wombat
+colorscheme dracula
 
 if g:colors_name == "wombat"
     hi NonText ctermfg=241 ctermbg=234 guifg=#626262 guibg=#242424
@@ -237,9 +237,10 @@ if g:colors_name == "wombat"
 endif
 
 execute "set colorcolumn=" . join(range(81,335), ',')
+" execute "set colorcolumn=81"
 " }}}
 " YouCompleteMe {{{
-hi YcmErrorSection guibg=#3f0000
+" hi YcmErrorSection guibg=#3f0000
 
 nnoremap <F2> :YcmCompleter GoToInclude<CR>
 nnoremap <leader>d :YcmCompleter GoToDeclaration<CR>
@@ -272,12 +273,12 @@ set wildignore=*.o,*.so,*.swp,*.cmake,*.log,*.bin
 "     \ }
 " }}}
 " Visual @ {{{
-xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
-
-function! ExecuteMacroOverVisualRange()
-    echo "@".getcmdline()
-        execute ":'<,'>normal @".nr2char(getchar())
-endfunction
+" xnoremap @ :<C-u>call ExecuteMacroOverVisualRange()<CR>
+"
+" function! ExecuteMacroOverVisualRange()
+"     echo "@".getcmdline()
+"         execute ":'<,'>normal @".nr2char(getchar())
+" endfunction
 " }}}
 " NERDTree {{{
 let NERDTreeMapActivateNode = '<space>'
@@ -328,8 +329,8 @@ endif
 nnoremap <silent> <F4> :A<CR>
 " }}}
 " Fullscreen {{{
-map <silent> <F11>
-            \ :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
+" map <silent> <F11>
+"             \ :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
 " }}}
 
 " vim:foldmethod=marker:foldlevel=0
