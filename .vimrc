@@ -253,7 +253,7 @@ let g:ycm_confirm_extra_conf = 0
 let g:ctrlp_match_window = 'bottom,order:ttb'
 let g:ctrlp_switch_buffer = 0
 let g:ctrlp_working_path_mode = 0
-let g:ctrlp_by_filename = 1
+let g:ctrlp_by_filename = 0
 let g:ctrlp_show_hidden = 1
 
 set wildignore=*.o,*.so,*.swp,*.cmake,*.log,*.bin
