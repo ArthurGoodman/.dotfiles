@@ -217,9 +217,9 @@ Plugin 'vim-scripts/a.vim'
 Plugin 'sheerun/vim-wombat-scheme'
 Plugin 'sjl/badwolf'
 Plugin 'altercation/vim-colors-solarized'
-Plugin 'joshdick/onedark.vim'
 Plugin 'crusoexia/vim-monokai'
 Plugin 'crusoexia/vim-dracula'
+Plugin 'rakr/vim-one'
 
 " All of your Plugins must be added before the following line
 
@@ -236,8 +236,8 @@ if g:colors_name == "wombat"
     hi LineNr ctermfg=241 ctermbg=234 cterm=none guifg=#857b6f guibg=#242424 gui=none
 endif
 
-execute "set colorcolumn=" . join(range(81,335), ',')
-" execute "set colorcolumn=81"
+" execute "set colorcolumn=" . join(range(81,335), ',')
+execute "set colorcolumn=81"
 " }}}
 " YouCompleteMe {{{
 " hi YcmErrorSection guibg=#3f0000
