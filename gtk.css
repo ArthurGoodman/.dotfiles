@@ -1,0 +1,5 @@
+@define-color VIM_BACKGROUND_COLOR #323342; /* Dracula theme background */
+
+window#vim-main-window {
+    background-color: @VIM_BACKGROUND_COLOR;
+}
