@@ -43,7 +43,7 @@ set autoread
 " set tildeop
 
 " Set 7 lines to the cursor - when moving vertically using j/k
-set so=7
+" set so=7
 
 " Turn persistent undo on
 try
@@ -185,7 +185,7 @@ nnoremap <space> za
 " TODO Document all statements
 " TODO Rearrange all commands properly
 
-nnoremap <leader>e :vsp ~/.dotfiles/.vimrc<CR>
+nnoremap <leader>e :tabnew ~/.dotfiles/.vimrc<CR>
 
 " silversearcher-ag
 nnoremap <leader>a :Ag 
@@ -244,6 +244,8 @@ nnoremap <leader>r :wa<cr>:silent exec "!x-terminal-emulator -e ./run.sh"<cr>
 " Spell checking {{{
 " ==============================================================================
 
+" TODO Decide what to do with this
+"
 " " Pressing ,ss will toggle and untoggle spell checking
 " map <leader>ss :setlocal spell!<cr>
 " 
@@ -385,17 +387,18 @@ endif
 set background=dark
 
 try
-    colorscheme dracula
+    colorscheme wombat
 catch
 endtry
 
 if g:colors_name == "wombat"
     hi NonText ctermfg=241 ctermbg=234 guifg=#626262 guibg=#242424
-    hi LineNr ctermfg=241 ctermbg=234 cterm=none guifg=#857b6f guibg=#242424 gui=none
+    hi LineNr ctermfg=241 ctermbg=234 guifg=#857b6f guibg=#242424
+    hi Todo ctermfg=none ctermbg=234 guifg=#ffb86c guibg=#242424
 endif
 
-" execute "set colorcolumn=" . join(range(81,335), ',')
-execute "set colorcolumn=81"
+execute "set colorcolumn=" . join(range(81,335), ',')
+" execute "set colorcolumn=81"
 
 " }}}
 " YouCompleteMe {{{
@@ -457,11 +460,11 @@ let g:nerdtree_tabs_open_on_gui_startup = 0
 " ==============================================================================
 
 " Always show sign column
-if exists('&signcolumn')
-    set signcolumn=yes
-else
-    let g:gitgutter_sign_column_always = 1
-endif
+" if exists('&signcolumn')
+"     set signcolumn=yes
+" else
+"     let g:gitgutter_sign_column_always = 1
+" endif
 
 " Disable diff by default
 let g:gitgutter_enabled=0
@@ -500,7 +503,6 @@ if has("gui_running")
     set guioptions-=l
     set t_Co=256
     set guitablabel=%M\ %t
-    set guifont=Menlo\ for\ Powerline\ 10
 endif
 
 " Set utf8 as standard encoding and en_US as the standard language
@@ -508,6 +510,16 @@ set encoding=utf8
 
 " Use Unix as the standard file type
 set ffs=unix,dos,mac
+
+" }}}
+" Gui Fonts {{{
+" ==============================================================================
+
+if has("gui_running")
+    " set guifont=Hack\ 10
+    set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
+    " set guifont=Roboto\ Mono\ Medium\ for\ Powerline\ 10
+endif
 
 " }}}
 " delimitMate {{{
@@ -521,7 +533,7 @@ let delimitMate_expand_cr = 1
 
 " let g:airline#extensions#tabline#enabled = 1
 
-let g:airline_theme = 'powerlineish'
+let g:airline_theme = "wombat"
 
 if has("gui_running")
     let g:airline_powerline_fonts = 1
