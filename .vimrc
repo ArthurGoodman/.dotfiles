@@ -77,7 +77,7 @@ set magic
 " }}}
 " Tabs & Spaces {{{
 " ==============================================================================
-"
+
 " Use spaces instead of tabs
 set expandtab
 " Be smart when using tabs ;)
@@ -357,6 +357,7 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'crusoexia/vim-monokai'
 Plugin 'crusoexia/vim-dracula'
 Plugin 'rakr/vim-one'
+Plugin 'NLKNguyen/papercolor-theme'
 
 " All of your Plugins must be added before the following line
 
@@ -366,7 +367,7 @@ filetype plugin indent on
 " }}}
 " UltiSnips {{{
 " ==============================================================================
-"
+
 " Trigger configuration. Do not use <tab> if you use https://github.com/Valloric/YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<c-b>"
 let g:UltiSnipsJumpForwardTrigger="<c-b>"
@@ -384,18 +385,18 @@ if $COLORTERM == 'gnome-terminal'
     set t_Co=256
 endif
 
-set background=dark
+set background=light
 
 try
-    colorscheme wombat
+    colorscheme PaperColor
+
+    if g:colors_name == "wombat"
+        hi NonText ctermfg=241 ctermbg=234 guifg=#626262 guibg=#242424
+        hi LineNr ctermfg=241 ctermbg=234 guifg=#857b6f guibg=#242424
+        hi Todo ctermfg=none ctermbg=234 guifg=#ffb86c guibg=#242424
+    endif
 catch
 endtry
-
-if g:colors_name == "wombat"
-    hi NonText ctermfg=241 ctermbg=234 guifg=#626262 guibg=#242424
-    hi LineNr ctermfg=241 ctermbg=234 guifg=#857b6f guibg=#242424
-    hi Todo ctermfg=none ctermbg=234 guifg=#ffb86c guibg=#242424
-endif
 
 execute "set colorcolumn=" . join(range(81,335), ',')
 " execute "set colorcolumn=81"
@@ -533,7 +534,7 @@ let delimitMate_expand_cr = 1
 
 " let g:airline#extensions#tabline#enabled = 1
 
-let g:airline_theme = "wombat"
+let g:airline_theme = "papercolor"
 
 if has("gui_running")
     let g:airline_powerline_fonts = 1
