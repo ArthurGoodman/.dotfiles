@@ -14,7 +14,7 @@ set cursorline
 " Turn on the Wild menu
 set wildmenu
 set wildmode=longest,list,full
-set ttimeoutlen=100
+set ttimeoutlen=1000 ttimeoutlen=0
 
 " Don't redraw while executing macros (good performance config)
 set lazyredraw
@@ -27,7 +27,7 @@ set mat=2
 
 set ai "Auto indent
 set si "Smart indent
-set wrap "Wrap lines
+set nowrap "Wrap lines
 
 set title
 
@@ -235,10 +235,8 @@ try
 catch
 endtry
 
-" Return to last edit position when opening files (You want this!)
+" Return to last edit position when opening files
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-
-nnoremap <leader>r :wa<cr>:silent exec "!x-terminal-emulator -e ./run.sh"<cr>
 
 " }}}
 " Spell checking {{{
@@ -259,26 +257,9 @@ nnoremap <leader>r :wa<cr>:silent exec "!x-terminal-emulator -e ./run.sh"<cr>
 " Autocmds {{{
 " ==============================================================================
 
-augroup configgroup
-    autocmd!
-
-    " Change Cursor shape in terminal
-    if !has("gui_running")
-        " Changing cursor shape
-        autocmd VimEnter,InsertLeave * silent execute '!echo -ne "\e[1 q"' | redraw!
-        autocmd InsertEnter,InsertChange *
-            \ if v:insertmode == 'i' |
-            \   silent execute '!echo -ne "\e[5 q"' | redraw! |
-            \ elseif v:insertmode == 'r' |
-            \   silent execute '!echo -ne "\e[3 q"' | redraw! |
-            \ endif
-        autocmd VimLeave * silent execute '!echo -ne "\e[ q"' | redraw!
-    endif
-
-    " Disable bells
-    set noerrorbells visualbell t_vb=
-    autocmd GUIEnter * set visualbell t_vb=
-augroup END
+" augroup configgroup
+"     autocmd!
+" augroup END
 
 " }}}
 " Vundle {{{
@@ -359,6 +340,9 @@ Plugin 'crusoexia/vim-dracula'
 Plugin 'rakr/vim-one'
 Plugin 'NLKNguyen/papercolor-theme'
 
+" Toggle the cursor shape in the terminal for Vim
+Plugin 'jszakmeister/vim-togglecursor'
+
 " All of your Plugins must be added before the following line
 
 call vundle#end()
@@ -385,10 +369,10 @@ if $COLORTERM == 'gnome-terminal'
     set t_Co=256
 endif
 
-set background=light
+set background=dark
 
 try
-    colorscheme PaperColor
+    colorscheme dracula
 
     if g:colors_name == "wombat"
         hi NonText ctermfg=241 ctermbg=234 guifg=#626262 guibg=#242424
@@ -534,11 +518,11 @@ let delimitMate_expand_cr = 1
 
 " let g:airline#extensions#tabline#enabled = 1
 
-let g:airline_theme = "papercolor"
+let g:airline_theme = "powerlineish"
 
-if has("gui_running")
-    let g:airline_powerline_fonts = 1
-endif
+" if has("gui_running")
+let g:airline_powerline_fonts = 1
+" endif
 
 " }}}
 " a.vim {{{
