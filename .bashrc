@@ -1,4 +1,6 @@
-alias gl="git log --oneline --all --graph --decorate"
+alias l="ls -lF"
+alias gll="git log --all --graph --decorate"
+alias gl="gll --oneline"
 alias gs="git status"
 alias gd="git diff"
 alias gdc="git diff --cached"
