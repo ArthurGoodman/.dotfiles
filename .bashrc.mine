@@ -1,3 +1,4 @@
+alias r=ranger
 alias l="ls -lF"
 alias gll="git log --all --graph --decorate"
 alias gl="gll --oneline"
@@ -59,3 +60,5 @@ function set_bash_prompt() {
 }
 
 PROMPT_COMMAND=set_bash_prompt
+
+echo -en "\033]0;Terminal\a"

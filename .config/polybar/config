@@ -266,11 +266,12 @@ format-disconnected =
 type = internal/date
 interval = 1
 
-date =  %Y-%m-%d
+;date =  %Y-%m-%d
+date =  %a %d %B %l:%M:%S %p
 date-alt =
 
-time =  %H:%M:%S
-time-alt =  %H:%M:%S
+;time = %l:%M:%S %p
+;time-alt = %I:%M:%S %p
 
 format-prefix =
 format-prefix-foreground = ${colors.foreground-alt}

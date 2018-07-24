@@ -12,6 +12,9 @@ set $suspend systemctl suspend
 #set $netrefresh sudo systemctl restart NetworkManager
 set $lock ~/.config/i3/i3lock-fancy-multimonitor/lock -p -n
 set $terminal st
+set $volume-up amixer -q -D pulse sset Master 5%+ unmute
+set $volume-down amixer -q -D pulse sset Master 5%- unmute
+set $volume-mute amixer -q -D pulse sset Master toggle
 
 # colors
 set $bg-color                #2f343f
@@ -40,12 +43,15 @@ exec --no-startup-id compton --xrender-sync-fence
 # network manager
 exec --no-startup-id nm-applet
 
+# hide cursor after brief period of inactivity
+exec --no-startup-id unclutter
+
 # wallpaper
 exec_always --no-startup-id feh --bg-fill ~/Pictures/wall.jpg
 
 # keyboard layouts
-exec --no-startup-id setxkbmap -layout \\"us,ru,ua\\"
-exec --no-startup-id setxkbmap -option 'grp:alt_shift_toggle'
+exec_always --no-startup-id setxkbmap -layout \\"us,ru,ua\\"
+exec_always --no-startup-id setxkbmap -option 'grp:alt_shift_toggle'
 
 ################################################################################
 # Options
@@ -56,13 +62,13 @@ for_window [class="^.*"] border pixel 2
 
 # gaps
 gaps inner 10
-gaps outer 3
+#gaps outer 3
 
 # use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
 # system font
-font pango:System San Francisco Display 8
+font pango:System San Francisco Display 10
 
 # window colors
 
@@ -72,13 +78,6 @@ client.unfocused        $bg-color         $bg-color         $text-color $indicat
 client.focused_inactive $bg-color         $bg-color         $text-color $indicator-color
 client.urgent           $bg-color         $urgent-bg-color  $text-color $indicator-color
 client.placeholder      $bg-color         $bg-color         $text-color $indicator-color
-
-################################################################################
-# Window options
-################################################################################
-
-for_window [class="TelegramDesktop"] floating enable
-for_window [class="Nautilus"] floating enable
 
 ################################################################################
 # Status bar
@@ -154,7 +153,7 @@ bindsym $mod+Shift+BackSpace exec --no-startup-id prompt "Are you sure you want 
 ################################################################################
 
 # start a file explorer
-bindsym $mod+e exec --no-startup-id nautilus
+bindsym $mod+e exec --no-startup-id nautilus --no-desktop
 
 # adjust gaps size
 bindsym $mod+g gaps inner current plus 5
@@ -170,14 +169,11 @@ bindsym $mod+Shift+r restart
 # lock screen
 bindsym $mod+x exec --no-startup-id $lock
 
+# suspend
+bindsym $mod+z exec --no-startup-id $suspend && $lock
+
 # shutdown
 bindsym $mod+Shift+x exec --no-startup-id prompt "Are you sure you want to shutdown?" "$shutdown"
-
-# reisze
-bindsym $mod+Shift+y exec --no-startup-id "bash ~/.scripts/i3resize left"
-bindsym $mod+Shift+u exec --no-startup-id "bash ~/.scripts/i3resize down"
-bindsym $mod+Shift+i exec --no-startup-id "bash ~/.scripts/i3resize up"
-bindsym $mod+Shift+o exec --no-startup-id "bash ~/.scripts/i3resize right"
 
 # toggle stickiness of the window
 bindsym $mod+o sticky toggle
@@ -187,6 +183,7 @@ bindsym $mod+o sticky toggle
 ################################################################################
 
 # workspaces
+set $ws0  "0"
 set $ws1  "1"
 set $ws2  "2"
 set $ws3  "3"
@@ -199,6 +196,7 @@ set $ws9  "9"
 set $ws10 "10"
 
 # switch to workspace
+bindsym $mod+grave workspace $ws0
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
@@ -211,6 +209,7 @@ bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
 
 # move focused container to workspace
+bindsym $mod+Shift+grave move container to workspace $ws0; workspace $ws0
 bindsym $mod+Shift+1 move container to workspace $ws1; workspace $ws1
 bindsym $mod+Shift+2 move container to workspace $ws2; workspace $ws2
 bindsym $mod+Shift+3 move container to workspace $ws3; workspace $ws3
@@ -277,34 +276,45 @@ bindsym $mod+p focus parent
 bindsym $mod+c focus child
 
 ################################################################################
+# Window options
+################################################################################
+
+for_window [class="TelegramDesktop"] floating enable
+for_window [class="Nautilus"] floating enable
+for_window [class="Lxappearance"] floating enable
+for_window [class="Arandr"] floating enable
+for_window [class="Pavucontrol"] floating enable
+for_window [class="Stride"] floating enable, move container to $ws1
+
+################################################################################
 # Resize mode
 ################################################################################
 
 # resize window (you can also use the mouse for that)
-# mode "resize" {
-#         # These bindings trigger as soon as you enter the resize mode
-#
-#         # Pressing left will shrink the window’s width.
-#         # Pressing right will grow the window’s width.
-#         # Pressing up will shrink the window’s height.
-#         # Pressing down will grow the window’s height.
-#         bindsym h resize shrink width 50 px or 10 ppt
-#         bindsym j resize grow height 50 px or 10 ppt
-#         bindsym k resize shrink height 50 px or 10 ppt
-#         bindsym l resize grow width 50 px or 10 ppt
-#
-#         # same bindings, but for the arrow keys
-#         bindsym Left resize shrink width 50 px or 10 ppt
-#         bindsym Down resize grow height 50 px or 10 ppt
-#         bindsym Up resize shrink height 50 px or 10 ppt
-#         bindsym Right resize grow width 50 px or 10 ppt
-#
-#         # back to normal: Enter or Escape
-#         bindsym Return mode "default"
-#         bindsym Escape mode "default"
-# }
+mode "resize" {
+        # These bindings trigger as soon as you enter the resize mode
 
-# bindsym $mod+r mode "resize"
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym h resize shrink width 50 px or 10 ppt
+        bindsym j resize grow height 50 px or 10 ppt
+        bindsym k resize shrink height 50 px or 10 ppt
+        bindsym l resize grow width 50 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 50 px or 10 ppt
+        bindsym Down resize grow height 50 px or 10 ppt
+        bindsym Up resize shrink height 50 px or 10 ppt
+        bindsym Right resize grow width 50 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+}
+
+bindsym $mod+r mode "resize"
 
 ################################################################################
 # Function keys
@@ -335,9 +345,13 @@ bindsym Shift+Print exec --no-startup-id scrot -u
 ################################################################################
 
 # pulseaudio controls
-bindsym XF86AudioRaiseVolume exec --no-startup-id amixer -q -D pulse sset Master 5%+ unmute
-bindsym XF86AudioLowerVolume exec --no-startup-id amixer -q -D pulse sset Master 5%- unmute
-bindsym XF86AudioMute exec --no-startup-id amixer -q -D pulse sset Master toggle
+bindsym XF86AudioRaiseVolume exec --no-startup-id $volume-up
+bindsym XF86AudioLowerVolume exec --no-startup-id $volume-down
+bindsym XF86AudioMute exec --no-startup-id $volume-mute
+
+bindsym $mod+plus exec --no-startup-id $volume-up
+bindsym $mod+minus exec --no-startup-id $volume-down
+bindsym $mod+m exec --no-startup-id $volume-mute
 
 # screen brightness controls
 bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10

@@ -74,6 +74,9 @@ set ruler
 " For regular expressions turn magic on
 set magic
 
+" Disable bells
+set vb t_vb=
+
 " }}}
 " Tabs & Spaces {{{
 " ==============================================================================
@@ -201,8 +204,8 @@ vnoremap <leader>p "+p
 nnoremap <silent> <leader><leader> :e#<CR>
 
 " Fast saving
-nnoremap <leader>w :w!<CR>
-nnoremap <leader>q :q!<CR>
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
 
 " Remove search highlighting
 nnoremap <leader><space> :noh<CR>
@@ -365,9 +368,9 @@ let g:UltiSnipsEditSplit="vertical"
 " ==============================================================================
 
 " Enable 256 colors palette in Gnome Terminal
-if $COLORTERM == 'gnome-terminal'
-    set t_Co=256
-endif
+" if $COLORTERM == 'gnome-terminal'
+"     set t_Co=256
+" endif
 
 set background=dark
 
@@ -510,6 +513,7 @@ endif
 " delimitMate {{{
 " ==============================================================================
 
+" TODO Investigate strange behaviour with comma
 let delimitMate_expand_cr = 1
 
 " }}}
