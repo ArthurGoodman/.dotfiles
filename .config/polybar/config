@@ -57,7 +57,7 @@ font-5 = "Font Awesome 5 Brands:pixelsize=12;1"
 modules-left = i3
 modules-center = mpd
 ; modules-right = filesystem xbacklight alsa pulseaudio xkeyboard memory cpu wlan eth battery temperature date powermenu
-modules-right = pulseaudio xkeyboard memory cpu wlan eth battery date powermenu
+modules-right = pulseaudio xkeyboard memory cpu wlan eth battery date uptime powermenu
 
 tray-position = right
 ;tray-padding = 2
@@ -410,3 +410,9 @@ menu-0-0 = reboot
 menu-0-0-exec = reboot
 menu-0-1 = power off
 menu-0-1-exec = poweroff
+
+[module/uptime]
+type = custom/script
+exec = ~/.scripts/system-uptime-pretty.sh
+interval = 30
+format-underline = #f0a000
