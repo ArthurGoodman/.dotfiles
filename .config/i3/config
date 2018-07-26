@@ -53,6 +53,9 @@ exec_always --no-startup-id feh --bg-fill ~/Pictures/wall.jpg
 exec_always --no-startup-id setxkbmap -layout \\"us,ru,ua\\"
 exec_always --no-startup-id setxkbmap -option 'grp:alt_shift_toggle'
 
+# lock screen automatically
+exec --no-startup-id xautolock -time 15 -locker "$lock"
+
 ################################################################################
 # Options
 ################################################################################

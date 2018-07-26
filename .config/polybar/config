@@ -413,6 +413,6 @@ menu-0-1-exec = poweroff
 
 [module/uptime]
 type = custom/script
-exec = ~/.scripts/system-uptime-pretty.sh
+exec = uptime-pretty
 interval = 30
 format-underline = #f0a000
