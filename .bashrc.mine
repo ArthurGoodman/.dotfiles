@@ -59,4 +59,4 @@ function set_bash_prompt() {
     PS1="${PYTHON_VIRTUALENV}${LIGHT_GREEN}\u@\h${COLOR_NONE}:${BLUE}\w${COLOR_NONE}${BRANCH}${PROMPT_SYMBOL} "
 }
 
-PROMPT_COMMAND='echo -ne "\033]0;${PWD/#$HOME/"~"} - Terminal\a"; set_bash_prompt'
+PROMPT_COMMAND='echo -ne "\033]0;${PWD/#$HOME/\~} - Terminal\a" ; set_bash_prompt'

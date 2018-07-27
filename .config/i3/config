@@ -76,12 +76,12 @@ font pango:System San Francisco Display 10
 
 # window colors
 
-# window class          border            background        text        indicator
+# window class          border            background        text            indicator
 client.focused          $focused-bg-color $focused-bg-color $inv-text-color $focused-indicator-color
-client.unfocused        $bg-color         $bg-color         $text-color $indicator-color
-client.focused_inactive $bg-color         $bg-color         $text-color $indicator-color
-client.urgent           $bg-color         $urgent-bg-color  $text-color $indicator-color
-client.placeholder      $bg-color         $bg-color         $text-color $indicator-color
+client.unfocused        $bg-color         $bg-color         $text-color     $indicator-color
+client.focused_inactive $bg-color         $bg-color         $text-color     $indicator-color
+client.urgent           $bg-color         $urgent-bg-color  $text-color     $indicator-color
+client.placeholder      $bg-color         $bg-color         $text-color     $indicator-color
 
 ################################################################################
 # Status bar
