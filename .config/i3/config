@@ -24,6 +24,7 @@ set $bg-color-tr             #d82f343f
 set $bg-color-str            #2f343fdd
 set $inactive-bg-color       #2f343f
 set $text-color              #f3f4f5
+set $inv-text-color          #0c0b0a
 set $inactive-text-color     #676E7D
 set $urgent-bg-color         #E53935
 set $urgent-indicator-color  #f3a09e
@@ -76,7 +77,7 @@ font pango:System San Francisco Display 10
 # window colors
 
 # window class          border            background        text        indicator
-client.focused          $focused-bg-color $focused-bg-color $text-color $focused-indicator-color
+client.focused          $focused-bg-color $focused-bg-color $inv-text-color $focused-indicator-color
 client.unfocused        $bg-color         $bg-color         $text-color $indicator-color
 client.focused_inactive $bg-color         $bg-color         $text-color $indicator-color
 client.urgent           $bg-color         $urgent-bg-color  $text-color $indicator-color
