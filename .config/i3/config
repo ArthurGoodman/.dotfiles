@@ -51,11 +51,14 @@ exec --no-startup-id unclutter
 exec_always --no-startup-id feh --bg-fill ~/Pictures/wall.jpg
 
 # keyboard layouts
-exec_always --no-startup-id setxkbmap -layout \\"us,ru,ua\\"
-exec_always --no-startup-id setxkbmap -option 'grp:alt_shift_toggle'
+exec --no-startup-id setxkbmap -layout \\"us,ru,ua\\"
+exec --no-startup-id setxkbmap -option 'grp:alt_shift_toggle'
 
 # lock screen automatically
 exec --no-startup-id xautolock -time 15 -locker "$lock"
+
+# increate key repeat rate a bit
+exec --no-startup-id xset r rate 250 30
 
 ################################################################################
 # Options
