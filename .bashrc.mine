@@ -60,3 +60,8 @@ function set_bash_prompt() {
 }
 
 PROMPT_COMMAND='echo -ne "\033]0;${PWD/#$HOME/\~} - Terminal\a" ; set_bash_prompt'
+
+if [ "$TERM" = "st-256color" ]
+then
+    export TERM=xterm-256color
+fi
