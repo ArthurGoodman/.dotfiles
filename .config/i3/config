@@ -121,19 +121,8 @@ exec_always --no-startup-id ~/.config/polybar/launch
 # installed.
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
-bindsym $mod+d exec --no-startup-id "rofi -show drun \
-    -lines 3 -eh 2 -width 100 -padding 500 -bw 0 \
-    -hide-scrollbar -display-drun run \
-    -color-normal \\"#00000000,$text-color,#00000000,#00000000,#9575cd\\" \
-    -color-window \\"$bg-color-tr,$bg-color-tr,#00000000\\" \
-    -font \\"System San Francisco Display 18\\""
-
-bindsym $mod+shift+d exec --no-startup-id "rofi -show run \
-    -lines 3 -eh 2 -width 100 -padding 500 -bw 0 \
-    -hide-scrollbar \
-    -color-normal \\"#00000000,$text-color,#00000000,#00000000,#9575cd\\" \
-    -color-window \\"$bg-color-tr,$bg-color-tr,#00000000\\" \
-    -font \\"System San Francisco Display 18\\""
+bindsym $mod+d exec --no-startup-id rofi -modi drun -show drun
+bindsym $mod+Shift+d exec --no-startup-id rofi -modi run -show run
 
 ################################################################################
 # Basic bindings
