@@ -267,7 +267,6 @@ au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g
 " ==============================================================================
 
 " augroup configgroup
-"     autocmd!
 " augroup END
 
 " }}}
@@ -351,6 +350,9 @@ Plugin 'NLKNguyen/papercolor-theme'
 
 " Toggle the cursor shape in the terminal for Vim
 Plugin 'jszakmeister/vim-togglecursor'
+
+" Have Vim automatically reload a file that has changed externally
+Plugin 'djoshea/vim-autoread'
 
 " All of your Plugins must be added before the following line
 
