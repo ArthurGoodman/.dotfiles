@@ -1,0 +1,71 @@
+#!/bin/bash
+
+# TODO Add --output parameter
+# TODO Maybe add --audio-device parameter
+
+FORMAT="image"
+SELECT=false
+
+VIDEO_EXT="mkv"
+IMAGE_EXT="png"
+
+for i in "$@"; do
+case $i in
+    -f=*|--format=*)
+        FORMAT="${i#*=}"
+        case $FORMAT in
+            image|video|gif)
+            ;;
+            *)
+                echo "error: invalid format '$FORMAT'"
+                exit 1
+            ;;
+        esac
+        shift
+        ;;
+    -s|--select)
+        SELECT=true
+        shift
+    ;;
+    -h|--help)
+        # TODO Write help
+        echo "This is help."
+        exit 0
+    ;;
+    *)
+        echo "error: invalid argument '$i'"
+        exit 1
+    ;;
+esac
+done
+
+if $SELECT ; then
+    SLOP=$(slop -f "%x %y %w %h %g %i") || exit 1
+    read -r X Y W H G ID < <(echo $SLOP)
+fi
+
+OUTPUT="$HOME/$(date +screen-%F-%H-%M-%S)"
+
+# TODO Make use of /tmp, right?
+
+case $FORMAT in
+    image)
+        if $SELECT ; then
+            import -window root -crop $G "$OUTPUT.$IMAGE_EXT"
+        else
+            import -window root "$OUTPUT.$IMAGE_EXT"
+        fi
+    ;;
+    video|gif)
+        if $SELECT ; then
+            ffmpeg -f x11grab -s "$W"x"$H" -i :0.0+$X,$Y -f pulse -ac 2 -i default "$OUTPUT.$VIDEO_EXT"
+        else
+            # TODO Implement correct resolution selection
+            ffmpeg -f x11grab -i :0.0 -f pulse -ac 2 -i default "$OUTPUT.$VIDEO_EXT"
+        fi
+        if [ "$FORMAT" == "gif" ]; then
+            ffmpeg -y -i "$OUTPUT.$VIDEO_EXT"  -vf fps=10,palettegen /tmp/palette.png
+            ffmpeg -i "$OUTPUT.$VIDEO_EXT" -i /tmp/palette.png -filter_complex "paletteuse" "$OUTPUT.gif"
+        fi
+    ;;
+esac

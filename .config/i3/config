@@ -282,6 +282,8 @@ for_window [class="Arandr"] floating enable
 for_window [class="Pavucontrol"] floating enable
 for_window [class="Stride"] floating enable
 for_window [class="vlc"] floating enable
+for_window [class="mpv"] floating enable
+for_window [class="feh"] floating enable
 
 ################################################################################
 # Resize mode
@@ -334,8 +336,11 @@ bindsym $mod+r mode "resize"
 # Media keys
 ################################################################################
 
-bindsym Print exec --no-startup-id scrot
-bindsym Shift+Print exec --no-startup-id scrot -u
+bindsym Print exec --no-startup-id screencapture --format=image
+bindsym Control+Print exec --no-startup-id screencapture --format=image --select
+bindsym $mod+Print exec --no-startup-id screencapture --format=video
+bindsym Control+$mod+Print exec --no-startup-id screencapture --format=video --select
+bindsym Control+Shift+Print exec --no-startup-id killall ffmpeg
 
 ################################################################################
 # XF86 keys
