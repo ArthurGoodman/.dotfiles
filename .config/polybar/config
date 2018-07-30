@@ -57,7 +57,7 @@ font-5 = "Font Awesome 5 Brands:pixelsize=12;1"
 modules-left = i3 xwindow
 modules-center = mpd
 ; modules-right = filesystem xbacklight alsa pulseaudio xkeyboard memory cpu wlan eth battery temperature date powermenu
-modules-right = pulseaudio xkeyboard memory cpu wlan eth battery date uptime powermenu
+modules-right = pulseaudio xkeyboard memory cpu wlan eth battery scriptdate uptime powermenu
 
 tray-position = right
 ;tray-padding = 2
@@ -416,3 +416,11 @@ type = custom/script
 exec = uptime-pretty
 interval = 30
 format-underline = #f0a000
+
+[module/scriptdate]
+type = custom/script
+exec = date +' %a %d %B %l:%M:%S %p'
+tail = false
+click-left = gsimplecal
+interval = 1
+format-underline = #0a6cf5
