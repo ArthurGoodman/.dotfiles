@@ -57,13 +57,17 @@ case $FORMAT in
     video|gif)
         EXT="mkv"
         TMPFILE="$(mktemp -t screen-XXXXXXX.$EXT)"
+        if [ "$FORMAT" == "gif" ]; then
+            FPS=24
+        else
+            FPS=60
+        fi
         trap "rm -f '$TMPFILE'" 0
         if $SELECT ; then
-            notify-send "$TMPFILE"
-            ffmpeg -y -f x11grab -s "$W"x"$H" -i :0.0+$X,$Y -f pulse -ac 2 -i 0 "$TMPFILE"
+            ffmpeg -y -f x11grab -framerate $FPS -s "$W"x"$H" -i :0.0+$X,$Y -f pulse -ac 2 -i default "$TMPFILE"
         else
             # TODO Implement correct resolution selection
-            ffmpeg -y -f x11grab -i :0.0 -f pulse -ac 2 -i 0 "$TMPFILE"
+            ffmpeg -y -f x11grab -framerate $FPS -i :0.0 -f pulse -ac 2 -i default "$TMPFILE"
         fi
         if [ "$FORMAT" == "gif" ]; then
             EXT="gif"
