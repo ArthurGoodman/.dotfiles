@@ -42,8 +42,7 @@ alias v="vim"
 ################################################################################
 
 # Fix color output of some programs in st
-if [ "$TERM" = "st-256color" ]
-then
+if [ "$TERM" = "st-256color" ] ; then
     export TERM=xterm-256color
 fi
 
@@ -51,26 +50,25 @@ fi
 # Prompt
 ################################################################################
 
-parse_git_branch() {
-    branch=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/(\1)/'`
+function set_git_branch() {
+    branch=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+    if [[ "$branch" =~ ^([A-Z]*-[0-9]*)-.* ]] ; then
+        branch="${BASH_REMATCH[1]}"
+    fi
     status=`git status 2> /dev/null`
-    if test -z "$branch" ; then
-        echo ""
+    if [ -z "$branch" ] ; then
+        BRANCH=""
     elif [[ $(echo ${status} | grep "nothing to commit") ]] ; then
-        echo "${WHITE}${branch}${COLOR_NONE}"
+        BRANCH="${WHITE}(${branch})${COLOR_NONE}"
     elif [[ $(echo ${status} | grep "nothing added to commit but untracked files present") ]] ; then
-        echo "${LIGHT_YELLOW}${branch}${COLOR_NONE}"
+        BRANCH="${LIGHT_YELLOW}(${branch})${COLOR_NONE}"
     else
-        echo "${LIGHT_RED}${branch}${COLOR_NONE}"
+        BRANCH="${LIGHT_RED}(${branch})${COLOR_NONE}"
     fi
 }
 
-function set_git_branch() {
-    BRANCH=$(parse_git_branch)
-}
-
 function set_prompt_symbol() {
-    if test $1 -eq 0 ; then
+    if [ $1 -eq 0 ] ; then
         PROMPT_SYMBOL="\$"
     else
         PROMPT_SYMBOL="${RED}\$${COLOR_NONE}"
@@ -78,7 +76,7 @@ function set_prompt_symbol() {
 }
 
 function set_virtualenv() {
-    if test -z "$VIRTUAL_ENV" ; then
+    if [ -z "$VIRTUAL_ENV" ] ; then
         PYTHON_VIRTUALENV=""
     else
         PYTHON_VIRTUALENV="${LIGHT_MAGENTA}[`basename \"$VIRTUAL_ENV\"`]${COLOR_NONE} "
