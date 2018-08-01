@@ -41,7 +41,7 @@ done
 OUTPUT="$HOME/$(date +screen-%F-%H-%M-%S)"
 
 if $SELECT ; then
-    SLOP=$(slop -f "%x %y %w %h %g %i") || exit 1
+    SLOP=$(slop -l -c 1,1,1,0.25 -f "%x %y %w %h %g %i") || exit 1
     read -r X Y W H G ID < <(echo $SLOP)
 fi
 
@@ -53,6 +53,7 @@ case $FORMAT in
         else
             import -window root "$OUTPUT.$EXT"
         fi
+        xclip -selection clipboard -t image/$EXT -i "$OUTPUT.$EXT"
     ;;
     video|gif)
         EXT="mkv"
@@ -64,10 +65,10 @@ case $FORMAT in
         fi
         trap "rm -f '$TMPFILE'" 0
         if $SELECT ; then
-            ffmpeg -y -f x11grab -framerate $FPS -s "$W"x"$H" -i :0.0+$X,$Y -f pulse -ac 2 -i default "$TMPFILE"
+            ffmpeg -y -f x11grab -framerate $FPS -s ${W}x${H} -i :0.0+$X,$Y -f pulse -ac 2 -i default "$TMPFILE"
         else
-            # TODO Implement correct resolution selection
-            ffmpeg -y -f x11grab -framerate $FPS -i :0.0 -f pulse -ac 2 -i default "$TMPFILE"
+            resolution=$(xrandr | grep current | sed -r "s/^.*current ([0-9]+) x ([0-9]+).*$/\1x\2/")
+            ffmpeg -y -s $resolution -f x11grab -framerate $FPS -i :0.0 -f pulse -ac 2 -i default "$TMPFILE"
         fi
         if [ "$FORMAT" == "gif" ]; then
             EXT="gif"
