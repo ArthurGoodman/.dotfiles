@@ -420,7 +420,7 @@ format-underline = #f0a000
 
 [module/scriptdate]
 type = custom/script
-exec = date +' %a %d %B %l:%M:%S %p'
+exec = date +' %a %d %b %l:%M:%S %p'
 tail = false
 click-left = gsimplecal
 interval = 1
