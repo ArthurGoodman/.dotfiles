@@ -4,6 +4,7 @@
 
 # mod
 set $mod Mod4
+set $alt Mod1
 
 # commands
 set $shutdown shutdown -h now
@@ -121,8 +122,9 @@ exec_always --no-startup-id ~/.config/polybar/launch
 # installed.
 #bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
-bindsym $mod+d exec --no-startup-id rofi -modi drun -show drun
-bindsym $mod+Shift+d exec --no-startup-id rofi -modi run -show run
+bindsym $mod+d exec --no-startup-id rofi -show drun
+bindsym $mod+Shift+d exec --no-startup-id rofi -show run
+bindsym $mod+a exec --no-startup-id rofi -show window
 
 ################################################################################
 # Basic bindings
@@ -231,6 +233,9 @@ bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
 bindsym $mod+l focus right
+
+# cycle through windows
+bindsym $alt+Tab focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
