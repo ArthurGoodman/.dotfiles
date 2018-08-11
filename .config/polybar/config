@@ -57,7 +57,7 @@ font-5 = "Font Awesome 5 Brands:pixelsize=12;1"
 modules-left = i3 xwindow
 modules-center = mpd
 ; modules-right = filesystem xbacklight alsa pulseaudio xkeyboard memory cpu wlan eth battery temperature date powermenu
-modules-right = pulseaudio xkeyboard memory cpu wlan eth battery scriptdate uptime powermenu
+modules-right = pulseaudio xkeyboard memory cpu wlan eth battery scriptdate uptime
 
 tray-position = right
 ;tray-padding = 2
