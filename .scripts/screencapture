@@ -2,7 +2,6 @@
 
 # TODO Add --output parameter
 # TODO Maybe add --audio-device parameter, maybe...
-# TODO Check multiple display support
 
 FORMAT="image"
 EXT="png"
