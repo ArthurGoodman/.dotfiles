@@ -359,6 +359,9 @@ Plugin 'jszakmeister/vim-togglecursor'
 " Have Vim automatically reload a file that has changed externally
 Plugin 'djoshea/vim-autoread'
 
+" Vim runtime files for OpenGL Shading Language
+Plugin 'tikhomirov/vim-glsl'
+
 " All of your Plugins must be added before the following line
 
 call vundle#end()
