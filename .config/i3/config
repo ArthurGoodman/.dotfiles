@@ -36,6 +36,9 @@ set $white                   #ffffff
 # Autostart
 ################################################################################
 
+# nvidia settings
+exec --no-startup-id nvidia-settings --load-config-only
+
 # dropbox
 exec --no-startup-id dropbox start
 
