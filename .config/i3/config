@@ -157,8 +157,8 @@ bindsym $mod+Shift+BackSpace exec --no-startup-id prompt "Are you sure you want 
 bindsym $mod+e exec --no-startup-id nautilus --no-desktop
 
 # adjust gaps size
-bindsym $mod+g gaps inner current plus 5
-bindsym $mod+Shift+g gaps inner current minus 5
+#bindsym $mod+g gaps inner current plus 5
+#bindsym $mod+Shift+g gaps inner current minus 5
 
 # kill focused window
 bindsym $mod+q kill
