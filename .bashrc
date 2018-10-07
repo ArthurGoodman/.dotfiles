@@ -1,3 +1,60 @@
+#
+# ~/.bashrc
+#
+
+# If not running interactively, don't do anything
+[[ $- != *i* ]] && return
+
+################################################################################
+# Common
+################################################################################
+
+# Disable ctrl-s and ctrl-q
+stty -ixon 
+
+# Allows you to cd into directory merely by typing the directory name
+shopt -s autocd 
+
+# Infinite history
+HISTSIZE= HISTFILESIZE=
+
+# Fix color output of some programs in st
+if [ "$TERM" = "st-256color" ] ; then
+    export TERM=xterm-256color
+fi
+
+###############################################################################
+# Aliases
+################################################################################
+
+alias cls="clear"
+
+alias ls="ls --color=auto"
+alias ll="ls -l"
+alias la="ls -alF"
+
+alias egrep="egrep --color=auto"
+alias fgrep="fgrep --color=auto"
+alias grep="grep --color=auto"
+
+alias gll="git log --all --graph --decorate"
+alias gl="gll --oneline"
+alias gs="git status"
+alias gd="git diff"
+alias gf="git fetch"
+alias gdc="git diff --cached"
+alias glu="git ls-files --others --exclude-standard"
+alias gf="git fetch"
+
+alias sv="sudo vim"
+alias v="vim"
+alias sr="sudo ranger"
+alias r="ranger"
+
+alias pacman="pacman --color=auto"
+alias yay="yay --color=auto"
+alias pacaur="pacaur --color=auto"
+
 ################################################################################
 # Colors
 ################################################################################
@@ -19,33 +76,6 @@ LIGHT_MAGENTA="\[\e[1;35m\]"
    LIGHT_CYAN="\[\e[1;36m\]"
    LIGHT_GRAY="\[\e[0;37m\]"
         WHITE="\[\e[1;37m\]"
-
-###############################################################################
-# Aliases
-################################################################################
-
-alias l="ls -lF"
-alias gll="git log --all --graph --decorate"
-alias gl="gll --oneline"
-alias gs="git status"
-alias gd="git diff"
-alias gdc="git diff --cached"
-alias glu="git ls-files --others --exclude-standard"
-alias gf="git fetch"
-alias cls="clear"
-alias sr="sudo ranger"
-alias r="ranger"
-alias sv="sudo vim"
-alias v="vim"
-
-################################################################################
-# Common
-################################################################################
-
-# Fix color output of some programs in st
-if [ "$TERM" = "st-256color" ] ; then
-    export TERM=xterm-256color
-fi
 
 ################################################################################
 # Prompt
@@ -92,4 +122,5 @@ function set_bash_prompt() {
     PS1="${PYTHON_VIRTUALENV}${LIGHT_GREEN}\u@\h${COLOR_NONE}:${LIGHT_BLUE}\W${COLOR_NONE}${BRANCH}${PROMPT_SYMBOL} "
 }
 
+# Set prompt and terminal title
 PROMPT_COMMAND='set_bash_prompt ; echo -ne "\033]0;${PWD/#$HOME/\~} - Terminal\a"'
