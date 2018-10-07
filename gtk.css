@@ -1,6 +1,0 @@
-/* @define-color VIM_BACKGROUND_COLOR #323342; */ /* Dracula */
-@define-color VIM_BACKGROUND_COLOR #242424; /* Wombat */
-
-window#vim-main-window {
-    background-color: @VIM_BACKGROUND_COLOR;
-}
