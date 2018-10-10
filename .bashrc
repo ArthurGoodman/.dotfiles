@@ -18,6 +18,19 @@ shopt -s autocd
 # Infinite history
 HISTSIZE= HISTFILESIZE=
 
+# Don't put duplicate lines or lines starting with space in the history.
+HISTCONTROL=ignoreboth
+
+# Append to the history file, don't overwrite it
+shopt -s histappend
+
+# Check the window size after each command and, if necessary,
+# update the values of LINES and COLUMNS.
+shopt -s checkwinsize
+
+# Make less more friendly for non-text input files, see lesspipe(1)
+[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+
 # Fix color output of some programs in st
 if [ "$TERM" = "st-256color" ] ; then
     export TERM=xterm-256color
