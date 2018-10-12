@@ -450,11 +450,16 @@ set wildignore=*.o,*.so,*.swp,*.cmake,*.log,*.bin,*~,*.pyc
 " NERDTree {{{
 " ==============================================================================
 
-let NERDTreeMapActivateNode = '<space>'
-let NERDTreeShowHidden = 1
-let NERDTreeIgnore=['\.swp']
+let NERDTreeMapActivateNode = 'l'
+let NERDTreeMapChangeRoot = 'L'
+let NERDTreeMapUpdirKeepOpen = 'h'
+let NERDTreeMapUpdir = 'H'
 
-let g:NERDTreeWinSize=35
+let NERDTreeShowHidden = 0
+let NERDTreeIgnore = ['\.swp']
+let NERDTreeChDirMode = 2 " Change CWD whenever tree root is changed
+let NERDTreeMinimalUI = 1
+let NERDTreeWinSize = 35
 
 nnoremap <leader>nf :NERDTreeFind<CR>
 nnoremap <leader>nn :NERDTreeTabsToggle<CR>
