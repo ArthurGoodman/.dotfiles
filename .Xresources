@@ -1,4 +1,5 @@
-! Dracula Xresources palette
+!! Dracula Xresources palette
+
 *.foreground: #F8F8F2
 *.background: #282A36
 *.color0:     #000000
@@ -18,6 +19,61 @@
 *.color7:     #BFBFBF
 *.color15:    #E6E6E6
 
-! URxvt options
-URxvt.font: xft:mono:size=10
-URxvt.scrollBar: 0
+!! URxvt
+
+! Font
+#define FONT Source Code Pro for Powerline
+URxvt.font: xft:FONT:size=10
+
+! Disable scrollbar
+URxvt.scrollBar: false
+
+! Bit depth
+URxvt.depth: 32
+
+! Hide cursor on keypress
+URxvt.pointerBlank: true
+
+! Underline color
+URxvt.colorUL: #4682B4
+
+! Do not scroll with output
+URxvt.scrollTtyOutput: false
+
+! Scroll in relation to buffer (with mouse scroll or Shift+Page Up)
+URxvt.scrollWithBuffer: true
+
+! Scroll back to the bottom on keypress
+URxvt.scrollTtyKeypress: true
+
+! Disable the scrollback buffer for the secondary screen
+URxvt.secondaryScreen: 1
+URxvt.secondaryScroll: 0
+!URxvt.secondaryWheel: 1
+
+! Scrolling with Meta-j/k
+URxvt.keysym.M-k: command:\033]720;5\007
+URxvt.keysym.M-j: command:\033]721;5\007
+
+! Arrow keys
+!URxvt.keysym.C-Up: \033[1;5A
+!URxvt.keysym.C-Down: \033[1;5B
+URxvt.keysym.C-Left: \033[1;5D
+URxvt.keysym.C-Right: \033[1;5C
+
+! Extensions
+URxvt.perl-ext-common: default,resize-font,keyboard-select,url-select
+
+! keyboard-select
+URxvt.keysym.M-Escape: perl:keyboard-select:activate
+URxvt.keyboard-select.clipboard: true
+
+! resize-font
+URxvt.resize-font.smaller: C-Down
+URxvt.resize-font.bigger: C-Up
+
+! url-select
+URxvt.keysym.M-u: perl:url-select:select_next
+URxvt.url-select.launcher: xdg-open
+URxvt.url-select.underline: true
+URxvt.url-select.button: 1

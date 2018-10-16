@@ -12,7 +12,7 @@ set $reboot reboot
 set $suspend systemctl suspend
 #set $netrefresh sudo systemctl restart NetworkManager
 set $lock ~/.config/i3/i3lock-fancy-multimonitor/lock -p -n
-set $terminal st
+set $terminal urxvt
 #set $volume-up amixer -q -D pulse sset Master 5%+ unmute
 #set $volume-down amixer -q -D pulse sset Master 5%- unmute
 #set $volume-mute amixer -q -D pulse sset Master toggle
