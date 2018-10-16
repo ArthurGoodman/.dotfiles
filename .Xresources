@@ -21,6 +21,9 @@
 
 !! URxvt
 
+! Background transparency
+URxvt.background: [90]#282A36
+
 ! Font
 #define FONT Source Code Pro for Powerline
 URxvt.font: xft:FONT:size=10
