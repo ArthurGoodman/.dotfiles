@@ -65,7 +65,7 @@ URxvt.keysym.C-Left: \033[1;5D
 URxvt.keysym.C-Right: \033[1;5C
 
 ! Extensions
-URxvt.perl-ext-common: default,resize-font,keyboard-select,url-select
+URxvt.perl-ext-common: default,resize-font,keyboard-select,url-select,selection-to-clipboard
 
 ! keyboard-select
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
