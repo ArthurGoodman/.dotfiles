@@ -294,6 +294,7 @@ bindsym $mod+c focus child
 ################################################################################
 
 for_window [class="TelegramDesktop"] floating enable
+for_window [class="TelegramDesktop" title="Media viewer"] fullscreen enable
 for_window [class="Nautilus"] floating enable
 for_window [class="Lxappearance"] floating enable
 for_window [class="Arandr"] floating enable
