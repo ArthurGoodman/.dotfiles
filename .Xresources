@@ -52,7 +52,7 @@ URxvt.scrollTtyKeypress: true
 ! Disable the scrollback buffer for the secondary screen
 URxvt.secondaryScreen: 1
 URxvt.secondaryScroll: 0
-!URxvt.secondaryWheel: 1
+URxvt.secondaryWheel: 1
 
 ! Scrolling with Meta-j/k
 URxvt.keysym.M-k: command:\033]720;5\007
