@@ -138,6 +138,7 @@ bindsym $mod+a exec --no-startup-id rofi -show window
 
 # start a terminal
 bindsym $mod+Return exec --no-startup-id $terminal
+
 bindsym $mod+Shift+Return exec --no-startup-id samedir
 
 # switch between last two workspaces
@@ -378,7 +379,11 @@ bindsym XF86MonBrightnessUp exec --no-startup-id xbacklight -inc 10
 bindsym XF86MonBrightnessDown exec --no-startup-id xbacklight -dec 10
 
 # touchpad controls
-#bindsym XF86TouchpadToggle exec --no-startup-id
+bindsym XF86TouchpadToggle exec --no-startup-id toggletouchpad
+bindsym XF86TouchpadOn exec --no-startup-id synclient TouchpadOff=0
+bindsym XF86TouchpadOff exec --no-startup-id synclient TouchpadOff=1
+
+bindsym $mod+n  exec --no-startup-id toggletouchpad
 
 # media player controls
 bindsym XF86AudioPlay exec --no-startup-id playerctl play
@@ -432,8 +437,6 @@ bindsym XF86Sleep exec --no-startup-id $lock
 #bindsym XF86Launch8 exec --no-startup-id
 #bindsym XF86Launch9 exec --no-startup-id
 #bindsym XF86AudioMicMute exec --no-startup-id
-#bindsym XF86TouchpadOn exec --no-startup-id
-#bindsym XF86TouchpadOff exec --no-startup-id
 #bindsym XF86Suspend exec --no-startup-id
 #bindsym XF86Close kill --no-startup-id
 #bindsym XF86WebCam exec --no-startup-id
