@@ -39,8 +39,8 @@ set $white                   #ffffff
 # Autostart
 ################################################################################
 
-# nvidia settings
-exec --no-startup-id nvidia-settings --load-config-only
+# update X resources
+exec --no-startup-id xrdb ~/.Xresources
 
 # dropbox
 exec --no-startup-id dropbox start
@@ -299,11 +299,9 @@ for_window [class="Nautilus"] floating enable
 for_window [class="Lxappearance"] floating enable
 for_window [class="Arandr"] floating enable
 for_window [class="Pavucontrol"] floating enable
-for_window [class="Stride"] floating enable
-for_window [class="Skype"] floating enable
-for_window [class="vlc"] floating enable
-for_window [class="mpv"] floating enable
 for_window [class="feh"] floating enable
+for_window [class="mpv"] floating enable
+for_window [class="vlc"] floating enable
 
 ################################################################################
 # Resize mode
