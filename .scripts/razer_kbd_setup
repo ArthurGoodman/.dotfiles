@@ -1,0 +1,10 @@
+#!/bin/bash
+
+KBD_ID=0003:1532:021E.0004 # Razer Ornata Chroma
+COLOR="\xff\xff\xff" # White
+BRIGHTNESS=128 # 50%
+
+DRIVER_PATH=/sys/bus/hid/drivers/razerkbd/$KBD_ID
+[[ ! -d $DRIVER_PATH ]] && exit 1 # Exit if directory doesn't exist
+echo -n -e $COLOR > $DRIVER_PATH/matrix_effect_static # Set static color
+echo -n $BRIGHTNESS > $DRIVER_PATH/matrix_brightness # Set brightness
