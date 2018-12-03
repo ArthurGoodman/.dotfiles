@@ -228,6 +228,7 @@ bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 
 # assign certain applications to the corresponding workspaces
 assign [class="Google-chrome"] $ws3
+assign [class="qutebrowser"] $ws3
 assign [class="Firefox"] $ws3
 assign [class="TelegramDesktop"] $ws10
 assign [class="Stride"] $ws10
