@@ -75,7 +75,8 @@ set ruler
 set magic
 
 " Disable bells
-set vb t_vb=
+set noerrorbells visualbell vb t_vb=
+autocmd GUIEnter * set visualbell t_vb=
 
 " Inable I-beam cursor in terminal
 let &t_ti.="\e[1 q"
@@ -529,7 +530,7 @@ set ffs=unix,dos,mac
 
 if has("gui_running")
     " set guifont=Hack\ 10
-    set guifont=Source\ Code\ Pro\ for\ Powerline\ Medium\ 10
+    set guifont=Source\ Code\ Pro\ for\ Powerline\ Regular\ 10
     " set guifont=Roboto\ Mono\ Medium\ for\ Powerline\ 10
 endif
 
