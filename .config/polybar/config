@@ -421,6 +421,7 @@ type = custom/script
 exec = uptime-pretty
 interval = 30
 format-underline = #f0a000
+format-prefix = " "
 
 [module/scriptdate]
 type = custom/script
