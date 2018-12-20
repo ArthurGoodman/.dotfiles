@@ -184,7 +184,8 @@ nmap <M-k> mz:m-2<cr>`z
 vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
-xnoremap p "_dP
+xnoremap p "_dp
+xnoremap P "_dp
 
 " }}}
 " Folding {{{
@@ -365,6 +366,8 @@ Plugin 'tikhomirov/vim-glsl'
 
 " Distraction-free writing in Vim
 Plugin 'junegunn/goyo.vim'
+
+Plugin 'PotatoesMaster/i3-vim-syntax'
 
 " All of your Plugins must be added before the following line
 

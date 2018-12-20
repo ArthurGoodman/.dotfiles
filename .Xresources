@@ -2,7 +2,7 @@
 
 *.foreground: #F8F8F2
 *.background: #282A36
-*.color0:     #000000
+*.color0:     #282A36
 *.color8:     #44475A
 *.color1:     #FF5555
 *.color9:     #FF5555
@@ -18,6 +18,7 @@
 *.color14:    #8BE9FD
 *.color7:     #BBBBBB
 *.color15:    #FFFFFF
+*.alpha: 230
 
 !! URxvt
 
