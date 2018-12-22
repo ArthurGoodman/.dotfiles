@@ -67,6 +67,9 @@ exec --no-startup-id xautolock -time 15 -locker "$lock"
 # increate key repeat rate a bit
 exec --no-startup-id xset r rate 250 30
 
+# run syncthing server
+exec --no-startup-id syncthing -no-browser -no-restart -logflags=0
+
 ################################################################################
 # Options
 ################################################################################
