@@ -312,26 +312,23 @@ for_window [class="vlc"] floating enable
 # Resize mode
 ################################################################################
 
-# resize window (you can also use the mouse for that)
 mode "resize" {
-        # These bindings trigger as soon as you enter the resize mode
+        bindsym h exec --no-startup-id i3resize left
+        bindsym Left exec --no-startup-id i3resize left
+        bindsym a exec --no-startup-id i3resize left
 
-        # Pressing left will shrink the window’s width.
-        # Pressing right will grow the window’s width.
-        # Pressing up will shrink the window’s height.
-        # Pressing down will grow the window’s height.
-        bindsym h resize shrink width 50 px or 10 ppt
-        bindsym j resize grow height 50 px or 10 ppt
-        bindsym k resize shrink height 50 px or 10 ppt
-        bindsym l resize grow width 50 px or 10 ppt
+        bindsym j exec --no-startup-id i3resize down
+        bindsym Down exec --no-startup-id i3resize down
+        bindsym s exec --no-startup-id i3resize down
 
-        # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 50 px or 10 ppt
-        bindsym Down resize grow height 50 px or 10 ppt
-        bindsym Up resize shrink height 50 px or 10 ppt
-        bindsym Right resize grow width 50 px or 10 ppt
+        bindsym k exec --no-startup-id i3resize up
+        bindsym Up exec --no-startup-id i3resize up
+        bindsym w exec --no-startup-id i3resize up
 
-        # back to normal: Enter or Escape
+        bindsym l exec --no-startup-id i3resize right
+        bindsym Right exec --no-startup-id i3resize right
+        bindsym d exec --no-startup-id i3resize right
+
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
