@@ -43,7 +43,7 @@ set $white                   #ffffff
 exec --no-startup-id xrdb ~/.Xresources
 
 # dropbox
-exec --no-startup-id dropbox start
+#exec --no-startup-id dropbox start
 
 # composite manager
 #exec --no-startup-id compton --xrender-sync-fence
