@@ -1,29 +1,52 @@
-!! Dracula Xresources palette
+!! Dracula color scheme
 
-*.foreground: #F8F8F2
-*.background: #282A36
-*.color0:     #282A36
-*.color8:     #44475A
-*.color1:     #FF5555
-*.color9:     #FF5555
-*.color2:     #50FA7B
-*.color10:    #50FA7B
-*.color3:     #F1FA8C
-*.color11:    #F1FA8C
-*.color4:     #BD93F9
-*.color12:    #BD93F9
-*.color5:     #FF79C6
-*.color13:    #FF79C6
-*.color6:     #8BE9FD
-*.color14:    #8BE9FD
-*.color7:     #BBBBBB
-*.color15:    #FFFFFF
+#define Color_Foreground    #F8F8F2
+#define Color_Background    #282A36
+#define Color_Black         #282A36
+#define Color_BrightBlack   #44475A
+#define Color_Red           #FF5555
+#define Color_BrightRed     #FF5555
+#define Color_Green         #50FA7B
+#define Color_BrightGreen   #50FA7B
+#define Color_Yellow        #F1FA8C
+#define Color_BrightYellow  #F1FA8C
+#define Color_Blue          #BD93F9
+#define Color_BrightBlue    #BD93F9
+#define Color_Magenta       #FF79C6
+#define Color_BrightMagenta #FF79C6
+#define Color_Cyan          #8BE9FD
+#define Color_BrightCyan    #8BE9FD
+#define Color_White         #BBBBBB
+#define Color_BrightWhite   #FFFFFF
+
+!! Colors
+
+*.foreground: Color_Foreground
+*.background: Color_Background
+*.color0:     Color_Black
+*.color8:     Color_BrightBlack
+*.color1:     Color_Red
+*.color9:     Color_BrightRed
+*.color2:     Color_Green
+*.color10:    Color_BrightGreen
+*.color3:     Color_Yellow
+*.color11:    Color_BrightYellow
+*.color4:     Color_Blue
+*.color12:    Color_BrightBlue
+*.color5:     Color_Magenta
+*.color13:    Color_BrightMagenta
+*.color6:     Color_Cyan
+*.color14:    Color_BrightCyan
+*.color7:     Color_White
+*.color15:    Color_BrightWhite
+
+! 90%
 *.alpha: 230
 
 !! URxvt
 
 ! Background transparency
-URxvt.background: [90]#282A36
+URxvt.background: [90]Color_Background
 
 ! Font
 #define FONT Source Code Pro for Powerline
