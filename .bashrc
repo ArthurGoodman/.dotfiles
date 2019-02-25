@@ -63,6 +63,7 @@ alias sv="sudo vim"
 alias v="vim"
 alias sr="sudo ranger"
 alias r="ranger"
+alias clip="xclip -selection clipboard"
 
 alias pacman="pacman --color=auto"
 alias yay="yay --color=auto"
