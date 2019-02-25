@@ -234,7 +234,7 @@ assign [class="Google-chrome"] $ws3
 assign [class="qutebrowser"] $ws3
 assign [class="Firefox"] $ws3
 assign [class="TelegramDesktop"] $ws10
-assign [class="Stride"] $ws10
+assign [class="Slack"] $ws10
 assign [class="Skype"] $ws10
 
 ################################################################################
