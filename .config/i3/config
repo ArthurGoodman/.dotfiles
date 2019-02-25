@@ -356,8 +356,9 @@ bindsym $mod+r mode "resize"
 # Media keys
 ################################################################################
 
-bindsym Print exec --no-startup-id screencapture --format=image
-bindsym Control+Print exec --no-startup-id screencapture --format=image --select
+bindsym Print exec --no-startup-id flameshot gui
+#bindsym Print exec --no-startup-id screencapture --format=image
+#bindsym Control+Print exec --no-startup-id screencapture --format=image --select
 bindsym $mod+Print exec --no-startup-id screencapture --format=video
 bindsym Control+$mod+Print exec --no-startup-id screencapture --format=video --select
 bindsym Control+Shift+Print exec --no-startup-id killall ffmpeg
