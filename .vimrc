@@ -184,8 +184,8 @@ nmap <M-k> mz:m-2<cr>`z
 vmap <M-j> :m'>+<cr>`<my`>mzgv`yo`z
 vmap <M-k> :m'<-2<cr>`>my`<mzgv`yo`z
 
-xnoremap p "_dp
-xnoremap P "_dp
+" xnoremap p "_dp
+" xnoremap P "_dp
 
 " }}}
 " Folding {{{
