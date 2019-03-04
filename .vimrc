@@ -367,7 +367,14 @@ Plugin 'tikhomirov/vim-glsl'
 " Distraction-free writing in Vim
 Plugin 'junegunn/goyo.vim'
 
+" Vim syntax for i3 window manager config
 Plugin 'PotatoesMaster/i3-vim-syntax'
+
+" Text outlining and task management for Vim based on Emacs' Org-Mode
+Plugin 'jceb/vim-orgmode'
+
+" speeddating.vim: use CTRL-A/CTRL-X to increment dates, times, and more
+Plugin 'tpope/vim-speeddating'
 
 " All of your Plugins must be added before the following line
 
