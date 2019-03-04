@@ -589,16 +589,33 @@ au TabLeave * let g:lasttab = tabpagenr()
 " Super useful when editing files in the same directory
 map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
 
-" Switching between tabs
-nnoremap <silent> <M-h> :tabprev<CR>
-nnoremap <silent> <M-l> :tabnext<CR>
+if has("gui_running")
+    " Switching between tabs
+    nnoremap <silent> <M-Left> :tabprev<CR>
+    nnoremap <silent> <M-Right> :tabnext<CR>
+    nnoremap <silent> <M-h> :tabprev<CR>
+    nnoremap <silent> <M-l> :tabnext<CR>
 
-" Switching between tabs by number
-nnoremap <silent> <M-1> :tabnext 1<CR>
-nnoremap <silent> <M-2> :tabnext 2<CR>
-nnoremap <silent> <M-3> :tabnext 3<CR>
-nnoremap <silent> <M-4> :tabnext 4<CR>
-nnoremap <silent> <M-5> :tabnext 5<CR>
+    " Switching between tabs by number
+    nnoremap <silent> <M-1> :tabnext 1<CR>
+    nnoremap <silent> <M-2> :tabnext 2<CR>
+    nnoremap <silent> <M-3> :tabnext 3<CR>
+    nnoremap <silent> <M-4> :tabnext 4<CR>
+    nnoremap <silent> <M-5> :tabnext 5<CR>
+else
+    " Switching between tabs
+    nnoremap <silent> <Esc><Left> :tabprev<CR>
+    nnoremap <silent> <Esc><Right> :tabnext<CR>
+    nnoremap <silent> <Esc>h :tabprev<CR>
+    nnoremap <silent> <Esc>l :tabnext<CR>
+
+    " Switching between tabs by number
+    nnoremap <silent> <Esc>1 :tabnext 1<CR>
+    nnoremap <silent> <Esc>2 :tabnext 2<CR>
+    nnoremap <silent> <Esc>3 :tabnext 3<CR>
+    nnoremap <silent> <Esc>4 :tabnext 4<CR>
+    nnoremap <silent> <Esc>5 :tabnext 5<CR>
+endif
 
 " }}}
 " Command mode {{{
