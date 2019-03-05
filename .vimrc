@@ -246,6 +246,10 @@ let g:nerdtree_tabs_open_on_gui_startup = 0
 "    let g:gitgutter_sign_column_always = 1
 "endif
 
+hi GitGutterAdd    guifg=#009900 guibg=NONE ctermfg=2 ctermbg=NONE
+hi GitGutterChange guifg=#bbbb00 guibg=NONE ctermfg=3 ctermbg=NONE
+hi GitGutterDelete guifg=#ff2222 guibg=NONE ctermfg=1 ctermbg=NONE
+
 let g:gitgutter_enabled=0
 
 nnoremap <silent> <leader>d :GitGutterToggle<cr>
