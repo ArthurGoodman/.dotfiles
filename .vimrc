@@ -11,7 +11,6 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'kien/ctrlp.vim'
 Plug 'crusoexia/vim-dracula'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
@@ -20,6 +19,9 @@ Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-fugitive'
+
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
+Plug 'junegunn/fzf.vim'
 
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 
@@ -68,7 +70,7 @@ set incsearch
 set laststatus=2
 set lazyredraw
 set magic
-set mat=2
+set matchtime=2
 set modelines=1
 set nobackup
 set noerrorbells visualbell vb t_vb=
@@ -126,8 +128,8 @@ nnoremap <C-Down> <C-w>j
 nnoremap <C-Up> <C-w>k
 nnoremap <C-Right> <C-w>l
 
-nnoremap <CR> o<esc>
-nnoremap <S-CR> O<esc>
+nnoremap <CR> o<Esc>
+nnoremap <S-CR> O<Esc>
 
 vnoremap < <gv
 vnoremap > >gv
@@ -187,22 +189,39 @@ let g:airline_theme = "powerlineish"
 let g:airline_powerline_fonts = 1
 
 " }}}
-" ctrlp {{{
-" ==============================================================================
+" fzf {{{
 
-let g:ctrlp_match_window = 'bottom,order:ttb'
-let g:ctrlp_switch_buffer = 0
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_by_filename = 0
-let g:ctrlp_show_hidden = 1
+let g:fzf_action = {
+  \ 'ctrl-t': 'tab split',
+  \ 'ctrl-s': 'split',
+  \ 'ctrl-v': 'vsplit' }
 
-set wildignore=*.o,*.so,*.swp,*.cmake,*.log,*.bin,*~,*.pyc
+let g:fzf_layout = { 'down': '~40%' }
+
+let g:fzf_colors =
+\ { 'fg':      ['fg', 'Normal'],
+  \ 'bg':      ['bg', 'Normal'],
+  \ 'hl':      ['fg', 'Comment'],
+  \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'bg+':     ['bg', 'CursorLine', 'CursorColumn', 'Normal'],
+  \ 'hl+':     ['fg', 'Statement'],
+  \ 'info':    ['fg', 'PreProc'],
+  \ 'border':  ['fg', 'Ignore'],
+  \ 'prompt':  ['fg', 'Constant'],
+  \ 'pointer': ['fg', 'Normal'],
+  \ 'marker':  ['fg', 'Keyword'],
+  \ 'spinner': ['fg', 'Label'],
+  \ 'header':  ['fg', 'Type'] }
+
+let g:fzf_history_dir = '~/.local/share/fzf-history'
+
+nnoremap <C-p> :FZF<CR>
 
 " }}}
 " UltiSnips {{{
 " ==============================================================================
 
-" Trigger configuration. Do not use <TAB> if you use YouCompleteMe.
+" Trigger configuration. Do not use <Tab> if you use YouCompleteMe.
 let g:UltiSnipsExpandTrigger="<C-b>"
 let g:UltiSnipsJumpForwardTrigger="<C-b>"
 let g:UltiSnipsJumpBackwardTrigger="<C-z>"
