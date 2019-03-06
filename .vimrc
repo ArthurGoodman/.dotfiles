@@ -13,21 +13,30 @@ call plug#begin('~/.vim/plugged')
 
 Plug 'kien/ctrlp.vim'
 Plug 'crusoexia/vim-dracula'
-Plug 'junegunn/goyo.vim'
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
 Plug 'tpope/vim-surround'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'Raimondi/delimitMate'
+Plug 'tpope/vim-fugitive'
 
-Plug 'Valloric/YouCompleteMe', { 'for': ['cpp', 'c'], 'do': 'python3 ./install.py --clang-completer' }
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable', 'for': ['cpp', 'c'] }
+Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 
-Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeTabsToggle' }
-Plug 'jistr/vim-nerdtree-tabs', { 'on': 'NERDTreeTabsToggle' }
+Plug 'airblade/vim-gitgutter', { 'on': 'GitGutterToggle' }
+autocmd! User vim-gitgutter call SetupGitGutter()
+
+function! BuildYCM(info)
+  if a:info.status == 'installed' || a:info.force
+    !python3 ./install.py --clang-completer
+  endif
+endfunction
+
+Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+
+Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeTabsToggle', 'NERDTreeFind'] }
+Plug 'jistr/vim-nerdtree-tabs', { 'on': ['NERDTreeTabsToggle', 'NERDTreeFind'] }
 
 Plug 'jceb/vim-orgmode', { 'for': 'org' }
 Plug 'tpope/vim-speeddating', { 'for': 'org' }
@@ -50,7 +59,7 @@ set backspace=eol,start,indent
 set cursorline
 set encoding=utf8
 set expandtab
-set ffs=unix,dos,mac
+set fileformats=unix,dos,mac
 set hidden
 set history=1000
 set hlsearch
@@ -64,7 +73,7 @@ set modelines=1
 set nobackup
 set noerrorbells visualbell vb t_vb=
 set noswapfile
-set nowb
+set nowritebackup
 set nowrap
 set number
 set relativenumber
@@ -194,9 +203,9 @@ set wildignore=*.o,*.so,*.swp,*.cmake,*.log,*.bin,*~,*.pyc
 " ==============================================================================
 
 " Trigger configuration. Do not use <TAB> if you use YouCompleteMe.
-let g:UltiSnipsExpandTrigger="<c-b>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsExpandTrigger="<C-b>"
+let g:UltiSnipsJumpForwardTrigger="<C-b>"
+let g:UltiSnipsJumpBackwardTrigger="<C-z>"
 
 " }}}
 " YouCompleteMe {{{
@@ -231,10 +240,10 @@ let NERDTreeChDirMode = 2 " Change CWD whenever tree root is changed
 let NERDTreeMinimalUI = 1
 let NERDTreeWinSize = 35
 
+let g:nerdtree_tabs_open_on_gui_startup = 0
+
 nnoremap <leader>n :NERDTreeTabsToggle<CR>
 nnoremap <leader>f :NERDTreeFind<CR>
-
-let g:nerdtree_tabs_open_on_gui_startup = 0
 
 " }}}
 " Git Gutter {{{
@@ -246,38 +255,40 @@ let g:nerdtree_tabs_open_on_gui_startup = 0
 "    let g:gitgutter_sign_column_always = 1
 "endif
 
-hi GitGutterAdd    guifg=#009900 guibg=NONE ctermfg=2 ctermbg=NONE
-hi GitGutterChange guifg=#bbbb00 guibg=NONE ctermfg=3 ctermbg=NONE
-hi GitGutterDelete guifg=#ff2222 guibg=NONE ctermfg=1 ctermbg=NONE
+function! SetupGitGutter()
+  hi GitGutterAdd    guifg=#009900 guibg=NONE ctermfg=2 ctermbg=NONE
+  hi GitGutterChange guifg=#bbbb00 guibg=NONE ctermfg=3 ctermbg=NONE
+  hi GitGutterDelete guifg=#ff2222 guibg=NONE ctermfg=1 ctermbg=NONE
 
-let g:gitgutter_enabled=0
+  let g:gitgutter_enabled=0
+endfunction
 
-nnoremap <silent> <leader>d :GitGutterToggle<cr>
+nnoremap <silent> <leader>d :GitGutterToggle<CR>
 
 " }}}
 " Helper functions {{{
 " ==============================================================================
 
 function! FormatFile()
-    let l:lines="all"
-    py3f ~/.clang-format.py
+  let l:lines="all"
+  py3f ~/.clang-format.py
 endfunction
 
 function! VisualSelection(direction, extra_filter) range
-    let l:saved_reg = @"
-    execute "normal! vgvy"
+  let l:saved_reg = @"
+  execute "normal! vgvy"
 
-    let l:pattern = escape(@", "\\/.*'$^~[]")
-    let l:pattern = substitute(l:pattern, "\n$", "", "")
+  let l:pattern = escape(@", "\\/.*'$^~[]")
+  let l:pattern = substitute(l:pattern, "\n$", "", "")
 
-    if a:direction == 'gv'
-        call CmdLine("Ag '" . l:pattern . "' " )
-    elseif a:direction == 'replace'
-        call CmdLine("%s" . '/'. l:pattern . '/')
-    endif
+  if a:direction == 'gv'
+      call CmdLine("Ag '" . l:pattern . "' " )
+  elseif a:direction == 'replace'
+      call CmdLine("%s" . '/'. l:pattern . '/')
+  endif
 
-    let @/ = l:pattern
-    let @" = l:saved_reg
+  let @/ = l:pattern
+  let @" = l:saved_reg
 endfunction
 
 " }}}
