@@ -83,8 +83,8 @@ URxvt.keysym.M-k: command:\033]720;5\007
 URxvt.keysym.M-j: command:\033]721;5\007
 
 ! Arrow keys
-!URxvt.keysym.C-Up: \033[1;5A
-!URxvt.keysym.C-Down: \033[1;5B
+URxvt.keysym.C-Up: \033[1;5A
+URxvt.keysym.C-Down: \033[1;5B
 URxvt.keysym.C-Left: \033[1;5D
 URxvt.keysym.C-Right: \033[1;5C
 
@@ -94,10 +94,6 @@ URxvt.perl-ext-common: default,resize-font,keyboard-select,url-select,selection-
 ! keyboard-select
 URxvt.keysym.M-Escape: perl:keyboard-select:activate
 URxvt.keyboard-select.clipboard: true
-
-! resize-font
-URxvt.resize-font.smaller: C-Down
-URxvt.resize-font.bigger: C-Up
 
 ! url-select
 URxvt.keysym.M-u: perl:url-select:select_next
