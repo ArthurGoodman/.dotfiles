@@ -164,7 +164,7 @@ nnoremap <silent> <Esc>5 :tabnext 5<CR>
 vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
 vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
 
-nnoremap <TAB> za
+nnoremap <Tab> za
 
 nnoremap <silent> <leader><leader> :e#<CR>
 
@@ -179,7 +179,7 @@ try
 catch
 endtry
 
-exec "set colorcolumn=" . join(range(81, 300), ',')
+exec "set colorcolumn=" . join(range(101, 300), ',')
 
 " }}}
 " airline {{{
