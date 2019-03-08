@@ -26,7 +26,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'junegunn/goyo.vim', { 'on': 'Goyo' }
 
 Plug 'airblade/vim-gitgutter', { 'on': 'GitGutterToggle' }
-autocmd! User vim-gitgutter call SetupGitGutter()
 
 function! BuildYCM(info)
   if a:info.status == 'installed' || a:info.force
@@ -39,6 +38,8 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeTabsToggle', 'NERDTreeFind'] }
 Plug 'jistr/vim-nerdtree-tabs', { 'on': ['NERDTreeTabsToggle', 'NERDTreeFind'] }
+
+Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
 
 Plug 'jceb/vim-orgmode', { 'for': 'org' }
 Plug 'tpope/vim-speeddating', { 'for': 'org' }
@@ -134,8 +135,8 @@ nnoremap <S-CR> O<Esc>
 vnoremap < <gv
 vnoremap > >gv
 
-nnoremap <leader>e :tabnew ~/.dotfiles/.vimrc<CR>
-nnoremap <leader>t :tabnew<CR>
+nnoremap <silent> <leader>e :tabnew ~/.dotfiles/.vimrc<CR>
+nnoremap <silent> <leader>t :tabnew<CR>
 
 nnoremap <leader>y "+y
 vnoremap <leader>y "+y
@@ -143,12 +144,12 @@ nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 vnoremap <leader>p "+p
 
-nnoremap <leader>w :w<CR>
-nnoremap <leader>q :q<CR>
+nnoremap <silent> <leader>w :w<CR>
+nnoremap <silent> <leader>q :q<CR>
 
-nnoremap <leader><space> :noh<CR>
+nnoremap <silent> <leader><space> :noh<CR>
 
-nnoremap <leader>s :call FormatFile() <bar> update<CR>
+nnoremap <silent> <leader>s :call FormatFile() <bar> update<CR>
 
 nnoremap <silent> <Esc><Left> :tabprev<CR>
 nnoremap <silent> <Esc><Right> :tabnext<CR>
@@ -175,17 +176,18 @@ nnoremap <silent> <leader><leader> :e#<CR>
 set background=dark
 
 try
+  let g:dracula_italic = 1
   colorscheme dracula
 catch
 endtry
 
-exec "set colorcolumn=" . join(range(101, 300), ',')
+let &colorcolumn = join(range(101, 300), ',')
 
 " }}}
 " airline {{{
 " ==============================================================================
 
-let g:airline_theme = "powerlineish"
+let g:airline_theme = 'powerlineish'
 let g:airline_powerline_fonts = 1
 
 " }}}
@@ -198,8 +200,8 @@ let g:fzf_action = {
 
 let g:fzf_layout = { 'down': '~40%' }
 
-let g:fzf_colors =
-\ { 'fg':      ['fg', 'Normal'],
+let g:fzf_colors = {
+  \ 'fg':      ['fg', 'Normal'],
   \ 'bg':      ['bg', 'Normal'],
   \ 'hl':      ['fg', 'Comment'],
   \ 'fg+':     ['fg', 'CursorLine', 'CursorColumn', 'Normal'],
@@ -274,13 +276,11 @@ nnoremap <leader>f :NERDTreeFind<CR>
 "    let g:gitgutter_sign_column_always = 1
 "endif
 
-function! SetupGitGutter()
-  hi GitGutterAdd    guifg=#009900 guibg=NONE ctermfg=2 ctermbg=NONE
-  hi GitGutterChange guifg=#bbbb00 guibg=NONE ctermfg=3 ctermbg=NONE
-  hi GitGutterDelete guifg=#ff2222 guibg=NONE ctermfg=1 ctermbg=NONE
+hi GitGutterAdd    guifg=#009900 guibg=NONE ctermfg=2 ctermbg=NONE
+hi GitGutterChange guifg=#bbbb00 guibg=NONE ctermfg=3 ctermbg=NONE
+hi GitGutterDelete guifg=#ff2222 guibg=NONE ctermfg=1 ctermbg=NONE
 
-  let g:gitgutter_enabled=0
-endfunction
+let g:gitgutter_enabled=0
 
 nnoremap <silent> <leader>d :GitGutterToggle<CR>
 
@@ -309,6 +309,13 @@ function! VisualSelection(direction, extra_filter) range
   let @/ = l:pattern
   let @" = l:saved_reg
 endfunction
+
+" }}}
+" vim-cpp-enhanced-highlight {{{
+
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
 
 " }}}
 
