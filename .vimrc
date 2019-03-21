@@ -73,11 +73,12 @@ set lazyredraw
 set magic
 set matchtime=2
 set modelines=1
+set mouse=a
 set nobackup
 set noerrorbells visualbell vb t_vb=
 set noswapfile
-set nowritebackup
 set nowrap
+set nowritebackup
 set number
 set relativenumber
 set ruler
