@@ -1,0 +1,104 @@
+#!/bin/bash
+
+if [ "$#" -eq 0 ]; then
+    spec="HEAD"
+elif [ "$#" -gt 1 ]; then
+    echo "error: too many arguments"
+    exit 1
+else
+    spec=$1
+fi
+
+if ! git cat-file -e ${spec}; then
+    exit 1
+fi
+
+editor_command="vim -MNRn"
+type_command="git cat-file -t"
+cat_command="git cat-file -p"
+
+fzf_bindings="j:down,k:up,ctrl-d:page-down,ctrl-u:page-up,g:top,q:abort,l:accept,right:accept"
+fzf_expect="h,left"
+fzf_opts="--reverse --no-clear --height=50% --color=bw --inline-info"
+
+preprocess_command="sort -d -k2r,2 -k4,4 | sed -r -e 's/[0-7]* tree .*/\0\//'"
+
+preview="\
+line={};                                                                         \
+spec=\$(echo -e \${line} | awk '{print \$3}');                                   \
+case \$(echo \${line} | awk '{print \$2}') in                                    \
+    blob) ${cat_command} \${spec} ;;                                             \
+    tree) ${cat_command} \${spec} | ${preprocess_command} | awk '{print \$4}' ;; \
+esac                                                                             \
+"
+
+preprocess() {
+    eval ${preprocess_command}
+}
+
+select_from_tree() {
+    local spec=$1
+    local output=$(${cat_command} ${spec} | preprocess | \
+        FZF_DEFAULT_OPTS=${fzf_opts} fzf \
+        --bind=${fzf_bindings} \
+        --expect=${fzf_expect} \
+        --preview="${preview}" \
+        --with-nth=4)
+    readarray -t lines <<<"$output"
+    select_from_tree_action=${lines[0]}
+    select_from_tree_spec=$(echo ${lines[1]} | awk '{print $3}')
+    select_from_tree_name=$(echo ${lines[1]} | awk '{print $4}')
+}
+
+get_object_id() {
+    local spec=$1
+    echo $(${cat_command} ${spec} | head -1 | awk '{print $2}')
+}
+
+blob_to_open=""
+
+declare -a specs
+specs+=(${spec})
+
+while :
+do
+    if [ -z ${spec} ]; then
+        break
+    fi
+    case $(${type_command} ${spec}) in
+        commit)
+            spec=$(get_object_id ${spec})
+            ;;
+        tag)
+            spec=$(get_object_id ${spec})
+            ;;
+        tree)
+            select_from_tree ${spec}
+            if [ ! -z ${select_from_tree_action// } ] && [ ${#specs[@]} -ge 1 ]; then
+                unset 'specs[${#specs[@]}-1]'
+                spec=${specs[${#specs[@]}-1]}
+                unset 'specs[${#specs[@]}-1]'
+            else
+                spec=${select_from_tree_spec}
+                name=${select_from_tree_name}
+            fi
+            ;;
+        blob)
+            blob_to_open=${spec}
+            break
+            ;;
+    esac
+    specs+=(${spec})
+done
+
+if [ ! -z ${name} ]; then
+    tmp_file="/tmp/${name}"
+    ${cat_command} ${blob_to_open} > ${tmp_file}
+    ${editor_command} ${tmp_file}
+    rm /tmp/${name}
+elif [ ! -z ${blob_to_open} ]; then
+    ${editor_command} <(${cat_command} ${blob_to_open})
+fi
+
+tput ed
+tput rmcup
