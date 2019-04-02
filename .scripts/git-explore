@@ -74,10 +74,10 @@ do
             ;;
         tree)
             select_from_tree ${spec}
-            if [ ! -z ${select_from_tree_action// } ] && [ ${#specs[@]} -ge 1 ]; then
+            if [ ! -z ${select_from_tree_action// } ] && [ ${#specs[@]} -gt 1 ]; then
                 unset 'specs[${#specs[@]}-1]'
                 spec=${specs[${#specs[@]}-1]}
-                unset 'specs[${#specs[@]}-1]'
+                continue
             else
                 spec=${select_from_tree_spec}
                 name=${select_from_tree_name}
@@ -85,20 +85,25 @@ do
             ;;
         blob)
             blob_to_open=${spec}
-            break
+            if [ ! -z ${name} ]; then
+                tmp_file="/tmp/${name}"
+                ${cat_command} ${blob_to_open} > ${tmp_file}
+                ${editor_command} ${tmp_file}
+                rm /tmp/${name}
+            elif [ ! -z ${blob_to_open} ]; then
+                ${editor_command} <(${cat_command} ${blob_to_open})
+            fi
+            if [ ${#specs[@]} -gt 1 ]; then
+                unset 'specs[${#specs[@]}-1]'
+                spec=${specs[${#specs[@]}-1]}
+                continue
+            else
+                break
+            fi
             ;;
     esac
     specs+=(${spec})
 done
-
-if [ ! -z ${name} ]; then
-    tmp_file="/tmp/${name}"
-    ${cat_command} ${blob_to_open} > ${tmp_file}
-    ${editor_command} ${tmp_file}
-    rm /tmp/${name}
-elif [ ! -z ${blob_to_open} ]; then
-    ${editor_command} <(${cat_command} ${blob_to_open})
-fi
 
 tput ed
 tput rmcup
