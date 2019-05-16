@@ -8,6 +8,7 @@ ln -snf .profile ~/.bash_profile
 ln -snf ~/.dotfiles/.Xresources ~/.Xresources
 
 cp -rsPf ~/.dotfiles/.config ~
+cp -rsPf ~/.dotfiles/.moc ~
 cp -rsPf ~/.dotfiles/.scripts ~
 
 mkdir -p ~/.vim/tmpdirs/undodir
