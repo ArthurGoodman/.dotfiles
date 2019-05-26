@@ -40,8 +40,17 @@
 *.color7:     Color_White
 *.color15:    Color_BrightWhite
 
-! 90%
-*.alpha: 230
+!! Common
+
+#define FONT Source Code Pro for Powerline
+
+!! st
+
+! Transparency
+st.alpha: 0.9
+
+! Font
+st.font: FONT:pixelsize=14:antialias=true:autohint=true
 
 !! URxvt
 
@@ -49,7 +58,6 @@
 URxvt.background: [90]Color_Background
 
 ! Font
-#define FONT Source Code Pro for Powerline
 URxvt.font: xft:FONT:size=10
 
 ! Disable scrollbar
