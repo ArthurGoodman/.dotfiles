@@ -42,7 +42,7 @@
 
 !! Common
 
-#define FONT Source Code Pro for Powerline
+#define FONT Source Code Pro for Powerline:size=10:antialias=true:autohint=true
 
 !! st
 
@@ -50,7 +50,7 @@
 st.alpha: 0.9
 
 ! Font
-st.font: FONT:pixelsize=14:antialias=true:autohint=true
+st.font: FONT
 
 !! URxvt
 
@@ -58,7 +58,7 @@ st.font: FONT:pixelsize=14:antialias=true:autohint=true
 URxvt.background: [90]Color_Background
 
 ! Font
-URxvt.font: xft:FONT:size=10
+URxvt.font: xft:FONT
 
 ! Disable scrollbar
 URxvt.scrollBar: false

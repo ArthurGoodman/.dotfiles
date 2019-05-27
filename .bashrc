@@ -42,7 +42,7 @@ fi
 
 alias cls="clear"
 
-alias ls="ls --color=auto"
+alias ls="ls --color=auto --group-directories-first"
 alias ll="ls -l"
 alias la="ls -alF"
 
