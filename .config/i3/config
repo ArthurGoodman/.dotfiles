@@ -9,16 +9,15 @@ set $alt Mod1
 # commands
 set $shutdown shutdown -h now
 set $reboot reboot
-set $suspend ~/.config/i3/betterlockscreen/betterlockscreen -s blur
-#set $netrefresh sudo systemctl restart NetworkManager
-set $lock ~/.config/i3/betterlockscreen/betterlockscreen -l blur
+set $suspend systemctl suspend
+set $lock i3lock -c 303030
 set $terminal urxvt
-#set $volume-up amixer -q -D pulse sset Master 5%+ unmute
-#set $volume-down amixer -q -D pulse sset Master 5%- unmute
-#set $volume-mute amixer -q -D pulse sset Master toggle
 set $volume-up pamixer -i 5 -u
 set $volume-down pamixer -d 5 -u
 set $volume-mute pamixer -t
+#set $volume-up amixer -q -D pulse sset Master 5%+ unmute
+#set $volume-down amixer -q -D pulse sset Master 5%- unmute
+#set $volume-mute amixer -q -D pulse sset Master toggle
 
 # colors
 set $bg-color                #2f343f
@@ -42,12 +41,8 @@ set $white                   #ffffff
 # update X resources
 exec --no-startup-id xrdb ~/.Xresources
 
-# dropbox
-#exec --no-startup-id dropbox start
-
 # composite manager
-#exec --no-startup-id compton --xrender-sync-fence
-exec --no-startup-id compton
+exec --no-startup-id picom
 
 # network manager
 exec --no-startup-id nm-applet
@@ -56,7 +51,7 @@ exec --no-startup-id nm-applet
 exec --no-startup-id unclutter
 
 # wallpaper
-exec_always --no-startup-id feh --bg-fill ~/Pictures/wall.jpg
+exec_always --no-startup-id ~/.fehbg
 
 # keyboard layouts
 exec --no-startup-id setxkbmap -layout \\"us,ru,ua\\" -option 'grp:alt_shift_toggle'
@@ -70,12 +65,15 @@ exec --no-startup-id xset r rate 250 30
 # run syncthing server
 exec --no-startup-id syncthing -no-browser -no-restart -logflags=0
 
+# external locker for screensaver
+exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork --color 303030
+
 ################################################################################
 # Options
 ################################################################################
 
 # needed for i3-gaps
-for_window [class="^.*"] border pixel 2
+for_window [class="^.*"] border pixel 1
 
 # gaps
 gaps inner 10
@@ -124,16 +122,16 @@ exec_always --no-startup-id ~/.config/polybar/launch
 ################################################################################
 
 # start dmenu (a program launcher)
-#bindsym $mod+Shift+d exec --no-startup-id dmenu_run
+bindsym $mod+Shift+d exec --no-startup-id dmenu_run -i -fn mono-15
 
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-#bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
+bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -i -fn mono-15'
 
-bindsym $mod+d exec --no-startup-id rofi -show drun
-bindsym $mod+Shift+d exec --no-startup-id rofi -show run
-bindsym $mod+a exec --no-startup-id rofi -show window
+# bindsym $mod+d exec --no-startup-id rofi -show drun
+# bindsym $mod+Shift+d exec --no-startup-id rofi -show run
+# bindsym $mod+a exec --no-startup-id rofi -show window
 
 ################################################################################
 # Basic bindings
@@ -178,13 +176,10 @@ bindsym $mod+Shift+r restart
 bindsym $mod+x exec --no-startup-id $lock
 
 # suspend
-bindsym $mod+z exec --no-startup-id $suspend && $lock
+bindsym $mod+z exec --no-startup-id $suspend
 
 # shutdown
 bindsym $mod+Shift+x exec --no-startup-id prompt "Are you sure you want to shutdown?" "$shutdown"
-
-# toggle stickiness of the window
-bindsym $mod+o sticky toggle
 
 ################################################################################
 # Workspace bindings
@@ -194,7 +189,7 @@ bindsym $mod+o sticky toggle
 set $ws0  "0:"
 set $ws1  "1:"
 set $ws2  "2:"
-set $ws3  "3:"
+set $ws3  "3:"
 set $ws4  "4:"
 set $ws5  "5:"
 set $ws6  "6:"
@@ -231,8 +226,9 @@ bindsym $mod+Shift+0 move container to workspace $ws10; workspace $ws10
 
 # assign certain applications to the corresponding workspaces
 assign [class="Google-chrome"] $ws3
+assign [class="Brave-browser"] $ws3
 assign [class="qutebrowser"] $ws3
-assign [class="Firefox"] $ws3
+assign [class="firefox"] $ws3
 assign [class="TelegramDesktop"] $ws10
 assign [class="Slack"] $ws10
 assign [class="Skype"] $ws10
@@ -257,16 +253,16 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+h move left
-bindsym $mod+Shift+j move down
-bindsym $mod+Shift+k move up
-bindsym $mod+Shift+l move right
+bindsym $mod+Shift+h move left 50 px
+bindsym $mod+Shift+j move down 50 px
+bindsym $mod+Shift+k move up 50 px
+bindsym $mod+Shift+l move right 50 px
 
 # alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
+bindsym $mod+Shift+Left move left 50 px
+bindsym $mod+Shift+Down move down 50 px
+bindsym $mod+Shift+Up move up 50 px
+bindsym $mod+Shift+Right move right 50 px
 
 # split in horizontal orientation
 bindsym $mod+semicolon split h
