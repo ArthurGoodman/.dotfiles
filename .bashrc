@@ -61,8 +61,9 @@ alias gf="git fetch"
 
 alias conf="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
 alias confl="conf log --all --graph --decorate --oneline"
-alias confd="conf diff"
 alias confs="conf status"
+alias confd="conf diff"
+alias confdc="conf diff --cached"
 
 alias v="vim"
 alias sv="sudo vim"
