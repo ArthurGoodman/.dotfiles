@@ -59,10 +59,17 @@ alias gdc="git diff --cached"
 alias glu="git ls-files --others --exclude-standard"
 alias gf="git fetch"
 
-alias sv="sudo vim"
+alias conf="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
+alias confl="conf log --all --graph --decorate --oneline"
+alias confd="conf diff"
+alias confs="conf status"
+
 alias v="vim"
-alias sr="sudo ranger"
+alias sv="sudo vim"
 alias r="ranger"
+alias sr="sudo ranger"
+alias p="pacman"
+alias sp="sudo pacman"
 alias clip="xclip -selection clipboard"
 
 alias pacman="pacman --color=auto"
@@ -128,16 +135,33 @@ function set_virtualenv() {
     fi
 }
 
+function set_docker() {
+    if [ -e "/.dockerenv" ] ; then
+        DOCKER="${LIGHT_MAGENTA}[docker]${COLOR_NONE} "
+    else
+        DOCKER=""
+    fi
+}
+
 # Set the full bash prompt.
 function set_bash_prompt() {
     set_prompt_symbol $?
     set_virtualenv
+    set_docker
     set_git_branch
-    PS1="${PYTHON_VIRTUALENV}${LIGHT_GREEN}\u@\h${COLOR_NONE}:${LIGHT_BLUE}\W${COLOR_NONE}${BRANCH}${PROMPT_SYMBOL} "
+    PS1="${DOCKER}${PYTHON_VIRTUALENV}${LIGHT_GREEN}\u@\h${COLOR_NONE}:${LIGHT_BLUE}\W${COLOR_NONE}${BRANCH}${PROMPT_SYMBOL} "
 }
 
 # Set prompt and terminal title
 PROMPT_COMMAND='set_bash_prompt ; echo -ne "\033]0;${PWD/#$HOME/\~} - Terminal\a"'
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
-export FZF_DEFAULT_OPTS='--height 40% --layout=reverse'
+if [ ! -e "/.dockerenv" ] ; then
+    [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+    export FZF_DEFAULT_OPTS='--height 40% --layout=reverse'
+fi
+
+function vimsed() {
+    local prefix
+    if [ ! -t 0 ]; then prefix="cat -"; else prefix="echo"; fi
+    sh -c $prefix | vim -E +"execute \"normal! $@\"" +%p +q! /dev/stdin
+}
