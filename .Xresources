@@ -42,7 +42,7 @@
 
 !! Common
 
-#define FONT Source Code Pro for Powerline:size=10:antialias=true:autohint=true
+#define FONT Source Code Pro for Powerline:pixelsize=13:antialias=true:hinting=true
 
 !! st
 
@@ -53,6 +53,13 @@ st.alpha: 0.9
 st.font: FONT
 
 !! URxvt
+
+! Set max buffer size
+URxvt.saveLines: 65535
+
+! Disable ISO 14755 unicode input
+URxvt.iso14755: false
+URxvt.iso14755_52: false
 
 ! Background transparency
 URxvt.background: [90]Color_Background
