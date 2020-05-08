@@ -62,7 +62,7 @@ URxvt.iso14755: false
 URxvt.iso14755_52: false
 
 ! Background transparency
-URxvt.background: [90]Color_Background
+URxvt.background: [95]Color_Background
 
 ! Font
 URxvt.font: xft:FONT
@@ -97,11 +97,20 @@ URxvt.secondaryWheel: 1
 URxvt.keysym.M-k: command:\033]720;5\007
 URxvt.keysym.M-j: command:\033]721;5\007
 
-! Arrow keys
+! Ctrl-Arrow keys
 URxvt.keysym.C-Up: \033[1;5A
 URxvt.keysym.C-Down: \033[1;5B
 URxvt.keysym.C-Left: \033[1;5D
 URxvt.keysym.C-Right: \033[1;5C
+
+! Shift-Arrow keys
+URxvt.keysym.S-Up: \033[1;2A
+URxvt.keysym.S-Down: \033[1;2B
+URxvt.keysym.S-Left: \033[1;2D
+URxvt.keysym.S-Right: \033[1;2C
+
+URxvt.keysym.C-Home: \033[1;5H
+URxvt.keysym.C-End: \033[1;5F
 
 ! Extensions
 URxvt.perl-ext-common: default,resize-font,keyboard-select,url-select,selection-to-clipboard
