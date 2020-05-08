@@ -11,14 +11,24 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'crusoexia/vim-dracula'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
+Plug 'joshdick/onedark.vim'
+" Plug 'crusoexia/vim-dracula'
+" Plug 'altercation/vim-colors-solarized'
+" Plug 'NLKNguyen/papercolor-theme'
+" Plug 'morhetz/gruvbox'
+" Plug 'drewtempelmeyer/palenight.vim'
+
+Plug 'itchyny/lightline.vim'
+" Plug 'vim-airline/vim-airline'
+" Plug 'vim-airline/vim-airline-themes'
+
 Plug 'tpope/vim-surround'
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 Plug 'Raimondi/delimitMate'
 Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-repeat'
 
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --bin' }
 Plug 'junegunn/fzf.vim'
@@ -39,7 +49,7 @@ Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeTabsToggle', 'NERDTreeFind'] }
 Plug 'jistr/vim-nerdtree-tabs', { 'on': ['NERDTreeTabsToggle', 'NERDTreeFind'] }
 
-Plug 'octol/vim-cpp-enhanced-highlight', { 'for': 'cpp' }
+Plug 'sheerun/vim-polyglot'
 
 Plug 'jceb/vim-orgmode', { 'for': 'org' }
 Plug 'tpope/vim-speeddating', { 'for': 'org' }
@@ -59,6 +69,7 @@ let maplocalleader = ' '
 set autoindent
 set autoread
 set backspace=eol,start,indent
+set colorcolumn=101
 set cursorline
 set encoding=utf8
 set expandtab
@@ -76,6 +87,7 @@ set modelines=1
 set mouse=a
 set nobackup
 set noerrorbells visualbell vb t_vb=
+set noshowmode
 set noswapfile
 set nowrap
 set nowritebackup
@@ -100,12 +112,6 @@ set wildmenu
 set wildmode=longest,list,full
 set wrapscan
 
-" Enable I-beam cursor in terminal
-let &t_ti.="\e[1 q"
-let &t_SI.="\e[5 q"
-let &t_EI.="\e[1 q"
-let &t_te.="\e[0 q"
-
 try
   set undodir=~/.vim/tmpdirs/undodir
   set undofile
@@ -114,21 +120,33 @@ endtry
 
 let g:load_doxygen_syntax = 1
 
+if has("termguicolors")
+  let &t_8f = "\e[38;2;%lu;%lu;%lum"
+  let &t_8b = "\e[48;2;%lu;%lu;%lum"
+  set termguicolors
+endif
+
+" set list
+" set listchars=eol:↵,tab:>-,trail:~,space:·
+
 " }}}
 " maps {{{
 " ==============================================================================
 
-nnoremap ; :
+nnoremap <silent> <C-h> <C-w>h
+nnoremap <silent> <C-j> <C-w>j
+nnoremap <silent> <C-k> <C-w>k
+nnoremap <silent> <C-l> <C-w>l
 
-nnoremap <C-h> <C-w>h
-nnoremap <C-j> <C-w>j
-nnoremap <C-k> <C-w>k
-nnoremap <C-l> <C-w>l
+nnoremap <silent> <C-Left> <C-w>h
+nnoremap <silent> <C-Down> <C-w>j
+nnoremap <silent> <C-Up> <C-w>k
+nnoremap <silent> <C-Right> <C-w>l
 
-nnoremap <C-Left> <C-w>h
-nnoremap <C-Down> <C-w>j
-nnoremap <C-Up> <C-w>k
-nnoremap <C-Right> <C-w>l
+nnoremap <silent> <S-Left> :call SplitResize('h')<CR>
+nnoremap <silent> <S-Right> :call SplitResize('l')<CR>
+nnoremap <silent> <S-Down> :call SplitResize('j')<CR>
+nnoremap <silent> <S-Up> :call SplitResize('k')<CR>
 
 nnoremap <CR> o<Esc>
 nnoremap <S-CR> O<Esc>
@@ -136,8 +154,8 @@ nnoremap <S-CR> O<Esc>
 vnoremap < <gv
 vnoremap > >gv
 
-nnoremap <silent> <leader>e :tabnew ~/.dotfiles/.vimrc<CR>
-nnoremap <silent> <leader>t :tabnew<CR>
+nnoremap <leader>e :tabnew ~/.vimrc<CR>
+nnoremap <leader>t :tabnew<CR>
 
 nnoremap <leader>y "+y
 vnoremap <leader>y "+y
@@ -145,30 +163,34 @@ nnoremap <leader>p "+p
 nnoremap <leader>P "+P
 vnoremap <leader>p "+p
 
-nnoremap <silent> <leader>w :w<CR>
-nnoremap <silent> <leader>q :q<CR>
+nnoremap <leader>w :w<CR>
+nnoremap <leader>q :q<CR>
 
-nnoremap <silent> <leader><space> :noh<CR>
+nnoremap <leader><space> :noh<CR>
 
-nnoremap <silent> <leader>s :call FormatFile() <bar> update<CR>
+nnoremap <leader>s :call FormatFile() <bar> update<CR>
 
-nnoremap <silent> <Esc><Left> :tabprev<CR>
-nnoremap <silent> <Esc><Right> :tabnext<CR>
-nnoremap <silent> <Esc>h :tabprev<CR>
-nnoremap <silent> <Esc>l :tabnext<CR>
+nnoremap <Esc><Left> :tabprev<CR>
+nnoremap <Esc><Right> :tabnext<CR>
+nnoremap <Esc>h :tabprev<CR>
+nnoremap <Esc>l :tabnext<CR>
 
-nnoremap <silent> <Esc>1 :tabnext 1<CR>
-nnoremap <silent> <Esc>2 :tabnext 2<CR>
-nnoremap <silent> <Esc>3 :tabnext 3<CR>
-nnoremap <silent> <Esc>4 :tabnext 4<CR>
-nnoremap <silent> <Esc>5 :tabnext 5<CR>
+nnoremap <Esc>1 :tabnext 1<CR>
+nnoremap <Esc>2 :tabnext 2<CR>
+nnoremap <Esc>3 :tabnext 3<CR>
+nnoremap <Esc>4 :tabnext 4<CR>
+nnoremap <Esc>5 :tabnext 5<CR>
 
-vnoremap <silent> * :<C-u>call VisualSelection('', '')<CR>/<C-R>=@/<CR><CR>
-vnoremap <silent> # :<C-u>call VisualSelection('', '')<CR>?<C-R>=@/<CR><CR>
+vnoremap * :<C-u>call VisualSelection()<CR>/<C-R>=@/<CR><CR>
+vnoremap # :<C-u>call VisualSelection()<CR>?<C-R>=@/<CR><CR>
 
 nnoremap <Tab> za
 
-nnoremap <silent> <leader><leader> :e#<CR>
+nnoremap <leader><leader> :e#<CR>
+
+nnoremap Q <nop>
+
+nnoremap <leader>a :Ag<CR>
 
 " }}}
 " colorscheme {{{
@@ -177,19 +199,27 @@ nnoremap <silent> <leader><leader> :e#<CR>
 set background=dark
 
 try
-  let g:dracula_italic = 1
-  colorscheme dracula
+  colorscheme onedark
 catch
 endtry
 
-let &colorcolumn = join(range(101, 300), ',')
-
 " }}}
-" airline {{{
+" statusline {{{
 " ==============================================================================
 
-let g:airline_theme = 'powerlineish'
-let g:airline_powerline_fonts = 1
+" let g:airline_theme = 'onedark'
+" let g:airline_powerline_fonts = 1
+
+let g:lightline = {
+      \ 'colorscheme': 'onedark',
+      \ 'active': {
+      \   'left': [ [ 'mode', 'paste' ],
+      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+      \ },
+      \ 'component_function': {
+      \   'gitbranch': 'FugitiveHead'
+      \ },
+      \ }
 
 " }}}
 " fzf {{{
@@ -257,12 +287,9 @@ let NERDTreeMapUpdirKeepOpen = 'h'
 let NERDTreeMapUpdir = 'H'
 
 let NERDTreeShowHidden = 0
-let NERDTreeIgnore = ['\.swp']
 let NERDTreeChDirMode = 2 " Change CWD whenever tree root is changed
 let NERDTreeMinimalUI = 1
 let NERDTreeWinSize = 35
-
-let g:nerdtree_tabs_open_on_gui_startup = 0
 
 nnoremap <leader>n :NERDTreeTabsToggle<CR>
 nnoremap <leader>f :NERDTreeFind<CR>
@@ -270,12 +297,6 @@ nnoremap <leader>f :NERDTreeFind<CR>
 " }}}
 " Git Gutter {{{
 " ==============================================================================
-
-"if exists('&signcolumn')
-"    set signcolumn=yes
-"else
-"    let g:gitgutter_sign_column_always = 1
-"endif
 
 hi GitGutterAdd    guifg=#009900 guibg=NONE ctermfg=2 ctermbg=NONE
 hi GitGutterChange guifg=#bbbb00 guibg=NONE ctermfg=3 ctermbg=NONE
@@ -286,6 +307,28 @@ let g:gitgutter_enabled=0
 nnoremap <silent> <leader>d :GitGutterToggle<CR>
 
 " }}}
+" vim-cpp-enhanced-highlight {{{
+" ==============================================================================
+
+let g:cpp_class_scope_highlight = 1
+let g:cpp_member_variable_highlight = 1
+let g:cpp_class_decl_highlight = 1
+
+" }}}
+" vim-commentary {{{
+" ==============================================================================
+
+autocmd FileType c,cpp,glsl,lang7 setlocal commentstring=//\ %s
+
+" }}}
+" goyo.vim {{{
+" ==============================================================================
+
+let g:goyo_width = 100
+let g:goyo_height = "100%"
+let g:goyo_linenr = 1
+
+" }}}
 " Helper functions {{{
 " ==============================================================================
 
@@ -294,29 +337,32 @@ function! FormatFile()
   py3f ~/.clang-format.py
 endfunction
 
-function! VisualSelection(direction, extra_filter) range
+function! VisualSelection() range
   let l:saved_reg = @"
   execute "normal! vgvy"
 
   let l:pattern = escape(@", "\\/.*'$^~[]")
   let l:pattern = substitute(l:pattern, "\n$", "", "")
 
-  if a:direction == 'gv'
-      call CmdLine("Ag '" . l:pattern . "' " )
-  elseif a:direction == 'replace'
-      call CmdLine("%s" . '/'. l:pattern . '/')
-  endif
-
   let @/ = l:pattern
   let @" = l:saved_reg
 endfunction
 
-" }}}
-" vim-cpp-enhanced-highlight {{{
-
-let g:cpp_class_scope_highlight = 1
-let g:cpp_member_variable_highlight = 1
-let g:cpp_class_decl_highlight = 1
+function! SplitResize(dir)
+  if a:dir ==# 'h' || a:dir ==# 'l'
+    let l:pref = 'vertical '
+    let l:next = 'l'
+  else
+    let l:pref = ''
+    let l:next = 'j'
+  endif
+  if (winnr() ==# winnr(l:next)) !=# (a:dir ==# l:next)
+    let l:sign = '+'
+  else
+    let l:sign = '-'
+  endif
+  exe l:pref . 'resize ' . l:sign . '5'
+endfunction
 
 " }}}
 
