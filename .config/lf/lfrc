@@ -1,0 +1,15 @@
+# Setting
+set nodrawbox
+set info size
+set ifs "\n"
+set filesep "\n"
+set previewer pv
+set cleaner preview-image
+
+# Key bindings
+map <enter> open
+map gh cd ~
+map gr cd /
+
+# Commands
+cmd open $ open $fx

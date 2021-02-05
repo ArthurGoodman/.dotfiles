@@ -67,8 +67,6 @@ alias confdc="conf diff --cached"
 
 alias v="vim"
 alias sv="sudo vim"
-alias r="ranger"
-alias sr="sudo ranger"
 alias p="pacman"
 alias sp="sudo pacman"
 alias clip="xclip -selection clipboard"
@@ -166,3 +164,5 @@ function vimsed() {
     if [ ! -t 0 ]; then prefix="cat -"; else prefix="echo"; fi
     sh -c $prefix | vim -E +"execute \"normal! $@\"" +%p +q! /dev/stdin
 }
+
+export PATH="/home/nick/.local/bin:$PATH"
