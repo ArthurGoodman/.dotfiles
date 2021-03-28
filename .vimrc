@@ -15,7 +15,7 @@ Plug 'joshdick/onedark.vim'
 " Plug 'crusoexia/vim-dracula'
 " Plug 'altercation/vim-colors-solarized'
 " Plug 'NLKNguyen/papercolor-theme'
-" Plug 'morhetz/gruvbox'
+Plug 'morhetz/gruvbox'
 " Plug 'drewtempelmeyer/palenight.vim'
 
 Plug 'itchyny/lightline.vim'
@@ -56,6 +56,9 @@ Plug 'tpope/vim-speeddating', { 'for': 'org' }
 
 Plug 'tikhomirov/vim-glsl', { 'for': 'glsl' }
 Plug 'PotatoesMaster/i3-vim-syntax', { 'for': 'i3' }
+
+Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
+Plug 'christoomey/vim-tmux-navigator'
 
 call plug#end()
 
@@ -133,10 +136,10 @@ endif
 " maps {{{
 " ==============================================================================
 
-nnoremap <silent> <C-h> <C-w>h
-nnoremap <silent> <C-j> <C-w>j
-nnoremap <silent> <C-k> <C-w>k
-nnoremap <silent> <C-l> <C-w>l
+" nnoremap <silent> <C-h> <C-w>h
+" nnoremap <silent> <C-j> <C-w>j
+" nnoremap <silent> <C-k> <C-w>k
+" nnoremap <silent> <C-l> <C-w>l
 
 nnoremap <silent> <C-Left> <C-w>h
 nnoremap <silent> <C-Down> <C-w>j
@@ -199,7 +202,7 @@ nnoremap <leader>a :Ag<CR>
 set background=dark
 
 try
-  colorscheme onedark
+  colorscheme gruvbox
 catch
 endtry
 
@@ -207,11 +210,11 @@ endtry
 " statusline {{{
 " ==============================================================================
 
-" let g:airline_theme = 'onedark'
+" let g:airline_theme = 'powerlineish'
 " let g:airline_powerline_fonts = 1
 
 let g:lightline = {
-      \ 'colorscheme': 'onedark',
+      \ 'colorscheme': 'powerline',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
@@ -365,5 +368,19 @@ function! SplitResize(dir)
 endfunction
 
 " }}}
+
+let g:mkdp_preview_options = {
+    \ 'mkit': {},
+    \ 'katex': {},
+    \ 'uml': {},
+    \ 'maid': {},
+    \ 'disable_sync_scroll': 0,
+    \ 'sync_scroll_type': 'middle',
+    \ 'hide_yaml_meta': 1,
+    \ 'sequence_diagrams': {},
+    \ 'flowchart_diagrams': {},
+    \ 'content_editable': v:false,
+    \ 'disable_filename': 1
+    \ }
 
 " vim:foldmethod=marker:foldlevel=0
