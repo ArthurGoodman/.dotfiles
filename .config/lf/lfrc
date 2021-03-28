@@ -3,7 +3,7 @@ set nodrawbox
 set info size
 set ifs "\n"
 set filesep "\n"
-set previewer pv
+set previewer preview
 set cleaner preview-image
 
 # Key bindings
