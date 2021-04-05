@@ -10,7 +10,7 @@ set $alt Mod1
 set $shutdown shutdown -h now
 set $reboot reboot
 set $suspend systemctl suspend
-set $lock i3lock -c 303030
+set $lock lock_screen
 set $terminal urxvt
 set $volume-up pamixer -i 5 -u
 set $volume-down pamixer -d 5 -u
@@ -62,11 +62,8 @@ exec --no-startup-id xautolock -time 15 -locker "$lock"
 # increate key repeat rate a bit
 exec --no-startup-id xset r rate 250 30
 
-# run syncthing server
-exec --no-startup-id syncthing -no-browser -no-restart -logflags=0
-
 # external locker for screensaver
-exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork --color 303030
+exec --no-startup-id xss-lock --transfer-sleep-lock -- "$lock"
 
 ################################################################################
 # Options
