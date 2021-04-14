@@ -11,9 +11,10 @@ endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'joshdick/onedark.vim'
+" Plug 'joshdick/onedark.vim'
 " Plug 'crusoexia/vim-dracula'
 " Plug 'altercation/vim-colors-solarized'
+" Plug 'lifepillar/vim-solarized8'
 " Plug 'NLKNguyen/papercolor-theme'
 Plug 'morhetz/gruvbox'
 " Plug 'drewtempelmeyer/palenight.vim'
@@ -59,6 +60,9 @@ Plug 'PotatoesMaster/i3-vim-syntax', { 'for': 'i3' }
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'christoomey/vim-tmux-navigator'
+
+" Plug 'edkolev/tmuxline.vim'
+" let g:tmuxline_powerline_separators = 0
 
 call plug#end()
 
@@ -129,8 +133,15 @@ if has("termguicolors")
   set termguicolors
 endif
 
-" set list
-" set listchars=eol:↵,tab:>-,trail:~,space:·
+if &term =~ '^screen'
+    execute "set <xUp>=\e[1;*A"
+    execute "set <xDown>=\e[1;*B"
+    execute "set <xRight>=\e[1;*C"
+    execute "set <xLeft>=\e[1;*D"
+endif
+
+set list
+set listchars=trail:~
 
 " }}}
 " maps {{{
