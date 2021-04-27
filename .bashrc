@@ -36,44 +36,7 @@ if [ "$TERM" = "st-256color" ] ; then
     export TERM=xterm-256color
 fi
 
-###############################################################################
-# Aliases
-################################################################################
-
-alias cls="clear"
-
-alias ls="ls --color=auto --group-directories-first"
-alias ll="ls -l"
-alias la="ls -alF"
-
-alias egrep="egrep --color=auto"
-alias fgrep="fgrep --color=auto"
-alias grep="grep --color=auto"
-
-alias gll="git log --all --graph --decorate"
-alias gl="gll --oneline"
-alias gs="git status"
-alias gd="git diff"
-alias gf="git fetch"
-alias gdc="git diff --cached"
-alias glu="git ls-files --others --exclude-standard"
-alias gf="git fetch"
-
-alias conf="/usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME"
-alias confl="conf log --all --graph --decorate --oneline"
-alias confs="conf status"
-alias confd="conf diff"
-alias confdc="conf diff --cached"
-
-alias v="vim"
-alias sv="sudo vim"
-alias p="pacman"
-alias sp="sudo pacman"
-alias clip="xclip -selection clipboard"
-
-alias pacman="pacman --color=auto"
-alias yay="yay --color=auto"
-alias pacaur="pacaur --color=auto"
+[ -f ~/.config/aliasrc.sh ] && . ~/.config/aliasrc.sh
 
 ################################################################################
 # Colors
@@ -101,7 +64,7 @@ LIGHT_MAGENTA="\[\e[1;35m\]"
 # Prompt
 ################################################################################
 
-function set_git_branch() {
+set_git_branch() {
     branch=`git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
     if [[ "$branch" =~ ^([A-Z]*-[0-9]*)-.* ]] ; then
         branch="${BASH_REMATCH[1]}"
@@ -118,7 +81,7 @@ function set_git_branch() {
     fi
 }
 
-function set_prompt_symbol() {
+set_prompt_symbol() {
     if [ $1 -eq 0 ] ; then
         PROMPT_SYMBOL="\$"
     else
@@ -126,7 +89,7 @@ function set_prompt_symbol() {
     fi
 }
 
-function set_virtualenv() {
+set_virtualenv() {
     if [ -z "$VIRTUAL_ENV" ] ; then
         PYTHON_VIRTUALENV=""
     else
@@ -134,7 +97,7 @@ function set_virtualenv() {
     fi
 }
 
-function set_docker() {
+set_docker() {
     if [ -e "/.dockerenv" ] ; then
         DOCKER="${LIGHT_MAGENTA}[docker]${COLOR_NONE} "
     else
@@ -143,7 +106,7 @@ function set_docker() {
 }
 
 # Set the full bash prompt.
-function set_bash_prompt() {
+set_bash_prompt() {
     set_prompt_symbol $?
     set_virtualenv
     set_docker
@@ -159,7 +122,7 @@ if [ ! -e "/.dockerenv" ] ; then
     export FZF_DEFAULT_OPTS='--height 40% --layout=reverse'
 fi
 
-function vimsed() {
+vimsed() {
     local prefix
     if [ ! -t 0 ]; then prefix="cat -"; else prefix="echo"; fi
     sh -c $prefix | vim -E +"execute \"normal! $@\"" +%p +q! /dev/stdin
