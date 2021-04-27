@@ -16,34 +16,18 @@ zmodload zsh/complist
 compinit -d ~/.cache/zsh/compdump-$ZSH_VERSION
 _comp_options+=(globdots)
 
-bindkey -v
+bindkey -e
 export KEYTIMEOUT=1
 
 bindkey -M menuselect '^h' vi-backward-char
 bindkey -M menuselect '^k' vi-up-line-or-history
 bindkey -M menuselect '^l' vi-forward-char
 bindkey -M menuselect '^j' vi-down-line-or-history
-bindkey -v '^?' backward-delete-char
 
-bindkey '^P' up-history
-bindkey '^N' down-history
-bindkey '^A' beginning-of-line
-bindkey '^E' end-of-line
-bindkey '^K' kill-line
-bindkey '^L' clear-screen
-bindkey '^R' history-incremental-search-backward
-bindkey '^U' kill-whole-line
-bindkey '^W' backward-kill-word
-bindkey '^Y' yank
-bindkey '^F' forward-char
-bindkey '^B' backward-char
-bindkey '^[f' forward-word
-bindkey '^[b' backward-word
 bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 bindkey -a "^[[1;5C" forward-word
 bindkey -a "^[[1;5D" backward-word
-bindkey '^[.' insert-last-word
 
 [ -f ~/.fzf.zsh ] && . ~/.fzf.zsh
 export FZF_DEFAULT_OPTS='--height 40% --layout=reverse'
