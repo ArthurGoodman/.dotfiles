@@ -60,9 +60,7 @@ Plug 'PotatoesMaster/i3-vim-syntax', { 'for': 'i3' }
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'christoomey/vim-tmux-navigator'
-
-" Plug 'edkolev/tmuxline.vim'
-" let g:tmuxline_powerline_separators = 0
+Plug 'edkolev/tmuxline.vim'
 
 call plug#end()
 
@@ -118,6 +116,7 @@ set wildignorecase
 set wildmenu
 set wildmode=longest,list,full
 set wrapscan
+set viminfo=
 
 try
   set undodir=~/.vim/tmpdirs/undodir
@@ -140,17 +139,12 @@ if &term =~ '^screen'
     execute "set <xLeft>=\e[1;*D"
 endif
 
-set list
-set listchars=trail:~
+"set list
+"set listchars=eol:↵,tab:>-,trail:~,space:·
 
 " }}}
 " maps {{{
 " ==============================================================================
-
-" nnoremap <silent> <C-h> <C-w>h
-" nnoremap <silent> <C-j> <C-w>j
-" nnoremap <silent> <C-k> <C-w>k
-" nnoremap <silent> <C-l> <C-w>l
 
 nnoremap <silent> <C-Left> <C-w>h
 nnoremap <silent> <C-Down> <C-w>j
@@ -233,6 +227,9 @@ let g:lightline = {
       \ 'component_function': {
       \   'gitbranch': 'FugitiveHead'
       \ },
+      \ 'component': {
+      \   'lineinfo': '%3l:%-2v%<',
+      \ },
       \ }
 
 " }}}
@@ -312,10 +309,6 @@ nnoremap <leader>f :NERDTreeFind<CR>
 " Git Gutter {{{
 " ==============================================================================
 
-hi GitGutterAdd    guifg=#009900 guibg=NONE ctermfg=2 ctermbg=NONE
-hi GitGutterChange guifg=#bbbb00 guibg=NONE ctermfg=3 ctermbg=NONE
-hi GitGutterDelete guifg=#ff2222 guibg=NONE ctermfg=1 ctermbg=NONE
-
 let g:gitgutter_enabled=0
 
 nnoremap <silent> <leader>d :GitGutterToggle<CR>
@@ -341,6 +334,30 @@ autocmd FileType c,cpp,glsl,lang7 setlocal commentstring=//\ %s
 let g:goyo_width = 100
 let g:goyo_height = "100%"
 let g:goyo_linenr = 1
+
+" }}}
+" markdown-preview {{{
+" ==============================================================================
+
+let g:mkdp_preview_options = {
+    \ 'mkit': {},
+    \ 'katex': {},
+    \ 'uml': {},
+    \ 'maid': {},
+    \ 'disable_sync_scroll': 0,
+    \ 'sync_scroll_type': 'middle',
+    \ 'hide_yaml_meta': 1,
+    \ 'sequence_diagrams': {},
+    \ 'flowchart_diagrams': {},
+    \ 'content_editable': v:false,
+    \ 'disable_filename': 1
+    \ }
+
+" }}}
+" tmuxline {{{
+" ==============================================================================
+
+let g:tmuxline_powerline_separators = 0
 
 " }}}
 " Helper functions {{{
@@ -379,19 +396,5 @@ function! SplitResize(dir)
 endfunction
 
 " }}}
-
-let g:mkdp_preview_options = {
-    \ 'mkit': {},
-    \ 'katex': {},
-    \ 'uml': {},
-    \ 'maid': {},
-    \ 'disable_sync_scroll': 0,
-    \ 'sync_scroll_type': 'middle',
-    \ 'hide_yaml_meta': 1,
-    \ 'sequence_diagrams': {},
-    \ 'flowchart_diagrams': {},
-    \ 'content_editable': v:false,
-    \ 'disable_filename': 1
-    \ }
 
 " vim:foldmethod=marker:foldlevel=0
