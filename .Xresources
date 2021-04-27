@@ -1,44 +1,6 @@
-!! Dracula color scheme
-
-#define Color_Foreground    #F8F8F2
-#define Color_Background    #282A36
-#define Color_Black         #282A36
-#define Color_BrightBlack   #44475A
-#define Color_Red           #FF5555
-#define Color_BrightRed     #FF5555
-#define Color_Green         #50FA7B
-#define Color_BrightGreen   #50FA7B
-#define Color_Yellow        #F1FA8C
-#define Color_BrightYellow  #F1FA8C
-#define Color_Blue          #BD93F9
-#define Color_BrightBlue    #BD93F9
-#define Color_Magenta       #FF79C6
-#define Color_BrightMagenta #FF79C6
-#define Color_Cyan          #8BE9FD
-#define Color_BrightCyan    #8BE9FD
-#define Color_White         #BBBBBB
-#define Color_BrightWhite   #FFFFFF
-
 !! Colors
 
-*.foreground: Color_Foreground
-*.background: Color_Background
-*.color0:     Color_Black
-*.color8:     Color_BrightBlack
-*.color1:     Color_Red
-*.color9:     Color_BrightRed
-*.color2:     Color_Green
-*.color10:    Color_BrightGreen
-*.color3:     Color_Yellow
-*.color11:    Color_BrightYellow
-*.color4:     Color_Blue
-*.color12:    Color_BrightBlue
-*.color5:     Color_Magenta
-*.color13:    Color_BrightMagenta
-*.color6:     Color_Cyan
-*.color14:    Color_BrightCyan
-*.color7:     Color_White
-*.color15:    Color_BrightWhite
+#include ".config/gruvbox-dark.xresources"
 
 !! Common
 
@@ -62,7 +24,7 @@ URxvt.iso14755: false
 URxvt.iso14755_52: false
 
 ! Background transparency
-URxvt.background: [95]Color_Background
+URxvt.background: [95]#282828
 
 ! Font
 URxvt.font: xft:FONT
@@ -96,6 +58,8 @@ URxvt.secondaryWheel: 1
 ! Scrolling with Meta-j/k
 URxvt.keysym.M-k: command:\033]720;5\007
 URxvt.keysym.M-j: command:\033]721;5\007
+
+URxvt.keysym.M-s: \033s
 
 ! Ctrl-Arrow keys
 URxvt.keysym.C-Up: \033[1;5A
