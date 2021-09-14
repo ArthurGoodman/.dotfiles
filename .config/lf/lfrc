@@ -13,3 +13,5 @@ map gr cd /
 
 # Commands
 cmd open $ open $fx
+
+map <c-s> %lf-rsync-here
