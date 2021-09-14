@@ -40,6 +40,7 @@ precmd() {
     set_virtualenv
     set_git_branch
     PS1="${DOCKER}${PYTHON_VIRTUALENV}%B%F{green}%n@%m%f%b:%B%F{blue}%1~%f%b${BRANCH}%(?.$.%F{red}$%f) "
+    echo -ne "\033]0;${PWD/#$HOME/~} - Terminal\a"
 }
 
 vimsed() {
@@ -47,8 +48,6 @@ vimsed() {
     if [ ! -t 0 ]; then prefix="cat -"; else prefix="echo"; fi
     sh -c $prefix | vim -E +"execute \"normal! $@\"" +%p +q! /dev/stdin
 }
-
-export PATH="/home/nick/.local/bin:$PATH"
 
 # should be last
 . /usr/share/zsh/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh 2>/dev/null

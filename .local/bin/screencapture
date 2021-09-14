@@ -40,7 +40,7 @@ done
 OUTPUT="$HOME/$(date +screen-%F-%H-%M-%S)"
 
 if $SELECT ; then
-    SLOP=$(slop -l -c 1,1,1,0.25 -f "%x %y %w %h %g %i") || exit 1
+    SLOP=$(slop -l -c 0.5,0.5,0.5,0.5 -f "%x %y %w %h %g %i") || exit 1
     read -r X Y W H G ID < <(echo $SLOP)
 fi
 

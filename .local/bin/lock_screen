@@ -1,4 +1,5 @@
 #!/bin/sh
 killall -SIGUSR1 dunst
 i3lock --nofork --color 303030
+#slock
 killall -SIGUSR2 dunst
