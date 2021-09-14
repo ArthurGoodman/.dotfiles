@@ -143,7 +143,7 @@ bindsym $mod+Shift+Return exec --no-startup-id samedir
 bindsym $mod+Tab workspace back_and_forth
 
 # switch to previous workpsace
-bindsym $mod+Escape workspace prev
+# bindsym $mod+Escape workspace prev
 
 # exit i3
 bindsym $mod+Shift+Escape exec --no-startup-id prompt "Are you sure you want to leave i3?" "i3-msg exit"
@@ -170,7 +170,7 @@ bindsym $mod+Shift+q kill
 bindsym $mod+Shift+r restart
 
 # lock screen
-bindsym $mod+x exec --no-startup-id $lock
+bindsym --release $mod+x exec --no-startup-id $lock
 
 # suspend
 bindsym $mod+z exec --no-startup-id $suspend
@@ -197,6 +197,7 @@ set $ws10 "10:"
 
 # switch to workspace
 bindsym $mod+grave workspace $ws10
+bindsym $mod+Escape workspace $ws10
 bindsym $mod+1 workspace $ws1
 bindsym $mod+2 workspace $ws2
 bindsym $mod+3 workspace $ws3
@@ -350,11 +351,12 @@ bindsym $mod+r mode "resize"
 ################################################################################
 
 bindsym Print exec --no-startup-id flameshot gui
+bindsym Control+Shift+S exec --no-startup-id flameshot gui
 #bindsym Print exec --no-startup-id screencapture --format=image
 #bindsym Control+Print exec --no-startup-id screencapture --format=image --select
-bindsym $mod+Print exec --no-startup-id screencapture --format=video
-bindsym Control+$mod+Print exec --no-startup-id screencapture --format=video --select
-bindsym Control+Shift+Print exec --no-startup-id killall ffmpeg
+# bindsym $mod+Print exec --no-startup-id screencapture --format=video
+# bindsym Control+$mod+Print exec --no-startup-id screencapture --format=video --select
+# bindsym Control+Shift+Print exec --no-startup-id killall ffmpeg
 
 ################################################################################
 # XF86 keys
@@ -381,7 +383,7 @@ bindsym XF86TouchpadOff exec --no-startup-id synclient TouchpadOff=1
 bindsym $mod+n  exec --no-startup-id toggletouchpad
 
 # media player controls
-bindsym XF86AudioPlay exec --no-startup-id playerctl play
+bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
 bindsym XF86AudioStop exec --no-startup-id playerctl stop
 bindsym XF86AudioPause exec --no-startup-id playerctl pause
 bindsym XF86AudioNext exec --no-startup-id playerctl next
