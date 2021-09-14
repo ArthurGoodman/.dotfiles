@@ -5,7 +5,13 @@ ID="lf-preview"
 [ $# = 1 ] && cmd=clear
 case "${cmd:-$1}" in
     "draw")
-        {   printf '{ "action": "add", "identifier": "%s", "path": "%s",' "$ID" "$2"
+        if echo "$(file -Lb --mime-type -- "$2")" | grep -Eq video/*; then
+            FILENAME=/tmp/lf-preview.png
+            ffmpegthumbnailer -i "$2" -o "$FILENAME" -s 0
+        else
+            FILENAME=$2
+        fi
+        {   printf '{ "action": "add", "identifier": "%s", "path": "%s",' "$ID" "$FILENAME"
             printf '"width": %d, "height": %d, "x": %d, "y": %d }\n' "$3" "$4" "$5" "$6"
         } > "$FIFO_UEBERZUG" ;;
     "clear")

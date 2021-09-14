@@ -46,12 +46,12 @@ case "$(file -Lb --mime-type -- "$1")" in
         fi } |
         iconv -f "${enc:-UTF-8}" -t UTF-8 && exit ;;
 
-    # Image
-    image/*)
+    # Image and video
+    image/*|video/*)
         preview-image draw "$1" "$2" "$3" "$4" "$5" && exit 1 ;;
 
-    # Video and audio
-    video/*|audio/*|application/octet-stream)
+    # Audio and other files
+    audio/*|application/octet-stream)
         mediainfo "$1" && exit ;;
 
     *) ;; # Go on to fall back
