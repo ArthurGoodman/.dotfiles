@@ -1,5 +1,5 @@
 # Setting
-# set nodrawbox
+set nodrawbox
 set info size
 set ifs "\n"
 set filesep "\n"
@@ -10,8 +10,10 @@ set cleaner ~/.config/lf/clear_img.sh
 map <enter> open
 map gh cd ~
 map gr cd /
+map <delete> delete
+map td push $mkdir<space>
+map tf push $touch<space>
+map <c-s> % ~/.config/lf/rsync-here.sh
 
 # Commands
 cmd open $ open $fx
-
-map <c-s> %lf-rsync-here

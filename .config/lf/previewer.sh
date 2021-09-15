@@ -18,9 +18,13 @@ cache() {
 file="$1"
 shift
 
-if [ -n "$FIFO_UEBERZUG" ]; then
-  case "$(file -Lb --mime-type -- "$file")" in
-    image/*)
+case "$(file -Lb --mime-type -- "$file")" in
+  text/*)
+    source-highlight -q --outlang-def=esc.outlang --style-file=esc.style -i "$file" || cat -- "$file"
+    exit 0
+    ;;
+  image/*)
+    if [ -n "$FIFO_UEBERZUG" ]; then
       orientation="$(identify -format '%[EXIF:Orientation]\n' -- "$file")"
       if [ -n "$orientation" ] && [ "$orientation" != 1 ]; then
         cache="$(hash "$file").jpg"
@@ -30,15 +34,17 @@ if [ -n "$FIFO_UEBERZUG" ]; then
       else
         draw "$file" "$@"
       fi
-      ;;
-    video/*)
+    fi
+    ;;
+  video/*)
+    if [ -n "$FIFO_UEBERZUG" ]; then
       cache="$(hash "$file").jpg"
       cache "$cache" "$@"
       ffmpegthumbnailer -i "$file" -o "$cache" -s 0
       draw "$cache" "$@"
-      ;;
-  esac
-fi
+    fi
+    ;;
+esac
 
 echo '----- File Type Classification -----'
 width="$3"
