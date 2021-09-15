@@ -1,18 +1,24 @@
-#!/usr/bin/sh
-start_ueberzug() {
-    mkfifo "$FIFO_UEBERZUG" || exit 1
-    ueberzug layer --parser json --silent < "$FIFO_UEBERZUG" &
-    exec 3>"$FIFO_UEBERZUG"
-}
+#!/bin/sh
+set -e
 
-stop_ueberzug() {
+if [ -n "$DISPLAY" ]; then
+  export FIFO_UEBERZUG="${TMPDIR:-/tmp}/lf-ueberzug-$$"
+
+  cleanup() {
     exec 3>&-
-    rm "$FIFO_UEBERZUG" > /dev/null 2>&1
-}
+    rm "$FIFO_UEBERZUG"
+  }
 
-if [ -n "$DISPLAY" ] && command -v ueberzug > /dev/null; then
-    export FIFO_UEBERZUG="/tmp/lf-ueberzug-${PPID}"
-    trap stop_ueberzug EXIT QUIT INT TERM
-    start_ueberzug
+  mkfifo "$FIFO_UEBERZUG"
+  ueberzug layer -s <"$FIFO_UEBERZUG" &
+  exec 3>"$FIFO_UEBERZUG"
+  trap cleanup EXIT
+
+  if ! [ -d "$HOME/.cache/lf" ]; then
+    mkdir -p "$HOME/.cache/lf"
+  fi
+
+  /usr/bin/lf "$@" 3>&-
+else
+  exec /usr/bin/lf "$@"
 fi
-/usr/bin/lf "$@"

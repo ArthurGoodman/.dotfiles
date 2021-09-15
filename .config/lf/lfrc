@@ -1,10 +1,10 @@
 # Setting
-set nodrawbox
+# set nodrawbox
 set info size
 set ifs "\n"
 set filesep "\n"
-set previewer preview
-set cleaner preview-image
+set previewer ~/.config/lf/previewer.sh
+set cleaner ~/.config/lf/clear_img.sh
 
 # Key bindings
 map <enter> open
