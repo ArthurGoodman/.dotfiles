@@ -13,7 +13,7 @@ map gr cd /
 map <delete> delete
 map td push $mkdir<space>
 map tf push $touch<space>
-map <c-s> % ~/.config/lf/rsync-here.sh
+map <c-s> ! ~/.config/lf/rsync-here.sh
 
 # Commands
 cmd open $ open $fx
