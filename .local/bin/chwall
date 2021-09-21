@@ -1,2 +1,2 @@
 #!/bin/sh
-sxiv -botf ~/sync/Default/Wallpapers | xargs feh --bg-fill
+sxiv -bot ~/sync/Default/Wallpapers | xargs feh --bg-fill
