@@ -2,7 +2,7 @@
 # ~/.bash_profile
 #
 
-export PATH="$PATH:$HOME/.local/bin"
+export PATH="$HOME/.local/bin:$PATH"
 export EDITOR="vim"
 export TERMINAL="st"
 
