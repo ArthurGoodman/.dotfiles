@@ -425,7 +425,7 @@ format-prefix = " "
 
 [module/scriptdate]
 type = custom/script
-exec = date +' %a %d %b %l:%M:%S %p'
+exec = date +' %a %d %b %Y %l:%M:%S %p'
 tail = false
 click-left = gsimplecal
 interval = 1
