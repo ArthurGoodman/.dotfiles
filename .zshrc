@@ -30,7 +30,7 @@ bindkey -a "^[[1;5C" forward-word
 bindkey -a "^[[1;5D" backward-word
 
 [ -f ~/.fzf.zsh ] && . ~/.fzf.zsh
-export FZF_DEFAULT_OPTS='--height 40% --layout=reverse'
+export FZF_DEFAULT_OPTS='--height 40% --layout=reverse --color=bg+:-1,gutter:-1'
 
 [ -f ~/.config/aliasrc.sh ] && . ~/.config/aliasrc.sh
 [ -f ~/.config/shell_prompt_utils.sh ] && . ~/.config/shell_prompt_utils.sh
