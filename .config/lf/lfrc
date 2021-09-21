@@ -11,7 +11,7 @@ map <enter> open
 map gh cd ~
 map gr cd /
 map <delete> delete
-map td push $mkdir<space>
+map td push $mkdir<space>-p<space>
 map tf push $touch<space>
 map <c-s> ! ~/.config/lf/rsync-here.sh
 
