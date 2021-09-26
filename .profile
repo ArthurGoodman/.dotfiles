@@ -4,6 +4,6 @@
 
 export PATH="$HOME/.local/bin:$PATH"
 export EDITOR="vim"
-export TERMINAL="st"
+export TERMINAL="urxvt"
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc
