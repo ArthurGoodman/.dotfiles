@@ -19,7 +19,7 @@ file="$1"
 shift
 
 case "$(file -Lb --mime-type -- "$file")" in
-  text/*)
+  text/*|application/json)
     source-highlight -q --outlang-def=esc.outlang --style-file=esc.style -i "$file" || cat -- "$file"
     exit 0
     ;;
