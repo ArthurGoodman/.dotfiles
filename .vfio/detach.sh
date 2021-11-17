@@ -1,5 +1,17 @@
 #!/bin/sh
+
+DEVICES=$@
+
 DIR=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
-sudo virsh detach-device win10 $DIR/keyboard.xml
-sudo virsh detach-device win10 $DIR/mouse.xml
-$HOME/.keyboard_config.sh
+
+. $DIR/common.sh
+
+if [ -z "$DEVICES" ]; then
+    for file in $(ls $DIR/*.xml); do
+        detach_device $file
+    done
+else
+    for dev in $DEVICES; do
+        detach_device $dev
+    done
+fi
