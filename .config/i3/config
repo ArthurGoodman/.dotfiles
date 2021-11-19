@@ -11,7 +11,7 @@ set $shutdown shutdown -h now
 set $reboot reboot
 set $suspend systemctl suspend
 set $lock lock_screen
-set $terminal urxvt
+set $terminal urxvtc
 set $volume-up pamixer -i 5 -u
 set $volume-down pamixer -d 5 -u
 set $volume-mute pamixer -t
@@ -64,6 +64,9 @@ exec --no-startup-id xset r rate 250 30
 
 # external locker for screensaver
 exec --no-startup-id xss-lock --transfer-sleep-lock -- "$lock"
+
+# urxvt daemon
+exec --no-startup-id urxvtd -q -o -f
 
 ################################################################################
 # Options
