@@ -3,7 +3,7 @@
 #
 
 export PATH="$HOME/.local/bin:$PATH"
-export EDITOR="vim"
-export TERMINAL="urxvt"
+export EDITOR="nvim"
+export TERMINAL="alacritty"
 
 [[ -f ~/.bashrc ]] && . ~/.bashrc

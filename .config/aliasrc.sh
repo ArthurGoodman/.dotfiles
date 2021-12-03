@@ -21,10 +21,12 @@ alias confs="conf status"
 alias confd="conf diff"
 alias confdc="conf diff --cached"
 
+alias vim="nvim"
 alias v="vim"
 alias sv="sudo vim"
+alias pacman="pacman --color=auto"
 alias p="pacman"
-alias sp="sudo pacman"
+alias sp="sudo pacman --color=auto"
 alias clip="xclip -selection clipboard"
 
 alias pacman="pacman --color=auto"

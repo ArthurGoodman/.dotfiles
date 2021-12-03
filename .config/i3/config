@@ -11,7 +11,7 @@ set $shutdown shutdown -h now
 set $reboot reboot
 set $suspend systemctl suspend
 set $lock lock_screen
-set $terminal urxvtc
+set $terminal alacritty
 set $volume-up pamixer -i 5 -u
 set $volume-down pamixer -d 5 -u
 set $volume-mute pamixer -t
@@ -66,7 +66,7 @@ exec --no-startup-id xset r rate 250 30
 exec --no-startup-id xss-lock --transfer-sleep-lock -- "$lock"
 
 # urxvt daemon
-exec --no-startup-id urxvtd -q -o -f
+#exec --no-startup-id urxvtd -q -o -f
 
 ################################################################################
 # Options
@@ -140,7 +140,7 @@ bindsym $mod+d exec --no-startup-id i3-dmenu-desktop --dmenu='dmenu -i -fn mono-
 # start a terminal
 bindsym $mod+Return exec --no-startup-id $terminal
 
-bindsym $mod+Shift+Return exec --no-startup-id samedir
+#bindsym $mod+Shift+Return exec --no-startup-id samedir
 
 # switch between last two workspaces
 bindsym $mod+Tab workspace back_and_forth
