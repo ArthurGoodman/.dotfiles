@@ -1,0 +1,35 @@
+import:
+  - ~/.config/alacritty/gruvbox.yml
+
+window:
+  padding:
+    x: 2
+    y: 2
+
+font:
+  normal:
+    family: Source Code Pro for Powerline
+    style: Regular
+
+  bold:
+    family: Source Code Pro for Powerline
+    style: Bold
+
+  italic:
+    family: Source Code Pro for Powerline
+    style: Italic
+
+  bold_italic:
+    family: Source Code Pro for Powerline
+    style: Bold Italic
+
+  size: 9.9
+
+  use_thin_strokes: false
+
+draw_bold_text_with_bright_colors: true
+
+background_opacity: 0.95
+
+key_bindings:
+  - { key: Return,   mods: Control|Shift, action: SpawnNewInstance }
