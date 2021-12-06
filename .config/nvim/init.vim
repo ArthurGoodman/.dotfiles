@@ -3,23 +3,23 @@ set nocompatible
 " plug {{{
 " ==============================================================================
 
-if empty(glob('~/.vim/autoload/plug.vim'))
-  silent !curl -fLo ~/.vim/autoload/plug.vim --create-dirs
-    \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+if empty(glob('~/.local/share/nvim/site/autoload/plug.vim'))
+  silent !sh -c 'curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs
+              \ https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
   autocmd VimEnter * PlugInstall --sync | source $MYVIMRC
 endif
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'joshdick/onedark.vim'
-" Plug 'crusoexia/vim-dracula'
+" Plug 'joshdick/onedark.vim'
 " Plug 'altercation/vim-colors-solarized'
 " Plug 'lifepillar/vim-solarized8'
 " Plug 'NLKNguyen/papercolor-theme'
 Plug 'morhetz/gruvbox'
 " Plug 'drewtempelmeyer/palenight.vim'
+" Plug 'Mofiqul/dracula.nvim'
 
-Plug 'itchyny/lightline.vim'
+" Plug 'itchyny/lightline.vim'
 " Plug 'vim-airline/vim-airline'
 " Plug 'vim-airline/vim-airline-themes'
 
@@ -44,13 +44,16 @@ function! BuildYCM(info)
   endif
 endfunction
 
-Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
-Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+" Plug 'Valloric/YouCompleteMe', { 'do': function('BuildYCM') }
+" Plug 'rdnetto/YCM-Generator', { 'branch': 'stable' }
+
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 Plug 'scrooloose/nerdtree', { 'on': ['NERDTreeTabsToggle', 'NERDTreeFind'] }
 Plug 'jistr/vim-nerdtree-tabs', { 'on': ['NERDTreeTabsToggle', 'NERDTreeFind'] }
 
-Plug 'sheerun/vim-polyglot'
+" Plug 'sheerun/vim-polyglot'
+" Plug 'bfrg/vim-cpp-modern'
 
 Plug 'jceb/vim-orgmode', { 'for': 'org' }
 Plug 'tpope/vim-speeddating', { 'for': 'org' }
@@ -60,7 +63,27 @@ Plug 'PotatoesMaster/i3-vim-syntax', { 'for': 'i3' }
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': { -> mkdp#util#install() }, 'for': ['markdown', 'vim-plug']}
 Plug 'christoomey/vim-tmux-navigator'
-Plug 'edkolev/tmuxline.vim'
+" Plug 'edkolev/tmuxline.vim'
+
+Plug 'ryanoasis/vim-devicons'
+
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'lukas-reineke/virt-column.nvim'
+
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+
+" Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+" Plug 'zchee/deoplete-clang'
+" Plug 'Shougo/neoinclude.vim'
+
+" Plug 'jamestthompson3/nvim-remote-containers'
+
+" Plug 'neovim/nvim-lspconfig'
+" Plug 'lspcontainers/lspcontainers.nvim'
+
+Plug 'aklt/plantuml-syntax'
+Plug 'tyru/open-browser.vim'
+Plug 'weirongxu/plantuml-previewer.vim'
 
 call plug#end()
 
@@ -76,7 +99,7 @@ set autoread
 set backspace=eol,start,indent
 set colorcolumn=101
 set cursorline
-set encoding=utf8
+set encoding=UTF-8
 set expandtab
 set fileformats=unix,dos,mac
 set hidden
@@ -176,7 +199,7 @@ nnoremap <leader>q :q<CR>
 
 nnoremap <leader><space> :noh<CR>
 
-nnoremap <leader>s :call FormatFile() <bar> update<CR>
+" nnoremap <leader>s :call FormatFile() <bar> update<CR>
 
 nnoremap <Esc><Left> :tabprev<CR>
 nnoremap <Esc><Right> :tabnext<CR>
@@ -218,22 +241,23 @@ endtry
 " let g:airline_theme = 'powerlineish'
 " let g:airline_powerline_fonts = 1
 
-let g:lightline = {
-      \ 'colorscheme': 'powerline',
-      \ 'active': {
-      \   'left': [ [ 'mode', 'paste' ],
-      \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
-      \ },
-      \ 'component_function': {
-      \   'gitbranch': 'FugitiveHead'
-      \ },
-      \ 'component': {
-      \   'lineinfo': '%3l:%-2v%<',
-      \ },
-      \ }
+" let g:lightline = {
+"       \ 'colorscheme': 'powerline',
+"       \ 'active': {
+"       \   'left': [ [ 'mode', 'paste' ],
+"       \             [ 'gitbranch', 'readonly', 'filename', 'modified' ] ]
+"       \ },
+"       \ 'component_function': {
+"       \   'gitbranch': 'FugitiveHead'
+"       \ },
+"       \ 'component': {
+"       \   'lineinfo': '%3l:%-2v%<',
+"       \ },
+"       \ }
 
 " }}}
 " fzf {{{
+" ==============================================================================
 
 let g:fzf_action = {
   \ 'ctrl-t': 'tab split',
@@ -275,17 +299,17 @@ let g:UltiSnipsJumpBackwardTrigger="<C-z>"
 " YouCompleteMe {{{
 " ==============================================================================
 
-nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
-nnoremap <leader>gi :YcmCompleter GoToInclude<CR>
+" nnoremap <leader>gd :YcmCompleter GoToDeclaration<CR>
+" nnoremap <leader>gi :YcmCompleter GoToInclude<CR>
 
 set completeopt-=preview
 
-let g:ycm_enable_diagnostic_signs = 0
-let g:ycm_confirm_extra_conf = 0
+" let g:ycm_enable_diagnostic_signs = 0
+" let g:ycm_confirm_extra_conf = 0
 
 " }}}
 " delimitMate {{{
-" ==============================================================================
+"===============================================================================
 
 let delimitMate_expand_cr = 1
 
@@ -318,9 +342,9 @@ nnoremap <silent> <leader>d :GitGutterToggle<CR>
 " vim-cpp-enhanced-highlight {{{
 " ==============================================================================
 
-let g:cpp_class_scope_highlight = 1
-let g:cpp_member_variable_highlight = 1
-let g:cpp_class_decl_highlight = 1
+" let g:cpp_class_scope_highlight = 1
+" let g:cpp_member_variable_highlight = 1
+" let g:cpp_class_decl_highlight = 1
 
 " }}}
 " vim-commentary {{{
@@ -332,9 +356,9 @@ autocmd FileType c,cpp,glsl,lang7 setlocal commentstring=//\ %s
 " goyo.vim {{{
 " ==============================================================================
 
-let g:goyo_width = 100
-let g:goyo_height = "100%"
-let g:goyo_linenr = 1
+" let g:goyo_width = 100
+" let g:goyo_height = "100%"
+" let g:goyo_linenr = 1
 
 " }}}
 " markdown-preview {{{
@@ -358,16 +382,16 @@ let g:mkdp_preview_options = {
 " tmuxline {{{
 " ==============================================================================
 
-let g:tmuxline_powerline_separators = 0
+" let g:tmuxline_powerline_separators = 0
 
 " }}}
 " Helper functions {{{
 " ==============================================================================
 
-function! FormatFile()
-  let l:lines="all"
-  py3f ~/.clang-format.py
-endfunction
+" function! FormatFile()
+"   let l:lines="all"
+"   py3f ~/.clang-format.py
+" endfunction
 
 function! VisualSelection() range
   let l:saved_reg = @"
@@ -397,7 +421,7 @@ function! SplitResize(dir)
 endfunction
 
 " }}}
-" Neovim {{{
+" neovim {{{
 " ==============================================================================
 
 if has("nvim")
@@ -405,5 +429,74 @@ if has("nvim")
 endif
 
 " }}}
+" coc {{{
+" ==============================================================================
+
+set updatetime=300
+set shortmess+=c
+set signcolumn=number
+
+nmap <silent> gd <Plug>(coc-definition)
+nmap <silent> gr <Plug>(coc-references)
+
+autocmd CursorHold * silent call CocActionAsync('highlight')
+
+" Symbol renaming.
+nmap <leader>rn <Plug>(coc-rename)
+
+inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
+                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+
+" Formatting selected code.
+xmap gf <Plug>(coc-format-selected)
+vmap gf <Plug>(coc-format-selected)
+nmap <silent> gf :Format<CR>
+
+command! -nargs=0 Format :call CocAction('format')
+
+" }}}
+
+lua << END
+
+-- lualine {{{
+-- ==============================================================================
+
+require("lualine").setup {
+  options = {
+    theme = "powerline",
+    section_separators = "",
+    component_separators = "",
+  }
+}
+
+-- }}}
+-- virt-column {{{
+-- ==============================================================================
+
+require("virt-column").setup {
+  char = "│",
+}
+
+-- }}}
+-- nvim-treesitter {{{
+-- ==============================================================================
+
+require("nvim-treesitter.configs").setup {
+  highlight = {
+    enable = true,
+  },
+}
+
+vim.o.foldmethod = "expr"
+vim.o.foldexpr = "nvim_treesitter#foldexpr()"
+vim.o.foldlevel = 999
+
+-- }}}
+
+END
+
+" let g:deoplete#enable_at_startup = 1
+" let g:deoplete#sources#clang#libclang_path = '/usr/lib/libclang.so'
+" let g:deoplete#sources#clang#clang_header = '/usr/lib/clang'
 
 " vim:foldmethod=marker:foldlevel=0
