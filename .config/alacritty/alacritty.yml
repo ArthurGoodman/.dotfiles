@@ -5,6 +5,7 @@ window:
   padding:
     x: 2
     y: 2
+  opacity: 0.95
 
 font:
   normal:
@@ -28,8 +29,6 @@ font:
   use_thin_strokes: false
 
 draw_bold_text_with_bright_colors: true
-
-background_opacity: 0.95
 
 key_bindings:
   - { key: Return,   mods: Control|Shift, action: SpawnNewInstance }
